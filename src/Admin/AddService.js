@@ -51,14 +51,14 @@ console.log('json',suv.subCateghory);
             //    console.log('previous', savedata);
             //     setSubMenu(true);
             savedata.push(obj);
-            window.localStorage.setItem("SubCategory", JSON.stringify(suv));
+
                  console.log('next', savedata);
              }
         }
     }
     const pushData = () => {
         console.log('submit');
-      //  suv.push(obj)
+        window.localStorage.setItem("SubCategory", JSON.stringify(suv));
     }
 
    

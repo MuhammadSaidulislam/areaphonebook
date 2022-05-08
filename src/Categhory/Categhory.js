@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Categhory.css';
 import { Card, Col, Container, Row, Button, Collapse } from 'react-bootstrap';
-//import data from '../jsonData/Categhory.json';
+import data from '../jsonData/Categhory.json';
 import { Link, useNavigate } from "react-router-dom";
 import SideBar from '../Sidebar/Sidebar';
 import Banner from '../Banner/Banner';
@@ -9,14 +9,14 @@ import Banner from '../Banner/Banner';
 export const Categhory = () => {
     //  window.localStorage.setItem("Category", JSON.stringify(data));
 
-    let data = window.localStorage.getItem("Category");
-    let setData = JSON.parse(data)
+  //  let data = window.localStorage.getItem("Category");
+  //  let setData = JSON.parse(data)
 
     
     const [dataId, setDataId] = useState()
     const navigate = useNavigate();
     const [open, setOpen] = useState();
-    const dataDividede = setData.categhory;
+    const dataDividede = data.categhory;
     const subCateghorySearch = (subCateghoryName, sub_id) => {
         setDataId(sub_id)
         return navigate(`/${subCateghoryName}`)
