@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { useParams } from 'react-router';
-import userdata from './SubCateghory.json';
+import userdata from '../jsonData/SubCateghory.json';
 
 export const SubCateghory = () => {
 
@@ -22,12 +22,12 @@ export const SubCateghory = () => {
         <div>
             <Container>
                 <Row>
-                    <Col md={4}>
-                        {filterdata && filterdata.map(data => <div>
-                            {
-                                data.details.map(value =>
+                    {filterdata && filterdata.map(data => <>
+                        {
+                            data.details.map(value =>
+                                <Col md={4}>
                                     <Card>
-                                        <Card.Img variant="left" src={value.photo} width="25px" />
+                                        <Card.Img variant="left" src={value.photo} width="100%" />
                                         <Card.Body className="right">
                                             <Card.Title>{value.name}</Card.Title>
                                             <Card.Text>
@@ -36,12 +36,12 @@ export const SubCateghory = () => {
                                             </Card.Text>
                                         </Card.Body>
                                     </Card>
-                                )
-                            }
-                            </div>
+                                </Col>
+                            )
+                        }
+                    </>
 
-                        )}
-                    </Col>
+                    )}
                 </Row>
             </Container>
         </div>

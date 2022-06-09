@@ -2,7 +2,7 @@
     "valueList": [
         {
             "id": 1,
-            "photo": "../resources/icons/kutubpur-union.png",
+            "photo": "./photo.png",
             "name": "আমাদের কুতুবপুর",
             "pageLink": "our-kutubpur",
             "subCategory": [
@@ -25,7 +25,7 @@
         },
         {
             "id": 2,
-            "photo": "../resources/icons/train-time-table.png",
+            "photo": "./photo.png",
             "name": "বর্তমান ট্রেনের সময়সূচি",
             "pageLink": "current-train-schedule",
             "subCategory": [
