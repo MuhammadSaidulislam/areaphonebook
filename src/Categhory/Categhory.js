@@ -9,23 +9,22 @@ export const Categhory = () => {
     const [dataId, setDataId] = useState()
     const navigate = useNavigate();
     const [open, setOpen] = useState();
-    const dataDividede = data.valueList;
+    const dataDividede = data.categhory;
     const subCateghorySearch = (subCateghoryName, sub_id) => {
         setDataId(sub_id)
         return navigate(`/${subCateghoryName}`)
     }
 
-    const [isCollapse, setCollapse] = useState(false)
 
-    const toggle = () => setCollapse(!isCollapse);
-  
     return (
         <>
 
-        <SideBar />
-        
+            <SideBar />
+
             <Container>
+
                 <Row>
+
                     {dataDividede.map(data => <Col md={3} key={data.id}>
                         <Card>
                             <Card.Img variant="left" src={data.photo} width="100%" />
@@ -36,13 +35,8 @@ export const Categhory = () => {
                                         <p key={nameList.id}> {nameList.name}</p>
                                     </>
                                 )}
-                                <Button
-                                    onClick={() => setOpen(!open)}
-                                    aria-controls=""
-                                >
-                                    click 
-                                </Button>
-                                <Collapse in={open}>
+                                <button className="btn btn-info" data-bs-toggle="collapse" data-bs-target={`#${data.collapseName}`}>Collapsible</button>
+                                <div id={data.collapseName} class="collapse">
                                     <div >
                                         {data.subCategory.map((subData) =>
                                             <>
@@ -50,7 +44,8 @@ export const Categhory = () => {
                                             </>
                                         )}
                                     </div>
-                                </Collapse>
+                                </div>
+
                             </Card.Body>
                         </Card>
                     </Col>

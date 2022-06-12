@@ -1,7 +1,8 @@
 {
-    "valueList": [
+    "categhory": [
         {
-            "id": 1,
+            "id": "1",
+            "collapseName":"one",
             "photo": "./photo.png",
             "name": "আমাদের কুতুবপুর",
             "pageLink": "our-kutubpur",
@@ -24,7 +25,8 @@
             ]
         },
         {
-            "id": 2,
+            "id": "2",
+            "collapseName":"two",
             "photo": "./photo.png",
             "name": "বর্তমান ট্রেনের সময়সূচি",
             "pageLink": "current-train-schedule",

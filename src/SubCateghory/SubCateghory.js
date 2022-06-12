@@ -9,14 +9,11 @@ export const SubCateghory = () => {
     const [filterdata, setFilterData] = useState([]);
 
     useEffect(() => {
-        const newItem = userdata.userData.filter(data => {
+        const newItem = userdata.subCateghory.filter(data => {
             return data.link === id;
         });
-        console.log('newItem', newItem);
         setFilterData(newItem);
     }, [])
-
-    console.log('newData', filterdata);
 
     return (
         <div>
