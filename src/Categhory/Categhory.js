@@ -3,6 +3,8 @@ import './Categhory.css';
 import { Card, Col, Container, Row, Button, Collapse } from 'react-bootstrap';
 import data from '../jsonData/Categhory.json';
 import { useNavigate } from "react-router-dom";
+import SideBar from '../Sidebar/Sidebar';
+
 export const Categhory = () => {
     const [dataId, setDataId] = useState()
     const navigate = useNavigate();
@@ -12,8 +14,16 @@ export const Categhory = () => {
         setDataId(sub_id)
         return navigate(`/${subCateghoryName}`)
     }
+
+    const [isCollapse, setCollapse] = useState(false)
+
+    const toggle = () => setCollapse(!isCollapse);
+  
     return (
         <>
+
+        <SideBar />
+        
             <Container>
                 <Row>
                     {dataDividede.map(data => <Col md={3} key={data.id}>
