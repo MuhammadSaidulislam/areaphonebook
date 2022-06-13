@@ -2,12 +2,16 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from "react-router-dom";
 import main from '../jsonData/Categhory.json';
 const Sidebar = () => {
+    const navigate = useNavigate();
     const [sidebar, setSidebar] = useState(false);
-
     const showSidebar = () => setSidebar(!sidebar);
     const categhory = main.categhory;
+    const subCateghorySearch = (subCateghoryName, sub_id) => {
+        return navigate(`/${subCateghoryName}`)
+    }
     return (
         <>
             <div className='navbar'>
@@ -35,7 +39,7 @@ const Sidebar = () => {
                                 <div id={data.pageLink} class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                     {data.subCategory.map((subData) =>
                                         <div class="accordion-body">
-                                            <p>{subData.name}</p>
+                                        <button key={subData.sub_id} className='btn btn-danger' onClick={() => subCateghorySearch(subData.link, subData.sub_id)}>{subData.name}</button>
                                         </div>
                                     )}
                                 </div>
