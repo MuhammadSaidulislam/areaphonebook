@@ -1,3 +1,6 @@
+a{
+    text-decoration: none !important;
+}
 .navbar {
     background-color: #060b26;
     height: 80px;
@@ -68,6 +71,367 @@
     align-items: center;
   }
   
-  span {
+  /* span {
     margin-left: 16px;
+  } */
+
+
+  /* card */
+  @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;700&display=swap');
+
+  /************************************
+               dark mood added 
+  ************************************/
+  
+  
+  /************************************
+               global css 
+  ************************************/
+  
+  .manu-item a {
+      text-decoration: none !important;
+      color: #413960;
+  }
+  
+ .manu-item a:hover {
+      color: #e84c3d;
+  }
+  
+  * {
+      font-family: 'Hind Siliguri', sans-serif;
+  }
+  
+  
+  /************************************
+               nav section
+  ************************************/
+  
+  nav {
+      background-color: #e84c3d;
+      height: 50px;
+  }
+  
+  nav a {
+      text-decoration: none;
+      color: white;
+  }
+  
+  .blog-header-logo {
+      font-weight: bold;
+      font-size: 22px;
+  }
+  
+  .logo-div {
+      top: 8px;
+  }
+  
+  sup {
+      color: whitesmoke;
+      top: -12px;
+      font-size: 12px;
+  }
+  
+  .sader .row {
+      margin: 0 0;
+  }
+  
+  .topic-text {
+      margin: 15px 0;
+  }
+  
+  .lol {
+      display: inline-block;
+      border: 1px #e84c3d solid;
+      padding: 5px 10px;
+      margin: 5px 0 0 0;
+      border-radius: 3px;
+      width: 100%;
+      background-color: #e84c3d;
+      color: #fff;
+      text-align: center;
+      transition: .4s;
+  }
+  
+  .lol:last-child {
+      margin-bottom: 5px;
+  }
+  
+  .lol:hover {
+      display: inline-block;
+      border: 1px #e84c3d solid;
+      padding: 5px 10px;
+      margin: 5px 0 0 0;
+      border-radius: 3px;
+      width: 100%;
+      background-color: #fff;
+      color: #e84c3d;
+  }
+  
+  
+  /************************************
+               nav section
+  ************************************/
+  
+  .hero-text {
+      background-color: #fff0f0;
+      text-align: center;
+      padding: 10px 0;
+      margin-bottom: 15px;
+  }
+  
+  .hero-btn {
+      text-align: center;
+      padding: 10px 0;
+      margin-bottom: 15px;
+  }
+  
+  .btn-warning {
+      width: 100%;
+  }
+  
+  .hero-text span {
+      padding: 0;
+      margin: 0;
+      color: #413960;
+  }
+  
+  .active {
+      color: #e84c3d;
+  }
+  
+  nav a:hover {
+      color: #413960;
+  }
+  
+  
+  /************************************
+              help card section
+  ************************************/
+  
+  .help-card {
+      margin: 15px 0 0 0;
+      overflow: hidden;
+  }
+  
+  .carousel-indicators {
+      bottom: -5px;
+  }
+  
+  
+  /************************************
+              card section
+  ************************************/
+  
+  .card {
+      border-radius: 0;
+      transition: .3s;
+      margin-bottom: 15px;
+  }
+  
+  .card:hover {
+      border-color: #e84c3d;
+      ;
+  }
+  
+  .card-body {
+      padding: 1rem;
+  }
+  
+  .manu-img {
+      padding-right: 1rem;
+      width: 64px;
+  }
+  
+  .manu-item {
+      font-size: 18px;
+  }
+  
+  .topic {
+      font-size: 12px;
+  }
+  
+  
+  /************************************
+              footer section
+  ************************************/
+  
+  
+  /* footer {
+      background-color: #413960;
+      padding: 30px 0;
+  }
+  
+  footer ul {
+      list-style: none;
+      padding: 0;
+  }
+  footer ul li {
+      display: inline-block;
+      margin-right: 10px;
+  }
+  footer ul li:last-child {
+      margin-right: 0;
+  }
+  footer ul li a {
+      color: white;
+  }
+  .copyright {
+      color: white;
+      padding: 20px 0 0 0;
+  } */
+  
+  
+  /************************************
+                  cards
+  ************************************/
+  
+  .icon-card {
+      background-color: #f2f2f2;
+      text-align: center;
+      padding: 8px;
+      color: #413960;
+      margin-bottom: 15px;
+  }
+  
+  .icon-card:hover {
+      background-color: #f2f2f2;
+      cursor: pointer;
+  }
+  
+  .icon {
+      margin: 10px 0;
+  }
+  
+  .call-icon {
+      padding-right: 15px;
+  }
+  
+  
+  /************************************
+                  use-video
+  ************************************/
+  
+  .bs-example {
+      margin: 20px;
+  }
+  
+  .modal-dialog iframe {
+      margin: 0 auto;
+      display: block;
+  }
+  
+  
+  /*======================================
+  *            Team Card               *
+  ======================================*/
+  
+  h1 {
+      text-align: center;
+      margin: 15px 0 40px 0;
+  }
+  
+  .team-card {
+      background-color: #F8FFFB;
+      text-align: center;
+      border-radius: 20px;
+      padding: 20px;
+      color: #413960;
+      margin-bottom: 20px;
+  }
+  
+  .team-card:hover {
+      background-color: #F0FFF0;
+      cursor: pointer;
+  }
+  
+  .icon-card-highlight {
+      box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+      border-radius: 20px;
+  }
+  
+  .team-img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+  }
+  
+  .text-center {
+      font-size: 1.1em;
+  }
+  
+  .team .fas,
+  .team .fab {
+      font-size: 22px;
+      letter-spacing: 10px;
+  }
+  
+  .team .fa-phone-square-alt {
+      color: #21b573;
+  }
+  
+  .team .fa-facebook-square {
+      color: #3b5998;
+  }
+  
+  .team .fa-envelope {
+      color: #43443d;
+  }
+  
+  
+  /* iPad */
+  
+  @media only screen and (max-width: 1024px) {
+      /* nav section */
+      .blog-header-logo {
+          font-size: 20px;
+      }
+      .logo-div {
+          top: 9px;
+      }
+      sup {
+          top: -10px;
+          font-size: 10px;
+      }
+  }
+  
+  
+  /* iPhone */
+  
+  @media only screen and (max-width: 767px) {
+      /* nav section */
+      .blog-header-logo {
+          font-size: 18px;
+      }
+      .logo-div {
+          top: 10px;
+      }
+      sup {
+          top: -9px;
+          font-size: 8px;
+      }
+  }
+  
+  
+  /* 
+  .onetime{
+      height : 300px;
+      width: 300px;
+      background-color:blue;
+      z-index: 9999;
+      align-items: center;
+  }     */
+  
+  .romjan {
+      text-align: center;
+      background-color: #fff0f0;
+      /* margin-top: 65px; */
+      margin-bottom: 15px;
+      padding: 20px 0;
+      border: 1px solid red;
+  }
+  
+  .romjan b {
+      color: #e84c3d;
   }
