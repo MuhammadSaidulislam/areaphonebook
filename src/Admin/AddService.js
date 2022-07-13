@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import mainData from '../jsonData/Categhory.json';
 import subData from '../jsonData/SubCateghory.json';
 
@@ -14,31 +14,47 @@ const obj = {
 }
 
 const AddService = () => {
-    const [showCategory, setCategory] = useState();
-    // let categhoryArray = subCategory.subCateghory[1].details;
-    // categhoryArray.push(obj);
-    // console.log('array', categhoryArray);
-    // console.log('id: ',userdata.subCateghory);
+    const [showCategory, setCategory] = useState([]);
+    const [subMenu, setSubMenu] = useState(false);
     let subValue = mainData.categhory;
-  //  console.log(subValue[0]);
-   // console.log(subValue.length);
+    const submenu = (data) => {
         for (let i = 0; i < subValue.length; i++) {
-            // let valueSet=subValue[i].id
-            // setCategory(valueSet)
-            console.log('array',subValue[i].id);
-           // setCategory(subValue[i].id)
+            if (data === subValue[i].pageLink) {
+                let savedata = subValue[i].subCategory;
+                setCategory(savedata);
+                setSubMenu(true);
+                savedata.push(obj);
+                console.log(savedata);
+                
+
+            }
         }
-      // console.log(showCategory);
+    }
+    
+window.localStorage.setItem("Category", JSON.stringify(subValue));
+    // const newData=()=>{
+    //     for (let i = 0; i < subValue.length; i++) {
+    //         if (data === subValue[i].pageLink) {
+    //             let savedata = subValue[i].subCategory;
+    //             savedata.push(obj)
+    //         }
+    //     }
+    // }
     return (
         <div>
-           
             <select className="form-select" aria-label="Default select example">
-           <option defaultValue>Open this select menu</option>
-           {subValue.map(data =>
-           <option value="1">{data.name}</option>)}
-       </select>
-        
-       
+                <option defaultValue>Open this select menu</option>
+                {subValue.map(data =>
+                    <option value="1" onClick={() => submenu(data.pageLink)}>{data.name}</option>)}
+            </select>
+            {subMenu ? <select className="form-select" aria-label="Default select example">
+                <option defaultValue>Open this select menu</option>
+                {showCategory.map(data =>
+                    <option value="1">{data.name}</option>)}
+            </select> : null}
+            {showCategory.map(data =>
+                <button type='submit' className='btn btn-info' onClick={() => submenu(data.pageLink)}>Submit data</button>)}
+            
         </div>
     )
 }
