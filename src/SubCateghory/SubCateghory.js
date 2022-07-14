@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { useParams } from 'react-router';
-import userdata from '../jsonData/SubCateghory.json';
+//import userdata from '../jsonData/SubCateghory.json';
 
 export const SubCateghory = () => {
-    const { id } = useParams()
+    const { id } = useParams();
+    let data = window.localStorage.getItem("SubCategory");
+    let setData = JSON.parse(data)
+
     const [filterdata, setFilterData] = useState([]);
     useEffect(() => {
-        const newItem = userdata.subCateghory.filter(data => {
+        const newItem = setData.subCateghory.filter(data => {
             return data.link === id;
         });
        setFilterData(newItem);

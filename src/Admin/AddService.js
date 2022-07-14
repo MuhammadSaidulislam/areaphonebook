@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import mainData from '../jsonData/Categhory.json';
-import subData from '../jsonData/SubCateghory.json';
+ // import subData from '../jsonData/SubCateghory.json';
 
 const obj = {
     "photo": "./photo.png",
@@ -14,24 +14,54 @@ const obj = {
 }
 
 const AddService = () => {
+
+ //   window.localStorage.setItem("Category", JSON.stringify(mainData));
+ //   window.localStorage.setItem("SubCategory", JSON.stringify(subData));
+    let Category = window.localStorage.getItem("Category");
+    let subCat = window.localStorage.getItem("SubCategory");
+  let suv=JSON.parse(subCat)
+console.log('json',suv.subCateghory);
+
     const [showCategory, setCategory] = useState([]);
     const [subMenu, setSubMenu] = useState(false);
     let subValue = mainData.categhory;
     const submenu = (data) => {
         for (let i = 0; i < subValue.length; i++) {
+            // console.log('main data',data);
+             
             if (data === subValue[i].pageLink) {
                 let savedata = subValue[i].subCategory;
                 setCategory(savedata);
+               // console.log('previous', savedata);
                 setSubMenu(true);
-                savedata.push(obj);
-                console.log(savedata);
-                
-
+              //  console.log('next', savedata);
             }
         }
     }
-    
-window.localStorage.setItem("Category", JSON.stringify(subValue));
+    const secondData=(value)=>{
+     //   console.log('main',value);
+     //   console.log(subData.subCateghory);
+        for (let i = 0; i < suv.subCateghory.length; i++) {
+            // console.log('main data',data);
+            //  console.log(subData[i]);
+             if (value === suv.subCateghory[i].link) {
+              //  console.log(subData.subCateghory[i].details);
+                 let savedata = suv.subCateghory[i].details;
+            //     setCategory(savedata);
+            //    console.log('previous', savedata);
+            //     setSubMenu(true);
+            savedata.push(obj);
+            window.localStorage.setItem("SubCategory", JSON.stringify(suv));
+                 console.log('next', savedata);
+             }
+        }
+    }
+    const pushData = () => {
+        console.log('submit');
+      //  suv.push(obj)
+    }
+
+   
     // const newData=()=>{
     //     for (let i = 0; i < subValue.length; i++) {
     //         if (data === subValue[i].pageLink) {
@@ -50,11 +80,11 @@ window.localStorage.setItem("Category", JSON.stringify(subValue));
             {subMenu ? <select className="form-select" aria-label="Default select example">
                 <option defaultValue>Open this select menu</option>
                 {showCategory.map(data =>
-                    <option value="1">{data.name}</option>)}
+                    <option value="1" onClick={() => secondData(data.link)}>{data.name}</option>)}
             </select> : null}
-            {showCategory.map(data =>
-                <button type='submit' className='btn btn-info' onClick={() => submenu(data.pageLink)}>Submit data</button>)}
-            
+
+            <button type='submit' className='btn btn-info' onClick={() => pushData()}>Submit data</button>
+
         </div>
     )
 }
