@@ -24,23 +24,23 @@ const Sidebar = () => {
                 <ul className='nav-menu-items' onClick={showSidebar}>
                     <li className='navbar-toggle'>
                         <Link to='#' className='menu-bars-close'>
-                        <FontAwesomeIcon icon={faClose} />
+                            <FontAwesomeIcon icon={faClose} />
                         </Link>
                     </li>
                 </ul>
                 <ul className='nav-menu-items'>
                     {categhory.map(data =>
-                        <div class="accordion" id="accordionExample">
-                            <div class="accordion-item">
-                                <div class="accordion-header" id="headingOne">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target={`#${data.pageLink}`} aria-expanded="true" aria-controls="collapseOne">
+                        <div className="accordion" id="accordionExample">
+                            <div className="accordion-item">
+                                <div className="accordion-header" id="headingOne">
+                                    <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target={`#${data.pageLink}`} aria-expanded="true" aria-controls="collapseOne">
                                         {data.name}
                                     </button>
                                 </div>
-                                <div id={data.pageLink} class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                <div id={data.pageLink} className="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                     {data.subCategory.map((subData) =>
-                                        <div class="accordion-body">
-                                        <button key={subData.sub_id} className='btn' onClick={() => subCateghorySearch(subData.link, subData.sub_id)}>{subData.name}</button>
+                                        <div className="accordion-body">
+                                            <button key={subData.sub_id} className='btn' onClick={() => subCateghorySearch(subData.link, subData.sub_id)}>{subData.name}</button>
                                         </div>
                                     )}
                                 </div>

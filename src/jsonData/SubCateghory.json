@@ -2,11 +2,12 @@
   "subCateghory": [
     {
       "id": 1,
+      "collapseName":"one",
       "link": "union-history",
       "details": [
         
         {
-          "photo": "../cdn/ac-fridge-servicing/ac-fridge-servicing.png",
+          "photo": "./photo.png",
           "name": "সারা রেফ্রিজারেটর",
           "number": "01706368048",
           "wordNo": "৫",
@@ -16,7 +17,7 @@
           "videoLink": "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fyiralcrazy%2Fvideos%2F614052535735551%2F&width=500&show_text=false&height=280&appId"
         },
         {
-          "photo": "../cdn/ac-fridge-servicing/ac-fridge-servicing.png",
+          "photo": "./photo.png",
           "name": "মেসার্স ওসমান রেফ্রিজারেশন, ওয়ার্কশপ",
           "number": "01710580609",
           "wordNo": "৬",
@@ -36,7 +37,7 @@
           "videoLink": "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fyiralcrazy%2Fvideos%2F614052535735551%2F&width=500&show_text=false&height=280&appId"
         },
         {
-          "photo": "../cdn/ac-fridge-servicing/ac-fridge-servicing.png",
+          "photo": "./photo.png",
           "name": "ইউনিক রিফ্রিজারেশন ",
           "number": "01704323150",
           "wordNo": "৬",
@@ -46,7 +47,7 @@
           "videoLink": "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fyiralcrazy%2Fvideos%2F614052535735551%2F&width=500&show_text=false&height=280&appId"
         },
         {
-          "photo": "../cdn/ac-fridge-servicing/ac-fridge-servicing.png",
+          "photo": "./photo.png",
           "name": "ইউসুফ রেফ্রিজারেশন ",
           "number": "01706317255",
           "wordNo": "৬",
@@ -59,6 +60,7 @@
     },
     {
       "id": 2,
+      "collapseName":"two",
       "link": "union-introduction",
       "details": [
         {
@@ -95,10 +97,11 @@
     },
     {
       "id": 3,
+      "collapseName":"three",
       "link": "dhaka-narayanganj-train",
       "details": [
         {
-          "photo": "../cdn/blood-bank/city-blood-bank-and-transfusion-center.png",
+          "photo": "./photo.png",
           "name": "City Blood Bank & Transfusion Center",
           "number": "01190839171",
           "wordNo": "সমগ্র পাগলা",
