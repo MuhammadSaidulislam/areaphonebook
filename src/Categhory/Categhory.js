@@ -33,7 +33,7 @@ export const Categhory = () => {
                 <Row>
 
 
-                    {dataDividede.map(data => <Col md={4} key={data.id}>
+                    {dataDividede.map(data => <Col md={6} lg={4} key={data.id}>
                         <div className="card">
                             <div className="card-header" data-toggle="collapse" data-target="#1">
                                 <div className="overflow-hidden">
@@ -51,7 +51,7 @@ export const Categhory = () => {
                                                                 <span key={nameList.id} className="col-6 topic tp1">{nameList.name}</span>
                                                             </>
                                                         )}
-                                                        <span className="col-6 topic tp4" data-bs-toggle="collapse" data-bs-target={`#${data.collapseName}`}> <a href="#1" data-toggle="collapse">আরো দেখুন <i class="fa fa-chevron-down"></i></a> </span>
+                                                        <span className="col-6 topic tp4" data-bs-toggle="collapse" data-bs-target={`#${data.collapseName}`}> <a href="#1" data-toggle="collapse">আরো দেখুন <i className="fa fa-chevron-down"></i></a> </span>
                                                     </Row>
                                                 </div>
                                             </div>
@@ -60,12 +60,12 @@ export const Categhory = () => {
                                 </div>
                             </div>
 
-                            <div id={data.collapseName} class="collapse">
+                            <div id={data.collapseName} className="collapse">
                                 <Container>
                                     <Row>
                                         {data.subCategory.map((subData) =>
                                             <>
-                                                <Col md={6}><span className="topic"> <button key={subData.sub_id} className='lol' onClick={() => subCateghorySearch(subData.link, subData.sub_id)}>{subData.name}</button></span></Col>
+                                                <Col xs={6}><span className="topic"> <button key={subData.sub_id} className='lol' onClick={() => subCateghorySearch(subData.link, subData.sub_id)}>{subData.name}</button></span></Col>
                                             </>
                                         )}
                                     </Row>

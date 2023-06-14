@@ -20,7 +20,7 @@ const AddService = () => {
     let Category = window.localStorage.getItem("Category");
     let subCat = window.localStorage.getItem("SubCategory");
   let suv=JSON.parse(subCat)
-console.log('json',suv.subCateghory);
+  // console.log('json',suv.subCateghory);
 
     const [showCategory, setCategory] = useState([]);
     const [subMenu, setSubMenu] = useState(false);

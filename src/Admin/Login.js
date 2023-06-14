@@ -12,7 +12,7 @@ const Login = () => {
     const database = [
         {
             username: "admin",
-            password: "uiuAPPzYt934"
+            password: "admin"
         },
         {
             username: "user2",

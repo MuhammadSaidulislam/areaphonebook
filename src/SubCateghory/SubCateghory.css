@@ -1,0 +1,11 @@
+.subcategory a{
+    color: #e84c3d;
+    cursor: pointer;
+}
+.subcategory a:hover{
+    color: #f83e2d;
+    cursor: pointer;
+}
+.card-body p{
+margin-bottom: 0px !important;
+}
