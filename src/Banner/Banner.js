@@ -39,7 +39,7 @@ const Banner = () => {
                     <Col md={12}>
                         <div id="signupBtn">
                             <div className="hero-btn">
-                                <a className="btn btn-warning" href="https://www.areaphonebook.com/signup"><i className="fas fa-user-plus"></i> আপনার তথ্য যোগ করুন</a>
+                                <Link className="btn btn-warning" to="/signup"><i className="fas fa-user-plus"></i> আপনার তথ্য যোগ করুন</Link>
                             </div>
 
                         </div>
