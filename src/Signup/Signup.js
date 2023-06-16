@@ -2,7 +2,11 @@ import React, { useState,useEffect } from "react";
 import "./Signup.css";
 import { Modal } from "react-bootstrap";
 import { loginUser, mobileOtp, registerUser } from "../api/auth";
+import { useNavigate } from 'react-router-dom';
+
+
 const Signup = () => {
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -17,6 +21,9 @@ const Signup = () => {
   const [otpCode,setOtpCode]=useState("");
   const [otpValue,setOtpValue]=useState("");
   const [otpWrong,setOtpWrong]=useState(false);
+  const [validLogin,setValidLogin]=useState(false);
+
+
 
   function generateRandomNumber() {
     const min = 10000;
@@ -74,8 +81,17 @@ const Signup = () => {
     setOtpValue(value);
   };
 
+
+
   const loginApi=()=>{
-    loginUser(userMobile,userPassword)
+    loginUser(userMobile,userPassword).then((data)=>{
+      if(data.message){
+        return navigate("/shop");
+      }
+      else{
+        setValidLogin(true)
+      }
+    })
   }
   return (
     <>
@@ -85,7 +101,9 @@ const Signup = () => {
             <h1>Welcome</h1>
             <div className="inputs">
               <input type="text" onChange={handleMobile} name="" placeholder="Mobile number" />
+              {validLogin ? <span>Invalid information</span>:<></>}
               <input type="password" onChange={handlePass} name="" placeholder="password" />
+              {validLogin ? <span>Invalid information</span>:<></>}
               {/*
             <p className="light">
                 <a href="#">Forgot password?</a>

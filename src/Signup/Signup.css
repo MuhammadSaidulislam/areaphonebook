@@ -13,6 +13,10 @@
   position: relative;
   overflow: hidden;
   box-shadow: 0 6px 31px -2px rgba(0, 0, 0, 0.3);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
 }
 .app h1 {
   font-size: 44px;
@@ -40,7 +44,7 @@
 .app form input {
   width: 100%;
   padding: 13px 15px;
-  margin: 0.7em auto;
+ margin-top: 0.7em;
   border-radius: 12px;
   border: none;
   background: rgba(0, 0, 0, 0.3);
