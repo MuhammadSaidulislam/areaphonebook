@@ -17,6 +17,7 @@
     "react-axios": "^2.0.6",
     "react-bootstrap": "^2.4.0",
     "react-dom": "^18.1.0",
+    "react-hook-form": "^7.44.3",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "^2.1.3",
