@@ -4,7 +4,8 @@ import { categoryAdd, categoryList, subCategoryAdd } from "../api/auth";
 
 const AddService = () => {
   const [categoryValue, setCategoryValue] = useState("");
-  const [categoryMsg,setCategoryMsg]=useState(false)
+  const [categoryMsg,setCategoryMsg]=useState(false);
+  const [SubCategoryMsg,setSubCategoryMsg]=useState(false);
   // category value
   const handleCategory = (e) => {
     var category = e.target.value;
@@ -15,6 +16,7 @@ const AddService = () => {
     categoryAdd(categoryValue).then((data) => {
       if (data.message) {
         setCategoryMsg(true)
+        setCategoryValue("")
       }
     });
   };
@@ -29,6 +31,7 @@ const AddService = () => {
 
   const [subCategoryValue, setSubCategoryValue] = useState("");
   const [selectCategory, setSelectCategory] = useState("");
+
   const handleSubCategory = (e) => {
     let subCategory = e.target.value;
     setSubCategoryValue(subCategory);
@@ -37,9 +40,19 @@ const AddService = () => {
     setSelectCategory(category);
   };
   const subCategoryApi = () => {
-    subCategoryAdd(selectCategory, subCategoryValue).then((data) => {
-      console.log("category", data);
-    });
+    if(selectCategory.length > 0 && subCategoryValue.length > 0){
+      subCategoryAdd(selectCategory, subCategoryValue).then((data) => {
+        console.log("category", data);
+        if(data.message){
+          setSubCategoryMsg(true)
+          setSubCategoryValue("")
+        }
+      });
+    }
+    else{
+      setSubCategoryMsg(false)
+    }
+    
   };
 
   return (
@@ -51,11 +64,13 @@ const AddService = () => {
               <label>Category add</label>
               <input
                 type="text"
+                value={categoryValue}
                 onChange={handleCategory}
                 placeholder="category add"
                 className="form-control"
               />
-              <button className="btn btn-info" onClick={addCategory}>
+              {categoryMsg ? <p>Category add successfully</p> : <></>} 
+              <button className="btn btn-info mt-2" onClick={addCategory}>
                 Save
               </button>
             </Col>
@@ -65,7 +80,7 @@ const AddService = () => {
                 className="form-select"
                 aria-label="Default select example"
               >
-                <option defaultValue>Open this select menu</option>
+                <option defaultValue>Select category</option>
                 {category.map((item, i) => (
                   <option
                     onClick={()=>selectCat(item.categoryName)}
@@ -83,7 +98,8 @@ const AddService = () => {
                 placeholder="sub-category add"
                 className="form-control"
               />
-              <button className="btn btn-info" onClick={subCategoryApi}>
+              {SubCategoryMsg ? <p>Sub category select successfully</p>:<></>}
+              <button className="btn btn-info mt-2" onClick={subCategoryApi}>
                 Save
               </button>
             </Col>
