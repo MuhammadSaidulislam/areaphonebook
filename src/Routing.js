@@ -5,6 +5,8 @@ import { Categhory } from './Categhory/Categhory';
 import Signup from './Signup/Signup';
 import { SubCateghory } from './SubCateghory/SubCateghory';
 import Shop from './Shop/Shop';
+import ShopList from './ShopList/ShopList';
+import AddService from './Admin/AddService';
 
 const Routing = () => {
 
@@ -17,6 +19,8 @@ const Routing = () => {
           <Route path="/admin" exact element={<Login/>}></Route>
           <Route path="/signup" exact element={<Signup/>}></Route>
           <Route path="/shop" exact element={<Shop/>}></Route>
+          <Route path="/category/:id" exact element={<ShopList/>}></Route>
+          <Route path="/dashboard" exact element={<AddService/>}></Route>
         </Routes>
       </BrowserRouter>
     </>

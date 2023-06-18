@@ -86,7 +86,15 @@ export const subCategoryList = async (categoryName) => {
     return error.response.data;
   }
 };
-
+// sub category list
+export const allSubCategoryList = async () => {
+  try {
+    const response = await axios.get("http://localhost:8000/allSubcategoryList");
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
 // shop create
 export const shopCreate = async (shop) => {
   try {
@@ -96,4 +104,29 @@ export const shopCreate = async (shop) => {
     return error.response.data;
   }
 };
+// sub category shop list
+export const subCategoryShopList = async (subCategoryName) => {
+  try {
+    const response = await axios.post("http://localhost:8000/AllShopList", {
+      subCategoryName: subCategoryName,
+    });
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
+// admin login
+export const loginAdmin = async (name, password) => {
+  try {
+    const response = await axios.post("http://localhost:8000/admin", {
+      name: name,
+      password: password,
+    });
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
 // https://api.sms.net.bd/sendsms?api_key={QRa72z0YlJt58U7gxw7WgAXNdyYw0PpeCTrsnT0l}&msg={saidul}&to=8801632663430

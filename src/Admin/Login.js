@@ -1,89 +1,55 @@
-import React, { useState } from "react";
-import { Container } from "react-bootstrap";
-import AddService from "./AddService";
-import "./Login.css";
-
+import React from 'react'
+import './Login.css'
+import { useState } from 'react'
+import { loginAdmin } from '../api/auth';
+import { Link, useNavigate } from "react-router-dom";
 const Login = () => {
-  // React States
-  const [errorMessages, setErrorMessages] = useState({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  // User Login info
-  const database = [
-    {
-      username: "admin",
-      password: "admin",
-    },
-    {
-      username: "user2",
-      password: "pass2",
-    },
-  ];
-
-  const errors = {
-    uname: "invalid username",
-    pass: "invalid password",
-  };
-
-  const handleSubmit = (event) => {
-    //Prevent page reload
-    event.preventDefault();
-
-    var { uname, pass } = document.forms[0];
-
-    // Find user login info
-    const userData = database.find((user) => user.username === uname.value);
-
-    // Compare user info
-    if (userData) {
-      if (userData.password !== pass.value) {
-        // Invalid password
-        setErrorMessages({ name: "pass", message: errors.pass });
-      } else {
-        setIsSubmitted(true);
+  const navigate = useNavigate();
+  const [name,setName]=useState("");
+  const [password,setPassword]=useState("");
+  const handleName=(e)=>{
+    setName(e.target.value)
+  }
+  const handlePassword=(e)=>{
+    setPassword(e.target.value)
+  }
+  const adminLogin=()=>{
+    loginAdmin(name,password).then((data)=>{
+      console.log('admin',data);
+      if(data.message){
+        return navigate("/dashboard")
       }
-    } else {
-      // Username not found
-      setErrorMessages({ name: "uname", message: errors.uname });
-    }
-  };
-  // Generate JSX code for error message
-  const renderErrorMessage = (name) =>
-    name === errorMessages.name && (
-      <div className="error">
-        <p>{errorMessages.message}</p>
-      </div>
-    );
-
-  const renderForm = (
+    })
+  }
+  return (
     <>
-      <div className="adminLogin">
+    <div className="adminLogin">
       <div className="loginForm">
         <div className="screen">
           <div className="screen__content">
-            <form className="login" onSubmit={handleSubmit}>
+            <div className="login">
               <div className="login__field">
                 <input
                   name="uname"
                   type="text"
+                  onChange={handleName}
                   className="login__input"
                   placeholder="User name / Email"
                 />
-                {renderErrorMessage("uname")}
               </div>
               <div className="login__field">
                 <input
                   name="pass"
                   type="password"
+                  onChange={handlePassword}
                   className="login__input"
                   placeholder="Password"
                 />
-                {renderErrorMessage("pass")}
               </div>
               <button type="submit" className="button login__submit">
-                <span className="button__text">Log In Now</span>
+                <span className="button__text" onClick={adminLogin}>Log In Now</span>
               </button>
-            </form>
+            </div>
           </div>
           <div className="screen__background">
             <span className="screen__background__shape screen__background__shape4"></span>
@@ -95,8 +61,7 @@ const Login = () => {
       </div>
       </div>
     </>
-  );
-  return <>{isSubmitted ? <AddService /> : <>{renderForm}</>}</>;
-};
+  )
+}
 
-export default Login;
+export default Login
