@@ -10,54 +10,47 @@ import Footer from "../Footer/Footer";
 
 export const Categhory = () => {
   const [category, setCategory] = useState([]);
+
   const [subCategory, setSubCategory] = useState([]);
   const navigate = useNavigate();
-console.log('category',category);
+
+  const [categories, setCategories] = useState({
+    categhory: []
+  });
+
   useEffect(() => {
-    categoryList().then((data) => {
-      setCategory(data.data);
-      // for (let i = 0; i < data.data.length; i++) {
-      //   subCategoryList(data.data[i].categoryName).then((data) => {
-      //     console.log("subcategoryone", data);
-      //     setSubCategory(data);
-      //   });
-      // }
-    });
+    const fetchData = async () => {
+      try {
+        const categoryData = await categoryList();
+        const updatedCategories = { ...categories }; // Copy the previous state
+        updatedCategories.categhory = categoryData.data; // Update the category data
+        setCategories(updatedCategories); // Update the state with new category data
+
+        for (let i = 0; i < categoryData.data.length; i++) {
+          const subCategoryData = await subCategoryList(
+            categoryData.data[i].categoryName
+          );
+          const updatedCategory = { ...updatedCategories.categhory[i] }; // Copy the category object
+          updatedCategory.subCategory = subCategoryData; // Update the subcategory data
+          updatedCategories.categhory[i] = updatedCategory; // Update the category object in the array
+          setCategories(updatedCategories); // Update the state with new subcategory data
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
   }, []);
+
+
   const subCategoryValue = (category) => {
     subCategoryList(category).then((data) => {
       setSubCategory(data);
     });
   };
 
-  // collapse
-  const [openCollapseId, setOpenCollapseId] = useState(null);
-
-  const toggleCollapse = (collapseId, category) => {
-    subCategoryValue(category);
-    setOpenCollapseId((prevCollapseId) =>
-      prevCollapseId === collapseId ? null : collapseId
-    );
-  };
-  const [subCategoryItem, setSubCategoryItem] = useState([]);
-  const subcategoryShow = (category) => {
-    return (
-      <>
-        {subCategoryItem.map((item) => (
-          <span className="col-6 topic tp1" key={item.id}>
-            {item.sub_category_name}
-          </span>
-        ))}
-      </>
-    );
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await subcategoryShow(category);
-      setSubCategoryItem(data);
-    };
-  }, []);
+  
 
   return (
     <>
@@ -65,8 +58,8 @@ console.log('category',category);
       <Banner />
       <Container>
         <Row>
-          {category.map((data, id) => (
-            <Col md={6} lg={4} key={`homeCategory` + data.id}>
+          {categories.categhory.map((data) => (
+            <Col md={6} lg={4} key={data.id}>
               <div className="card">
                 <div
                   className="card-header"
@@ -78,51 +71,32 @@ console.log('category',category);
                       <div className="cleartfix">
                         <div className="media align-items-stretch d-flex">
                           <div className="align-self-center">
-                            <img
-                              className="manu-img"
-                              //   src={data.categoryName}
-                              //   alt={data.categoryName}
-                              src="image"
-                              alt="image"
-                            />
+                            <img className="manu-img" src="" alt="image" />
                           </div>
                           <div className="media-body">
                             <h3 className="manu-item">
-                              <Link to={`/${data.categoryName}`}>
-                                {data.categoryName}
-                              </Link>
+                              <Link to={`/${data.categoryName}`}>{data.categoryName}</Link>
                             </h3>
-
                             <Row>
-                             {subcategoryShow(data.categoryName)} 
-                              {/*
-                             {subCategory.slice(0, 3).map((nameList, i) => (
-                                <>
-                                  <span
-                                    key={nameList.id}
-                                    className="col-6 topic tp1"
-                                  >
-                                    {nameList.sub_category_name}
-                                  </span>
-                                </>
-                              ))}
-                            */}
+                              {data.subCategory &&
+                                data.subCategory.slice(0, 3).map((nameList) => (
+                                  <>
+                                    <span
+                                      key={nameList.id}
+                                      className="col-6 topic tp1"
+                                    >
+                                      {nameList.sub_category_name}
+                                    </span>
+                                  </>
+                                ))}
 
                               <span
                                 className="col-6 topic tp4"
-                                onClick={() =>
-                                  toggleCollapse(
-                                    `a${data.categoryName}`,
-                                    data.categoryName
-                                  )
-                                }
-                                aria-expanded={
-                                  openCollapseId === `a${data.categoryName}`
-                                }
-                                aria-controls={`a${data.categoryName}`}
+                                data-bs-toggle="collapse"
+                                data-bs-target={`#${data.categoryName}`}
                               >
                                 {" "}
-                                <a data-toggle="collapse">
+                                <a href="#1" data-toggle="collapse">
                                   আরো দেখুন{" "}
                                   <i className="fa fa-chevron-down"></i>
                                 </a>{" "}
@@ -135,26 +109,28 @@ console.log('category',category);
                   </div>
                 </div>
 
-                <div
-                  id="a${data.categoryName}"
-                  className={`collapse ${
-                    openCollapseId === `a${data.categoryName}` ? "show" : ""
-                  }`}
-                >
+                <div id={data.categoryName} className="collapse">
                   <Container>
                     <Row>
-                      {subCategory.map((subData) => (
+                
+                    
+                    {data.subCategory && data.subCategory.map((subData) => (
                         <>
                           <Col xs={6}>
                             <span className="topic">
                               {" "}
-                              <button key={subData.sub_id} className="lol">
+                              <Link
+                              to={`/category/${subData.sub_category_name}`}
+                                key={subData.sub_id}
+                                className="lol"
+                              >
                                 {subData.sub_category_name}
-                              </button>
+                              </Link>
                             </span>
                           </Col>
                         </>
                       ))}
+                 
                     </Row>
                   </Container>
                 </div>
