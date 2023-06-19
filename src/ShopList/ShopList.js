@@ -20,9 +20,6 @@ const ShopList = () => {
       <Banner />
       <Container>
         <Row>
-          <Col md={12}>
-            <h1>ShopList</h1>
-          </Col>
           {shopList.map((value) => (
             <Col md={4} key={value.id}>
               <div className="card mb-3">
@@ -37,8 +34,8 @@ const ShopList = () => {
                   <div className="col-md-8">
                     <div className="card-body subcategory">
                       <a className="card-title">{value.shop_name}</a>
-                      <p className="card-text">মোবাইল: {value.mobile}</p>
-                      <p className="card-text">ওয়ার্ড নং: {value.ward}</p>
+                      <p className="card-text">মোবাইল: {value.ward}</p>
+                      <p className="card-text">মালিক: {value.shop_owner}</p>
                       <p className="card-text">স্থান: {value.address}</p>
                       <p className="card-text">বিস্তারিত: {value.service}</p>
                     </div>

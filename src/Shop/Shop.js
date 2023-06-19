@@ -3,11 +3,21 @@ import "./Shop.css";
 import Sidebar from "../Sidebar/Sidebar";
 import Banner from "../Banner/Banner";
 import { Col, Container, Row } from "react-bootstrap";
-import { categoryList, shopCreate, subCategoryList } from "../api/auth";
-
+import {
+  categoryList,
+  shopCreate,
+  subCategoryList,
+  userInfo,
+} from "../api/auth";
+import { useNavigate } from "react-router-dom";
 const Shop = () => {
+  const navigate = useNavigate();
   const [category, setCategory] = useState([]);
   const [selectCategory, setSelectCategory] = useState("");
+  const savedUserProfile = localStorage.getItem("userProfile");
+  const userProfile = JSON.parse(savedUserProfile);
+  const [userShop, setUserShop] = useState([]);
+ 
   useEffect(() => {
     categoryList().then((data) => {
       setCategory(data.data);
@@ -15,57 +25,69 @@ const Shop = () => {
   }, []);
   const [subCategory, setSubCategory] = useState([]);
   const selectCat = (category) => {
-      setSelectCategory(category);
+    setSelectCategory(category);
     subCategoryList(category).then((data) => {
       setSubCategory(data);
     });
   };
   // shop
-  const [sub_category,setSub_category]=useState("");
-  const [shop_owner,setShop_owner]=useState("");
-  const [shop_name,setShop_name]=useState("");
-  const [email,setEmail]=useState("");
-  const [ward,setWard]=useState("");
-  const [address,setAddress]=useState("");
-  const [service,setService]=useState("");
-  const handleSubCategoryChange=(e)=>{
-    setSub_category(e.target.value)
-  }
-  const handleShopOwner=(e)=>{
-    setShop_owner(e.target.value)
-  }
-  const handleShopName=(e)=>{
-    setShop_name(e.target.value)
-  }
-  const handleEmail=(e)=>{
-    setEmail(e.target.value)
-  }
-  const handleWard=(e)=>{
-    setWard(e.target.value)
-  }
-  const handleAddress=(e)=>{
-    setAddress(e.target.value)
-  }
-  const handleService=(e)=>{
-    setService(e.target.value)
-  }
+  const [sub_category, setSub_category] = useState("");
+  const [shop_owner, setShop_owner] = useState("");
+  const [shop_name, setShop_name] = useState("");
+  const [email, setEmail] = useState("");
+  const [ward, setWard] = useState("");
+  const [address, setAddress] = useState("");
+  const [service, setService] = useState("");
+  const handleSubCategoryChange = (e) => {
+    setSub_category(e.target.value);
+  };
+  const handleShopOwner = (e) => {
+    setShop_owner(e.target.value);
+  };
+  const handleShopName = (e) => {
+    setShop_name(e.target.value);
+  };
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+  };
+  const handleWard = (e) => {
+    setWard(e.target.value);
+  };
+  const handleAddress = (e) => {
+    setAddress(e.target.value);
+  };
+  const handleService = (e) => {
+    setService(e.target.value);
+  };
   const createShopFunction = () => {
     const shop = {
-      mobile:"0163",
+      mobile: userProfile.mobile,
       shop_owner,
       shop_name,
-      category:selectCategory,
+      category: selectCategory,
       sub_category,
       email,
       ward,
       address,
       service,
     };
-     console.log("shop", shop);
-     shopCreate(shop).then((data)=>{
-      console.log('shop data',data);
-     })
+    shopCreate(shop).then((data) => {
+      if (data.message) {
+        return navigate("/");
+      }
+    });
   };
+  // profile info
+
+  useEffect(() => {
+    userInfo(userProfile.mobile).then((data) => {
+      if (data.message) {
+        console.log("no shop");
+      } else {
+        setUserShop(data);
+      }
+    });
+  }, []);
   return (
     <>
       <Sidebar />
@@ -76,6 +98,20 @@ const Shop = () => {
             <Col md={12}>
               <h1 className="text-center">Shop information</h1>
             </Col>
+          </Row>
+          <Row>
+            {userShop &&
+              userShop.map((data) => (
+                <Col md={6} className="shopBox">
+                  <h6>Shop Information</h6>
+                  <p>Mobile: {data.mobile}</p>
+                  <p>Shop owner: {data.shop_owner}</p>
+                  <p>Shop name: {data.shop_name}</p>
+                  <p>Category: {data.category}</p>
+                  <p>Sub category: {data.sub_category}</p>
+                  <p>Service: {data.service}</p>
+                </Col>
+              ))}
           </Row>
           <Row>
             <Col md={6}>
@@ -121,6 +157,7 @@ const Shop = () => {
                 onChange={handleShopOwner}
                 className="form-control"
                 placeholder="Shop owner"
+                required
               />
             </Col>
             <Col md={6}>
@@ -130,6 +167,7 @@ const Shop = () => {
                 onChange={handleShopName}
                 className="form-control"
                 placeholder="Shop name"
+                required
               />
             </Col>
             <Col md={6}>
@@ -139,11 +177,18 @@ const Shop = () => {
                 onChange={handleEmail}
                 className="form-control"
                 placeholder="E-mail"
+                required
               />
             </Col>
             <Col md={6}>
               <label>Ward no</label>
-              <input type="text" onChange={handleWard} className="form-control" placeholder="Ward" />
+              <input
+                type="text"
+                onChange={handleWard}
+                className="form-control"
+                placeholder="Ward"
+                required
+              />
             </Col>
             <Col md={6}>
               <label>Address</label>
@@ -152,6 +197,7 @@ const Shop = () => {
                 onChange={handleAddress}
                 className="form-control"
                 placeholder="Address"
+                required
               />
             </Col>
             <Col md={6}>
@@ -161,6 +207,7 @@ const Shop = () => {
                 onChange={handleService}
                 className="form-control"
                 placeholder="Service"
+                required
               />
             </Col>
             <Col md={12} className="text-center mt-3">

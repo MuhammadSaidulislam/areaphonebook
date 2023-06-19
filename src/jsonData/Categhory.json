@@ -1,11 +1,7 @@
 {
     "categhory": [
         {
-            "id": "1",
-            "collapseName":"one",
-            "photo": "./photo.png",
             "name": "আমাদের কুতুবপুর",
-            "pageLink": "our-kutubpur",
             "subCategory": [
                 {
                     "name": "ইউনিয়নের ইতিহাস",
@@ -25,11 +21,7 @@
             ]
         },
         {
-            "id": "2",
-            "collapseName":"two",
-            "photo": "./photo.png",
             "name": "বর্তমান ট্রেনের সময়সূচি",
-            "pageLink": "current-train-schedule",
             "subCategory": [
                 {
                     "name": "ঢাকা - নারায়ণগঞ্জ",

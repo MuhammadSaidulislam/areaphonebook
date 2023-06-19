@@ -94,6 +94,7 @@ const AddService = () => {
               <label>Sub-category add</label>
               <input
                 type="text"
+                value={subCategoryValue}
                 onChange={handleSubCategory}
                 placeholder="sub-category add"
                 className="form-control"

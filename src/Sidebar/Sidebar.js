@@ -42,6 +42,7 @@ const Sidebar = () => {
         <Link to="#" className="menu-bars" onClick={showSidebar}>
           <FontAwesomeIcon icon={faBars} />
         </Link>
+        <Link to="/" style={{ color: '#fff', fontSize: '18px', marginRight: '10px' }}>Area Phonebook</Link>
       </div>
       <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
         <ul className="nav-menu-items" onClick={showSidebar}>

@@ -22,7 +22,7 @@ const Signup = () => {
   const [otpValue,setOtpValue]=useState("");
   const [otpWrong,setOtpWrong]=useState(false);
   const [validLogin,setValidLogin]=useState(false);
-
+  const [otpShow,setOtpShow]=useState("");
 
 
   function generateRandomNumber() {
@@ -36,12 +36,11 @@ const Signup = () => {
     setPhone(false);
     setOtpNumber(true);
     const randomNumber = generateRandomNumber();
-    console.log(randomNumber);
+    setOtpShow(randomNumber);
     setOtpCode(randomNumber)
     // mobileOtp(mobile,randomNumber);
   };
   const otpSave = () => {
-    console.log(otpCode,otpValue);
     if(String(otpCode) === otpValue){
       setOtpNumber(false);
       setPass(true);
@@ -53,7 +52,9 @@ const Signup = () => {
     
   };
   const loginSave = () => {
-    registerUser(mobile,password)
+    registerUser(mobile,password).then((data)=>{
+      console.log('login',data);
+    })
     setShow(false);
     setPass(false);
     setPhone(true);
@@ -85,14 +86,18 @@ const Signup = () => {
 
   const loginApi=()=>{
     loginUser(userMobile,userPassword).then((data)=>{
-      if(data.message){
+      if(!data.error){
+        localStorage.setItem('userProfile', JSON.stringify(data));
         return navigate("/shop");
       }
       else{
         setValidLogin(true)
-      }
+     }
     })
   }
+
+  
+
   return (
     <>
       <section className="loginBox">
@@ -140,8 +145,9 @@ const Signup = () => {
             {otpNumber ? (
               <>
                 <label id="mobile">Enter your OTP number</label> <br />
-                <input type="text" onChange={handleOtp} placeholder="OTP number" /> <br />
-               {otpWrong ? <><span>This code is not correct</span></>:<></>} <br />
+                <input type="text" onChange={handleOtp} placeholder="OTP number" /> <br /> 
+                <span>{otpShow}</span> <br />
+                {otpWrong ? <><span>This code is not correct</span></>:<></>} <br />
                 <button className="btn" onClick={otpSave}>
                   Continue
                 </button>
@@ -153,6 +159,7 @@ const Signup = () => {
               <>
                 <label id="mobile">Enter your password</label> <br />
                 <input type="password" onChange={handlePassChange} placeholder="Password" /> <br />
+                <span>Password must be 6 letter or bigger</span> <br />
                 <button className="btn" onClick={loginSave}>
                   Save
                 </button>
