@@ -18,23 +18,24 @@ export const Categhory = () => {
     categhory: []
   });
 
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
         const categoryData = await categoryList();
-        const updatedCategories = { ...categories }; // Copy the previous state
-        updatedCategories.categhory = categoryData.data; // Update the category data
-        setCategories(updatedCategories); // Update the state with new category data
 
-        for (let i = 0; i < categoryData.data.length; i++) {
-          const subCategoryData = await subCategoryList(
-            categoryData.data[i].categoryName
-          );
-          const updatedCategory = { ...updatedCategories.categhory[i] }; // Copy the category object
-          updatedCategory.subCategory = subCategoryData; // Update the subcategory data
-          updatedCategories.categhory[i] = updatedCategory; // Update the category object in the array
-          setCategories(updatedCategories); // Update the state with new subcategory data
-        }
+        const updatedCategories = await Promise.all(
+          categoryData.data.map(async (category) => {
+            const subCategoryData = await subCategoryList(category.categoryName);
+
+            return {
+              categoryName: category.categoryName,
+              subCategory: subCategoryData
+            };
+          })
+        );
+
+        setCategories({ categhory: updatedCategories });
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -44,11 +45,7 @@ export const Categhory = () => {
   }, []);
 
 
-  const subCategoryValue = (category) => {
-    subCategoryList(category).then((data) => {
-      setSubCategory(data);
-    });
-  };
+ 
 
   
 
@@ -78,8 +75,7 @@ export const Categhory = () => {
                               <Link to={`/${data.categoryName}`}>{data.categoryName}</Link>
                             </h3>
                             <Row>
-                              {data.subCategory &&
-                                data.subCategory.slice(0, 3).map((nameList) => (
+                              {data.subCategory && data.subCategory.slice(0, 3).map((nameList) => (
                                   <>
                                     <span
                                       key={nameList.id}

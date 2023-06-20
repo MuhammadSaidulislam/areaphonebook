@@ -5,6 +5,7 @@ import Banner from "../Banner/Banner";
 import { Col, Container, Row } from "react-bootstrap";
 import {
   categoryList,
+  pendingShopList,
   shopCreate,
   subCategoryList,
   userInfo,
@@ -17,14 +18,16 @@ const Shop = () => {
   const savedUserProfile = localStorage.getItem("userProfile");
   const userProfile = JSON.parse(savedUserProfile);
   const [userShop, setUserShop] = useState([]);
- 
+
   useEffect(() => {
     categoryList().then((data) => {
       setCategory(data.data);
     });
   }, []);
   const [subCategory, setSubCategory] = useState([]);
+  console.log("subCategory", subCategory);
   const selectCat = (category) => {
+    console.log("category", category);
     setSelectCategory(category);
     subCategoryList(category).then((data) => {
       setSubCategory(data);
@@ -71,7 +74,12 @@ const Shop = () => {
       address,
       service,
     };
-    shopCreate(shop).then((data) => {
+    // shopCreate(shop).then((data) => {
+    //   if (data.message) {
+    //     return navigate("/");
+    //   }
+    // });
+    pendingShopList(shop).then((data) => {
       if (data.message) {
         return navigate("/");
       }

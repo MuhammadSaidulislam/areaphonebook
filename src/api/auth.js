@@ -1,4 +1,4 @@
-import { API } from '../config';
+import { API } from "../config";
 const axios = require("axios");
 // signup
 export const registerUser = async (mobile, password) => {
@@ -99,7 +99,7 @@ export const allSubCategoryList = async () => {
 // shop create
 export const shopCreate = async (shop) => {
   try {
-    const response = await axios.post(`${API}/create`, { shop});
+    const response = await axios.post(`${API}/create`, { shop });
     return response.data;
   } catch (error) {
     return error.response.data;
@@ -136,6 +136,35 @@ export const userInfo = async (userMobile) => {
       userMobile: userMobile,
     });
     return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+// pending shop create
+export const pendingShopList = async (shop) => {
+  try {
+    const response = await axios.post(`${API}/pendingShop`, { shop });
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+// category list
+export const pendingList = async () => {
+  try {
+    const response = await axios.get(`${API}/pending`);
+    return response.data;
+    // console.log(response.data);
+  } catch (error) {
+    return error.response.data;
+  }
+};
+// pending shop delete
+export const pendingDel = async (userMobile) => {
+  try {
+    const response = await axios.delete(`${API}/pendingDelete/${userMobile}`);
+    return response.data;
+    // console.log(response.data);
   } catch (error) {
     return error.response.data;
   }
