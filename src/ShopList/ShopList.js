@@ -33,7 +33,7 @@ const ShopList = () => {
                   </div>
                   <div className="col-md-8">
                     <div className="card-body subcategory">
-                      <a className="card-title">{value.shop_name}</a>
+                      <p className="card-title">{value.shop_name}</p>
                       <p className="card-text">মোবাইল: {value.ward}</p>
                       <p className="card-text">মালিক: {value.shop_owner}</p>
                       <p className="card-text">স্থান: {value.address}</p>

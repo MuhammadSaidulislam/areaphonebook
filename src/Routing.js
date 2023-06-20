@@ -14,13 +14,13 @@ const Routing = () => {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" exact element={<Categhory />}></Route>
-          <Route path="/:id" exact element={<SubCateghory />}></Route>
-          <Route path="/admin" exact element={<Login/>}></Route>
-          <Route path="/signup" exact element={<Signup/>}></Route>
-          <Route path="/shop" exact element={<Shop/>}></Route>
-          <Route path="/category/:id" exact element={<ShopList/>}></Route>
-          <Route path="/dashboard" exact element={<AddService/>}></Route>
+          <Route path="/" element={<Categhory />}></Route>
+          <Route path="/:id" element={<SubCateghory />}></Route>
+          <Route path="/admin" element={<Login/>}></Route>
+          <Route path="/signup" element={<Signup/>}></Route>
+          <Route path="/shop" element={<Shop/>}></Route>
+          <Route path="/category/:id" element={<ShopList/>}></Route>
+          <Route path="/dashboard" element={<AddService/>}></Route>
         </Routes>
       </BrowserRouter>
     </>
