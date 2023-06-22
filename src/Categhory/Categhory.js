@@ -7,10 +7,10 @@ import SideBar from "../Sidebar/Sidebar";
 import Banner from "../Banner/Banner";
 import { allSubCategoryList, categoryList, subCategoryList } from "../api/auth";
 import Footer from "../Footer/Footer";
+import Loader from "../Component/Loader/Loader";
 
 export const Categhory = () => {
   const [category, setCategory] = useState([]);
-
   const [subCategory, setSubCategory] = useState([]);
   const navigate = useNavigate();
 
@@ -18,30 +18,33 @@ export const Categhory = () => {
     categhory: []
   });
 
+  const [isLoading, setIsLoading] = useState(false);
   
   useEffect(() => {
+   
+      setIsLoading(true);
+    
     const fetchData = async () => {
       try {
         const categoryData = await categoryList();
-
         const updatedCategories = await Promise.all(
           categoryData.data.map(async (category) => {
             const subCategoryData = await subCategoryList(category.categoryName);
-
             return {
               categoryName: category.categoryName,
               subCategory: subCategoryData
             };
           })
         );
-
         setCategories({ categhory: updatedCategories });
+        setIsLoading(false)
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
+    
   }, []);
 
 
@@ -52,9 +55,10 @@ export const Categhory = () => {
   return (
     <>
       <SideBar />
-      <Banner />
       <Container>
         <Row>
+        {isLoading ? <><Loader/></>:<>
+        <Banner />
           {categories.categhory.map((data) => (
             <Col md={6} lg={4} key={data.id}>
               <div className="card">
@@ -133,6 +137,8 @@ export const Categhory = () => {
               </div>
             </Col>
           ))}
+          </>}
+          
         </Row>
       </Container>
     </>
