@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import main from "../jsonData/Categhory.json";
 import "./Sidebar.css";
 import { categoryList, subCategoryList } from "../api/auth";
+import { Container } from "react-bootstrap";
 const Sidebar = () => {
   const navigate = useNavigate();
   const [sidebar, setSidebar] = useState(false);
@@ -30,36 +31,52 @@ const Sidebar = () => {
 
   const [openCollapseId, setOpenCollapseId] = useState(null);
 
-  const toggleCollapse = (collapseId,category) => {
-    subCategoryValue(category)
+  const toggleCollapse = (collapseId, category) => {
+    subCategoryValue(category);
     setOpenCollapseId((prevCollapseId) =>
       prevCollapseId === collapseId ? null : collapseId
     );
   };
+
+  const subCategoryLink = (subCategory) => {
+    setSidebar(false)
+    return navigate(`/category/${subCategory}`);
+   
+  };
+
   return (
     <>
       <div className="navbar">
-        <Link to="#" className="menu-bars" onClick={showSidebar}>
-          <FontAwesomeIcon icon={faBars} />
-        </Link>
-        <Link to="/" style={{ color: '#fff', fontSize: '18px', marginRight: '10px' }}>Area Phonebook</Link>
+        <Container>
+          <Link to="#" className="menu-bars" onClick={showSidebar}>
+            <FontAwesomeIcon icon={faBars} />
+          </Link>
+          <Link
+            to="/"
+            style={{ color: "#fff", fontSize: "18px", marginRight: "10px" }}
+          >
+            Area Phonebook
+          </Link>
+        </Container>
       </div>
       <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
-        <ul className="nav-menu-items" onClick={showSidebar}>
+        {/*
+       <ul className="nav-menu-items" onClick={showSidebar}>
           <li className="navbar-toggle">
             <Link to="#" className="menu-bars-close">
               <FontAwesomeIcon icon={faClose} />
             </Link>
           </li>
         </ul>
+      */}
         <ul className="nav-menu-items">
           <div id="accordion">
             {category.map((data, i) => (
-              <div className="card" key={i}>
-                <div className="card-header">
+              <div className="" key={`sidebar` + i}>
+                <div className="categorySidebar">
                   <button
-                    className="btn"
-                    onClick={() => toggleCollapse(`a${i}`,data.categoryName)}
+                    className=""
+                    onClick={() => toggleCollapse(`a${i}`, data.categoryName)}
                     aria-expanded={openCollapseId === `a${i}`}
                     aria-controls={`a${i}`}
                   >
@@ -74,37 +91,25 @@ const Sidebar = () => {
                   data-bs-parent="#accordion"
                 >
                   <>
-                  {subCategory.map((subData) =>
-                    <div className="accordion-body">
-                        <Link to={`/category/${subData.sub_category_name}`} className='btn'>{subData.sub_category_name}</Link>
-                    </div>
-                )}
+                    {subCategory.map((subData, i) => (
+                      <div
+                        className="subCategorySidebar"
+                        key={`subcategory` + i}
+                        onClick={() =>
+                          subCategoryLink(subData.sub_category_name)
+                        }
+                      >
+                        <button
+                        >
+                          {subData.sub_category_name}
+                        </button>
+                      </div>
+                    ))}
                   </>
                 </div>
               </div>
             ))}
           </div>
-
-          {/*
-                {category.map(data =>
-                        <div className="accordion" id="accordionExample">
-                            <div className="accordion-item">
-                                <div className="accordion-header">
-                                    <button onClick={()=>subCategoryValue(data.categoryName)} className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target={`#${data.categoryName}`} aria-expanded="true">
-                                        {data.categoryName}
-                                    </button>
-                                </div>
-                                <div id={data.categoryName} className="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                    {subCategory.map((subData) =>
-                                        <div className="accordion-body">
-                                            <button key={subData.sub_id} className='btn'>{subData.sub_category_name}</button>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                    )}
-                */}
         </ul>
       </nav>
     </>

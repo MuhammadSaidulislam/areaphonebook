@@ -7,6 +7,7 @@ import { SubCateghory } from './SubCateghory/SubCateghory';
 import Shop from './Shop/Shop';
 import ShopList from './ShopList/ShopList';
 import AddService from './Admin/AddService';
+import CityCorporation from './Component/CityCorporation/CityCorporation';
 
 const Routing = () => {
 
@@ -14,7 +15,8 @@ const Routing = () => {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Categhory />}></Route>
+        <Route path="/" element={<CityCorporation />}></Route>
+          <Route path="/category" element={<Categhory />}></Route>
           <Route path="/:id" element={<SubCateghory />}></Route>
           <Route path="/admin" element={<Login/>}></Route>
           <Route path="/signup" element={<Signup/>}></Route>
