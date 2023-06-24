@@ -66,8 +66,8 @@ const AddService = () => {
   }, []);
 
   const confirmShop = (info) => {
-    console.log("shop", info.mobile);
-    pendingDel(info.mobile).then((data)=>{
+    console.log("shop", info);
+    pendingDel(info.shop_id).then((data)=>{
       console.log('delete',data);
     })
     shopCreate(info).then((data) => {

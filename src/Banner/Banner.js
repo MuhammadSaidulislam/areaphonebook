@@ -3,7 +3,7 @@ import { Col, Container, Modal, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./Banner.css";
 import { userInfo } from "../api/auth";
-
+import cover from "../assets/image/banner/cover.jpg"
 const Banner = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -30,7 +30,7 @@ const Banner = () => {
               <div className="row">
                 <div className="col-12">
                   <img
-                    src="https://www.areaphonebook.com/resources/help-card/cover.jpg"
+                    src={cover}
                     alt="Help Card"
                     style={{ width: "100%", marginTop: "15px" }}
                   />

@@ -160,9 +160,19 @@ export const pendingList = async () => {
   }
 };
 // pending shop delete
-export const pendingDel = async (userMobile) => {
+export const pendingDel = async (shopId) => {
   try {
-    const response = await axios.delete(`${API}/pendingDelete/${userMobile}`);
+    const response = await axios.delete(`${API}/pendingDelete/${shopId}`);
+    return response.data;
+    // console.log(response.data);
+  } catch (error) {
+    return error.response.data;
+  }
+};
+export const shopDetails = async (shopId) => {
+  console.log(shopId);
+  try {
+    const response = await axios.post(`${API}/singleShopShow/${shopId}`);
     return response.data;
     // console.log(response.data);
   } catch (error) {

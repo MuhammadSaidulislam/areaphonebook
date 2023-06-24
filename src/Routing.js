@@ -8,6 +8,7 @@ import Shop from './Shop/Shop';
 import ShopList from './ShopList/ShopList';
 import AddService from './Admin/AddService';
 import CityCorporation from './Component/CityCorporation/CityCorporation';
+import ShopDetails from './Component/ShopDetails/ShopDetails';
 
 const Routing = () => {
 
@@ -16,12 +17,13 @@ const Routing = () => {
       <BrowserRouter>
         <Routes>
         <Route path="/" element={<CityCorporation />}></Route>
-          <Route path="/category" element={<Categhory />}></Route>
-          <Route path="/:id" element={<SubCateghory />}></Route>
+          <Route path="/narayanganj" element={<Categhory />}></Route>
+          <Route path="/narayanganj/:id" element={<SubCateghory />}></Route>
           <Route path="/admin" element={<Login/>}></Route>
           <Route path="/signup" element={<Signup/>}></Route>
           <Route path="/shop" element={<Shop/>}></Route>
-          <Route path="/category/:id" element={<ShopList/>}></Route>
+          <Route path="/narayanganj/:sub/:id" element={<ShopList/>}></Route>
+         <Route path="/narayanganj/:category/:sub/:id" element={<ShopDetails/>}></Route>
           <Route path="/dashboard" element={<AddService/>}></Route>
         </Routes>
       </BrowserRouter>

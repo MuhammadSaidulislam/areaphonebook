@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faClose } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faClose, faDotCircle, faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import main from "../jsonData/Categhory.json";
 import "./Sidebar.css";
 import { categoryList, subCategoryList } from "../api/auth";
-import { Container } from "react-bootstrap";
+import { Container, Dropdown } from "react-bootstrap";
 const Sidebar = () => {
   const navigate = useNavigate();
   const [sidebar, setSidebar] = useState(false);
@@ -39,9 +39,8 @@ const Sidebar = () => {
   };
 
   const subCategoryLink = (subCategory) => {
-    setSidebar(false)
+    setSidebar(false);
     return navigate(`/category/${subCategory}`);
-   
   };
 
   return (
@@ -57,6 +56,21 @@ const Sidebar = () => {
           >
             Area Phonebook
           </Link>
+          <Dropdown>
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+            <FontAwesomeIcon icon={faEllipsisVertical} />
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item href="#/action-1">Signup</Dropdown.Item>
+              <Dropdown.Item href="#/action-1">Login</Dropdown.Item>
+              <Dropdown.Item href="#/action-2">Search</Dropdown.Item>
+              <Dropdown.Item href="#/action-3">Language</Dropdown.Item>
+              <Dropdown.Item href="#/action-1">Dark/Light</Dropdown.Item>
+              <Dropdown.Item href="#/action-2">Report</Dropdown.Item>
+              <Dropdown.Item href="#/action-3">Change city</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </Container>
       </div>
       <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
@@ -99,10 +113,7 @@ const Sidebar = () => {
                           subCategoryLink(subData.sub_category_name)
                         }
                       >
-                        <button
-                        >
-                          {subData.sub_category_name}
-                        </button>
+                        <button>{subData.sub_category_name}</button>
                       </div>
                     ))}
                   </>

@@ -5,6 +5,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import Banner from "../Banner/Banner";
 import { Col, Container, Row } from "react-bootstrap";
 import { useState } from "react";
+import { Link } from 'react-router-dom';
 const ShopList = () => {
   const { id } = useParams();
   const [shopList, setShopList] = useState([]);
@@ -33,7 +34,7 @@ const ShopList = () => {
                   </div>
                   <div className="col-md-8">
                     <div className="card-body subcategory">
-                      <p className="card-title">{value.shop_name}</p>
+                      <Link to={`${value.shop_id}`} className="card-title">{value.shop_name}</Link>
                       <p className="card-text">মোবাইল: {value.ward}</p>
                       <p className="card-text">মালিক: {value.shop_owner}</p>
                       <p className="card-text">স্থান: {value.address}</p>
