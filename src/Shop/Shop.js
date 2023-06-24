@@ -11,6 +11,7 @@ import {
   userInfo,
 } from "../api/auth";
 import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
 const Shop = () => {
   const navigate = useNavigate();
   const [category, setCategory] = useState([]);
@@ -18,7 +19,7 @@ const Shop = () => {
   const savedUserProfile = localStorage.getItem("userProfile");
   const userProfile = JSON.parse(savedUserProfile);
   const [userShop, setUserShop] = useState([]);
-
+  
   useEffect(() => {
     categoryList().then((data) => {
       setCategory(data.data);
@@ -62,8 +63,16 @@ const Shop = () => {
   const handleService = (e) => {
     setService(e.target.value);
   };
+  const generateRandomNumber = () => {
+    const min = 1000000; // Minimum 7-digit number (inclusive)
+    const max = 9999999; // Maximum 7-digit number (inclusive)
+    const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+    return randomNumber;
+  };
+  const uuid = uuidv4();
   const createShopFunction = () => {
     const shop = {
+      shop_id: uuid,
       mobile: userProfile.mobile,
       shop_owner,
       shop_name,
@@ -74,11 +83,6 @@ const Shop = () => {
       address,
       service,
     };
-    // shopCreate(shop).then((data) => {
-    //   if (data.message) {
-    //     return navigate("/");
-    //   }
-    // });
     pendingShopList(shop).then((data) => {
       if (data.message) {
         return navigate("/");

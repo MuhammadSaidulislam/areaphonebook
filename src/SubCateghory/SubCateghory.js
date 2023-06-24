@@ -19,6 +19,8 @@ export const SubCateghory = () => {
     });
   }, []);
 
+  console.log('subCategory',subCategory);
+
   return (
     <div>
       <Sidebar />
@@ -28,7 +30,7 @@ export const SubCateghory = () => {
           {subCategory.map((value) => (
             <Col md={4} key={value.id}>
               <div className="card mb-3 subcategoryBox">
-                <Link to={`/category/${value.sub_category_name}`}>
+                <Link to={`/narayanganj/${value.category_name}/${value.sub_category_name}`}>
                   {value.sub_category_name}
                 </Link>
               </div>

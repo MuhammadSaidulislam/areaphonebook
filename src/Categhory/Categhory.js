@@ -20,10 +20,11 @@ export const Categhory = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   
+
+
+
   useEffect(() => {
-   
-      setIsLoading(true);
-    
+    setIsLoading(true);
     const fetchData = async () => {
       try {
         const categoryData = await categoryList();
@@ -36,8 +37,10 @@ export const Categhory = () => {
             };
           })
         );
-        setCategories({ categhory: updatedCategories });
-        setIsLoading(false)
+        setTimeout(() => {
+          setCategories({ categhory: updatedCategories });
+          setIsLoading(false);
+        }, 1000);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -59,7 +62,7 @@ export const Categhory = () => {
         <Row>
         {isLoading ? <><Loader/></>:<>
         <Banner />
-          {categories.categhory.map((data) => (
+          {categories.categhory && categories.categhory.map((data) => (
             <Col md={6} lg={4} key={data.id}>
               <div className="card">
                 <div
@@ -76,7 +79,7 @@ export const Categhory = () => {
                           </div>
                           <div className="media-body">
                             <h3 className="manu-item">
-                              <Link to={`/${data.categoryName}`}>{data.categoryName}</Link>
+                              <Link to={`/narayanganj/${data.categoryName}`}>{data.categoryName}</Link>
                             </h3>
                             <Row>
                               {data.subCategory && data.subCategory.slice(0, 3).map((nameList) => (
