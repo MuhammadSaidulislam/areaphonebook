@@ -7,11 +7,9 @@
 .app {
   background: linear-gradient(90deg, #e84c3da8, #e84c3d);
   width: 330px;
-  height: 410px;
   border-radius: 5px;
-  padding: 1em;
+  padding: 28px 40px;
   position: relative;
-  overflow: hidden;
   box-shadow: 0 6px 31px -2px rgba(0, 0, 0, 0.3);
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -32,19 +30,14 @@
 } */
 
 .app form {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
   text-align: center;
-  padding: 2em;
+ 
 }
 
 .app form input {
   width: 100%;
   padding: 13px 15px;
- margin-top: 0.7em;
+  margin-top: 0.7em;
   border-radius: 12px;
   border: none;
   background: rgba(0, 0, 0, 0.3);
@@ -62,16 +55,12 @@
 }
 
 .loginFooter {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 2em;
   text-align: center;
 }
 
 .loginFooter button {
   width: 100%;
+  margin-top: 25px;
   padding: 13px 15px;
   border-radius: 100px;
   border: none;

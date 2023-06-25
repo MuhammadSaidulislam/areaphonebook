@@ -17,6 +17,8 @@ const AddService = () => {
   const [category, setCategory] = useState([]);
   const [subCategoryValue, setSubCategoryValue] = useState("");
   const [selectCategory, setSelectCategory] = useState("");
+
+  console.log('pending',pending);
   // category value
   const handleCategory = (e) => {
     var category = e.target.value;
@@ -58,17 +60,16 @@ const AddService = () => {
       setSubCategoryMsg(false);
     }
   };
-
+const [noData,setNodata]=useState(false)
   useEffect(() => {
     pendingList().then((data) => {
       setPending(data.data);
     });
-  }, []);
+  }, [noData]);
 
   const confirmShop = (info) => {
-    console.log("shop", info);
     pendingDel(info.shop_id).then((data)=>{
-      console.log('delete',data);
+      setNodata(true)
     })
     shopCreate(info).then((data) => {
       if (data.message) {
@@ -132,6 +133,14 @@ const AddService = () => {
               pending.map((data) => (
                 <div>
                   <p>{data.mobile}</p>
+                  <p>{data.category}</p>
+                  <p>{data.sub_category}</p>
+                  <p>{data.ward}</p>
+                  <p>{data.shop_name}</p>
+                  <p>{data.shop_owner}</p>
+                  <p>{data.address}</p>
+
+
                   <button className="btn btn-danger">Cancel</button>
                   <button
                     className="btn btn-info"
@@ -145,21 +154,7 @@ const AddService = () => {
           </Row>
         </Container>
       </div>
-      {/*
-    
-    <select className="form-select" aria-label="Default select example">
-                <option defaultValue>Open this select menu</option>
-                {subValue.map(data =>
-                    <option value="1" onClick={() => submenu(data.pageLink)}>{data.name}</option>)}
-            </select>
-            {subMenu ? <select className="form-select" aria-label="Default select example">
-                <option defaultValue>Open this select menu</option>
-                {showCategory.map(data =>
-                    <option value="1" onClick={() => secondData(data.link)}>{data.name}</option>)}
-            </select> : null}
-
-            <button type='submit' className='btn btn-info' onClick={() => pushData()}>Submit data</button>
-    */}
+     
     </>
   );
 };

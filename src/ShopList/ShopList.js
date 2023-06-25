@@ -21,7 +21,7 @@ const ShopList = () => {
       <Banner />
       <Container>
         <Row>
-          {shopList.map((value) => (
+          {shopList.length === 0 ? <><h1 className="text-center">No data</h1></> : shopList.map((value) => (
             <Col md={4} key={value.id}>
               <div className="card mb-3">
                 <div className="row g-0">

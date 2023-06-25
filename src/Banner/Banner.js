@@ -9,17 +9,22 @@ const Banner = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [userLogin, setUserLogin] = useState(false);
-  const savedUserProfile = localStorage.getItem("userProfile");
+  const savedUserProfile = localStorage.getItem("areaphonebook");
   const userProfile = JSON.parse(savedUserProfile);
 
   useEffect(() => {
+    if(userProfile){
     userInfo(userProfile.mobile).then((data) => {
       if (data.message) {
         setUserLogin(false);
       } else {
-        setUserLogin(false);
+        setUserLogin(true);
       }
     });
+  }
+  else{
+    setUserLogin(false);
+  }
   }, []);
   return (
     <>
@@ -71,15 +76,17 @@ const Banner = () => {
           <Col md={12}>
             <div id="signupBtn">
               <div className="hero-btn">
-              {userLogin ? <>
+              {userLogin ?<>
+                <Link className="btn btn-warning" to="/userDashboard">
+                  <i className="fas fa-user-plus"></i> আপনার তথ্য 
+                </Link>
+                </>:
+                <>
                 <Link className="btn btn-warning" to="/signup">
                   <i className="fas fa-user-plus"></i> আপনার তথ্য যোগ করুন
                 </Link>
-                </>:<>
-                <Link className="btn btn-warning" to="/shop">
-                  <i className="fas fa-user-plus"></i> আপনার তথ্য 
-                </Link>
-                </>}
+                </>
+              }
                 
               </div>
             </div>

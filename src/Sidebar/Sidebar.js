@@ -5,7 +5,7 @@ import { faBars, faClose, faDotCircle, faEllipsisVertical } from "@fortawesome/f
 import { useNavigate } from "react-router-dom";
 import main from "../jsonData/Categhory.json";
 import "./Sidebar.css";
-import { categoryList, subCategoryList } from "../api/auth";
+import { categoryList, logout, subCategoryList } from "../api/auth";
 import { Container, Dropdown } from "react-bootstrap";
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -38,10 +38,15 @@ const Sidebar = () => {
     );
   };
 
-  const subCategoryLink = (subCategory) => {
+  const subCategoryLink = (category_name,subCategory) => {
     setSidebar(false);
-    return navigate(`/category/${subCategory}`);
+    return navigate(`/narayanganj/${category_name}/${subCategory}`);
   };
+
+  const logoutBtn=()=>{
+    logout()
+    return navigate(`/narayanganj`);
+  }
 
   return (
     <>
@@ -62,13 +67,13 @@ const Sidebar = () => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">Signup</Dropdown.Item>
-              <Dropdown.Item href="#/action-1">Login</Dropdown.Item>
               <Dropdown.Item href="#/action-2">Search</Dropdown.Item>
               <Dropdown.Item href="#/action-3">Language</Dropdown.Item>
               <Dropdown.Item href="#/action-1">Dark/Light</Dropdown.Item>
               <Dropdown.Item href="#/action-2">Report</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">Change city</Dropdown.Item>
+              <Dropdown.Item><Link to="/">Change city</Link></Dropdown.Item>
+              <Dropdown.Item><button className="btn btn-danger" onClick={logoutBtn}>Logout</button></Dropdown.Item>
+              <Dropdown.Item><Link to="/signup">Login</Link></Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </Container>
@@ -110,7 +115,7 @@ const Sidebar = () => {
                         className="subCategorySidebar"
                         key={`subcategory` + i}
                         onClick={() =>
-                          subCategoryLink(subData.sub_category_name)
+                          subCategoryLink(subData.category_name,subData.sub_category_name)
                         }
                       >
                         <button>{subData.sub_category_name}</button>

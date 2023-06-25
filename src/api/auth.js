@@ -7,10 +7,9 @@ export const registerUser = async (mobile, password) => {
       mobile: mobile,
       password: password,
     });
-
-    console.log(response.data);
+    return response.data;
   } catch (error) {
-    console.error(error.response.data);
+    return error.response.data;
   }
 };
 // login
@@ -170,7 +169,6 @@ export const pendingDel = async (shopId) => {
   }
 };
 export const shopDetails = async (shopId) => {
-  console.log(shopId);
   try {
     const response = await axios.post(`${API}/singleShopShow/${shopId}`);
     return response.data;
@@ -178,5 +176,19 @@ export const shopDetails = async (shopId) => {
   } catch (error) {
     return error.response.data;
   }
+};
+export const numberCheck = async (mobile) => {
+  try {
+    const response = await axios.post(`${API}/mobileCheck`, {
+      mobileNumber: mobile,
+    });
+    return response.data;
+    // console.log(response.data);
+  } catch (error) {
+    return error.response.data;
+  }
+};
+export const logout = async () => {
+  localStorage.removeItem("areaphonebook");
 };
 // https://api.sms.net.bd/sendsms?api_key={QRa72z0YlJt58U7gxw7WgAXNdyYw0PpeCTrsnT0l}&msg={saidul}&to=8801632663430
