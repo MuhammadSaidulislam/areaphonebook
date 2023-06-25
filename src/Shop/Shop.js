@@ -11,15 +11,15 @@ import {
   userInfo,
 } from "../api/auth";
 import { useNavigate } from "react-router-dom";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 const Shop = () => {
   const navigate = useNavigate();
   const [category, setCategory] = useState([]);
   const [selectCategory, setSelectCategory] = useState("");
-  const savedUserProfile = localStorage.getItem("userProfile");
+  const savedUserProfile = localStorage.getItem("areaphonebook");
   const userProfile = JSON.parse(savedUserProfile);
   const [userShop, setUserShop] = useState([]);
-  
+
   useEffect(() => {
     categoryList().then((data) => {
       setCategory(data.data);
@@ -40,6 +40,7 @@ const Shop = () => {
   const [shop_name, setShop_name] = useState("");
   const [email, setEmail] = useState("");
   const [ward, setWard] = useState("");
+  console.log('ward',ward);
   const [address, setAddress] = useState("");
   const [service, setService] = useState("");
   const handleSubCategoryChange = (e) => {
@@ -152,14 +153,15 @@ const Shop = () => {
                 onChange={handleSubCategoryChange}
               >
                 <option defaultValue>Open this select menu</option>
-                {subCategory.map((item, i) => (
-                  <option
-                    key={`subcategory` + i}
-                    value={item.sub_category_name}
-                  >
-                    {item.sub_category_name}
-                  </option>
-                ))}
+                {subCategory &&
+                  subCategory.map((item, i) => (
+                    <option
+                      key={`subcategory` + i}
+                      value={item.sub_category_name}
+                    >
+                      {item.sub_category_name}
+                    </option>
+                  ))}
               </select>
             </Col>
             <Col md={6}>
@@ -194,13 +196,23 @@ const Shop = () => {
             </Col>
             <Col md={6}>
               <label>Ward no</label>
-              <input
-                type="text"
+              <label>Sub-category select</label>
+              <select
+                className="form-select"
+                aria-label="Default select example"
                 onChange={handleWard}
-                className="form-control"
-                placeholder="Ward"
-                required
-              />
+              >
+                <option defaultValue>Open this select menu</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+              </select>
             </Col>
             <Col md={6}>
               <label>Address</label>

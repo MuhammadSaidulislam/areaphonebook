@@ -27,7 +27,7 @@ export const SubCateghory = () => {
       <Banner />
       <Container>
         <Row>
-          {subCategory.map((value) => (
+          {subCategory.length === 0 ? <><h1 className="text-center">No data</h1></> : subCategory.map((value) => (
             <Col md={4} key={value.id}>
               <div className="card mb-3 subcategoryBox">
                 <Link to={`/narayanganj/${value.category_name}/${value.sub_category_name}`}>

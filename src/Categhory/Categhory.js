@@ -123,7 +123,7 @@ export const Categhory = () => {
                             <span className="topic">
                               {" "}
                               <Link
-                              to={`/category/${subData.sub_category_name}`}
+                              to={`/narayanganj/${subData.category_name}/${subData.sub_category_name}`}
                                 key={subData.sub_id}
                                 className="lol"
                               >

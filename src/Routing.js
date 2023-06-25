@@ -21,7 +21,7 @@ const Routing = () => {
           <Route path="/narayanganj/:id" element={<SubCateghory />}></Route>
           <Route path="/admin" element={<Login/>}></Route>
           <Route path="/signup" element={<Signup/>}></Route>
-          <Route path="/shop" element={<Shop/>}></Route>
+          <Route path="/userDashboard" element={<Shop/>}></Route>
           <Route path="/narayanganj/:sub/:id" element={<ShopList/>}></Route>
          <Route path="/narayanganj/:category/:sub/:id" element={<ShopDetails/>}></Route>
           <Route path="/dashboard" element={<AddService/>}></Route>
