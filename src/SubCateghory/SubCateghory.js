@@ -9,17 +9,14 @@ import "./SubCateghory.css";
 import { subCategoryList } from "../api/auth";
 
 export const SubCateghory = () => {
-  const { id } = useParams();
-  console.log(id);
+  const { category } = useParams();
   const [subCategory, setSubcategory] = useState([]);
   useEffect(() => {
-    subCategoryList(id).then((data) => {
-      console.log(data);
+    subCategoryList(category).then((data) => {
       setSubcategory(data);
     });
   }, []);
 
-  console.log('subCategory',subCategory);
 
   return (
     <div>

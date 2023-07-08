@@ -1,0 +1,17 @@
+.shopDetail{
+    background-color: #f4f4f4;
+    padding: 30px;
+}
+.shopDetail h1{
+    text-align: center;
+    color: #e84c3d;
+    font-weight: 500;
+    font-size: 30px;
+}
+.shopDetail h4{
+    font-size: 21px;
+    color: black;
+}
+.shopDetail h4 span{
+    color: #e84c3d;
+}

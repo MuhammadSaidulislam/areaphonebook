@@ -11,6 +11,19 @@ const Sidebar = () => {
   const navigate = useNavigate();
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
+
+  const savedUserProfile = localStorage.getItem("areaphonebook");
+  const userProfile = JSON.parse(savedUserProfile);
+ 
+  useEffect(() => {
+    if (userProfile) {
+      console.log('true');
+    } else {
+      console.log('false');
+    }
+  }, []);
+
+
   const categhory = main.categhory;
   const subCateghorySearch = (subCateghoryName, sub_id) => {
     return navigate(`/${subCateghoryName}`);
@@ -61,33 +74,29 @@ const Sidebar = () => {
           >
             Area Phonebook
           </Link>
-          <Dropdown>
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
+          <Dropdown className="navDropdown">
+            <Dropdown.Toggle id="dropdown-basic">
             <FontAwesomeIcon icon={faEllipsisVertical} />
             </Dropdown.Toggle>
 
-            <Dropdown.Menu>
-              <Dropdown.Item href="#/action-2">Search</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">Language</Dropdown.Item>
-              <Dropdown.Item href="#/action-1">Dark/Light</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Report</Dropdown.Item>
-              <Dropdown.Item><Link to="/">Change city</Link></Dropdown.Item>
-              <Dropdown.Item><button className="btn btn-danger" onClick={logoutBtn}>Logout</button></Dropdown.Item>
-              <Dropdown.Item><Link to="/signup">Login</Link></Dropdown.Item>
+            <Dropdown.Menu className="navbarDropdown">
+             {/*
+             <Dropdown href="#/action-2">Search</Dropdown>
+              <Dropdown href="#/action-3">Language</Dropdown>
+              <Dropdown href="#/action-1">Dark/Light</Dropdown>
+            */}
+              <Dropdown><Link to="/report">Report</Link></Dropdown>
+              <Dropdown><Link to="/">Change city</Link></Dropdown>
+              {userProfile ? 
+                <><Dropdown><button onClick={logoutBtn}>Logout</button></Dropdown></>:
+              <><Dropdown><Link to="/signup">Login</Link></Dropdown></>}
+              
+              
             </Dropdown.Menu>
           </Dropdown>
         </Container>
       </div>
       <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
-        {/*
-       <ul className="nav-menu-items" onClick={showSidebar}>
-          <li className="navbar-toggle">
-            <Link to="#" className="menu-bars-close">
-              <FontAwesomeIcon icon={faClose} />
-            </Link>
-          </li>
-        </ul>
-      */}
         <ul className="nav-menu-items">
           <div id="accordion">
             {category.map((data, i) => (

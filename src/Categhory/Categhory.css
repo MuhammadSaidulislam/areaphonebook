@@ -1,0 +1,8 @@
+.topic .extra{
+    color: #e84c3d;
+    font-weight: 500;
+    white-space: nowrap;
+}
+.categorySubcategory .card-header{
+    min-height: 89px;
+}
