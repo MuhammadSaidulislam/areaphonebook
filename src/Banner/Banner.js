@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import "./Banner.css";
 import { userInfo } from "../api/auth";
 import cover from "../assets/image/banner/cover.jpg";
-import { useParams } from 'react-router';
+import { useParams } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
-const Banner = ({wardSelect,onValueChange}) => {
+const Banner = ({ wardSelect, onValueChange }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -18,12 +18,12 @@ const Banner = ({wardSelect,onValueChange}) => {
 
   const { category } = useParams();
   const { sub } = useParams();
-  
+
   // const [categoryTitle,setCategoryTitle]=useState("")
   // const [suCategoryTitle,setSubCategoryTitle]=useState("")
 
-  const categoryTitle=category;
-  const suCategoryTitle=sub
+  const categoryTitle = category;
+  const suCategoryTitle = sub;
   // console.log('categoryTitle',categoryTitle);
   // console.log('suCategoryTitle',suCategoryTitle);
 
@@ -32,7 +32,7 @@ const Banner = ({wardSelect,onValueChange}) => {
     // setSubCategoryTitle(suCategoryTitle)
     if (userProfile) {
       userInfo(userProfile.mobile).then((data) => {
-        console.log('data',data);
+        console.log("data", data);
         if (data.message) {
           setUserLogin(true);
         } else {
@@ -44,15 +44,10 @@ const Banner = ({wardSelect,onValueChange}) => {
     }
   }, []);
 
-
-
-
- 
   const handleWardChange = (event) => {
     onValueChange(event.target.value);
     setSelectedWard(event.target.value);
   };
-
 
   return (
     <>
@@ -74,11 +69,7 @@ const Banner = ({wardSelect,onValueChange}) => {
           <Col md={12}>
             <div className="hero-text">
               <div className="bannerHeading">
-               <Link to={`/narayanganj/${category}`}>{categoryTitle && categoryTitle.length ? <>{category} </>:<></>}</Link>
-               <Link to={`/narayanganj/${category}/${sub}`}>{suCategoryTitle && suCategoryTitle.length ? <><FontAwesomeIcon icon={faArrowRightLong} />{sub}</>:<></>}</Link>
-              
-
-               {/*
+                {/*
               
                {wardSelect === true ? <>
                 <p><FontAwesomeIcon icon={faArrowRightLong} />Select ward No: </p>
@@ -97,16 +88,39 @@ const Banner = ({wardSelect,onValueChange}) => {
               </select>
                 </>:<></>}
               */}
-                
-              </div>
 
-              <button
-                onClick={handleShow}
-                className="active trailVideo"
-                data-toggle="modal"
-              >
-                ব্যবহারের ভিডিও
-              </button>
+                {category && category.length ? (
+                  <>
+                    <Link to={`/narayanganj/${category}`}>
+                      {categoryTitle && categoryTitle.length ? (
+                        <>{category} </>
+                      ) : (
+                        <></>
+                      )}
+                    </Link>
+                    <Link to={`/narayanganj/${category}/${sub}`}>
+                      {suCategoryTitle && suCategoryTitle.length ? (
+                        <>
+                          <FontAwesomeIcon icon={faArrowRightLong} />
+                          {sub}
+                        </>
+                      ) : (
+                        <></>
+                      )}
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      onClick={handleShow}
+                      className="active trailVideo"
+                      data-toggle="modal"
+                    >
+                      ব্যবহারের ভিডিও
+                    </button>
+                  </>
+                )}
+              </div>
               <Modal show={show} onHide={handleClose} animation={false}>
                 <Modal.Header closeButton>
                   <Modal.Title>কীভাবে ওয়েবসাইটটি ব্যবহার করবেন</Modal.Title>
