@@ -1,20 +1,167 @@
-.cityCorporationHeading h1{
-    text-align: center;
-    font-size: 45px;
-    font-weight: 600;
-    padding: 40px 0px;
+@import url('https://fonts.maateen.me/solaiman-lipi/font.css');
+.cityCorporationHeading h1 {
+  text-align: center;
+  font-size: 45px;
+  font-weight: 600;
+  padding: 40px 0px;
 }
-.corporationCard{
-    text-align: center;
+.corporationCard {
+  text-align: center;
 }
-.corporationCard img{
-    width: 250px;
-    text-align: center;
+.corporationCard img {
+  width: 250px;
+  text-align: center;
 }
-.corporationCard p{
-    margin-top: 10px;
-    text-align: center;
-    font-size: 35px;
-    font-weight: 600;
-    color: #e84c3d;
+.corporationCard p {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 35px;
+  font-weight: 600;
+  color: #e84c3d;
+}
+
+/* new doc */
+body {
+    font-family: 'SolaimanLipi', Arial, sans-serif !important;
+}
+input.form-control {
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 0px;
+  height: 45px;
+}
+.page {
+  max-width: 1000px !important;
+  background: white;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 0.5cm;
+  box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+}
+
+.page[size="A4"] {
+  width: 21cm;
+  height: 29.7cm;
+}
+.page[size="A4"][layout="portrait"] {
+  width: 29.7cm;
+  height: 21cm;
+}
+.page[size="A3"] {
+  width: 29.7cm;
+  height: 42cm;
+}
+.page[size="A3"][layout="portrait"] {
+  width: 42cm;
+  height: 29.7cm;
+}
+.page[size="A5"] {
+  width: 14.8cm;
+  height: 21cm;
+}
+.page[size="A5"][layout="portrait"] {
+  width: 21cm;
+  height: 14.8cm;
+}
+@media print {
+  body,
+  page {
+    margin: 0;
+    box-shadow: 0;
+  }
+}
+
+#pageOne p {
+  font-size: 17px;
+}
+p {
+  font-size: 20px;
+  margin-bottom: 1rem;
+}
+
+.form-control {
+  padding: 20px 10px;
+  border: 1px solid gray;
+  border-radius: 0px;
+}
+.input_box1,
+.input_box2,
+.input_box3,
+.input_box4,
+.input_box5 {
+  height: 50px;
+  width: 50px;
+  border: 1px solid black;
+  border-radius: 0px;
+  text-align: center;
+  margin-left: -1px;
+  pointer-events: none !important;
+  font-weight: bold;
+}
+.input_box2 {
+  height: 40px;
+  width: 35px;
+}
+.input_box3 {
+  height: 40px;
+  width: 40px;
+}
+.input_box4 {
+  height: 40px;
+  width: 34px;
+}
+.page {
+  max-width: 1000px;
+}
+input.checkbox {
+  height: 30px;
+  width: 30px;
+}
+.check_box_style {
+  height: 30px;
+  width: 30px;
+  border: 2px solid black;
+  display: inline-block;
+}
+.check_box_style img {
+  height: 20px;
+  position: relative;
+  left: 1px;
+}
+.input_box5 {
+  height: 30px;
+  width: 23px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.page_speed_1965622155 {
+  padding: 120px 100px !important; 
+  color: black;
+}
+.page_speed_1026305736 {
+  margin-left: 40px;
+}
+.page_speed_276937023 {
+  text-align: justify;
+}
+.page_speed_2041838867 {
+  padding-left: 35px;
+}
+.page_speed_175150834 {
+  font-size: 70px;
+}
+.page_speed_946459372 {
+  border-radius: 0px;
+  min-width: 120px;
+}
+.page_speed_1862336596 {
+  font-size: 1rem;
+  color: white;
+}
+.page_speed_520395661 {
+  display: none;
+}
+.form-control:focus {
+  border-color: #29cb6f !important;
+  box-shadow: none !important;
 }

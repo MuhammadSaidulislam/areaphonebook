@@ -3,6 +3,7 @@ import "./Signup.css";
 import { Modal } from "react-bootstrap";
 import { loginUser, mobileOtp, numberCheck, registerUser } from "../api/auth";
 import { useNavigate } from "react-router-dom";
+import Layout from './../Component/Layout/Layout';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -76,8 +77,9 @@ const Signup = () => {
   };
   const loginSave = () => {
     registerUser(userMobile, password).then((data) => {
-       console.log("login", data);
-       if(data.message){
+       console.log("register", data);
+       if(!data.error){
+        localStorage.setItem("areaphonebook", JSON.stringify(data));
         return navigate("/userDashboard");
        }
        
@@ -121,7 +123,7 @@ const Signup = () => {
   };
 
   return (
-    <>
+    <Layout>
       <section className="loginBox">
         <div className="app">
           <form>
@@ -229,7 +231,7 @@ const Signup = () => {
           </div>
         </Modal.Body>
       </Modal>
-    </>
+    </Layout>
   );
 };
 

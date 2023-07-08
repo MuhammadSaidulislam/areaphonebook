@@ -1,0 +1,23 @@
+.bannerHeading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bannerHeading p,.bannerHeading a {
+  margin-bottom: 0px;
+  font-size: 21px;
+  color: #e84c3d;
+  font-weight: 500;
+}
+.bannerHeading .dropdownSelect {
+  background-color: transparent !important;
+  color: #e84c3d !important;
+  border: none !important;
+  /* font-size: 23px !important; */
+}
+.bannerHeading p svg {
+  margin: 0px 12px;
+}
+.trailVideo{
+  padding: 5px 12px;
+}
