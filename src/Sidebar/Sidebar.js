@@ -86,11 +86,11 @@ const Sidebar = () => {
           <Accordion>
           {categories.map((category,i) =>
             <Accordion.Item eventKey={i}>
-              <Accordion.Header>{category.categoryName}</Accordion.Header>
+              <Accordion.Header>{category.category_name}</Accordion.Header>
               <Accordion.Body>
              <div className="subCategorySidebar">
              {category.subCategory && category.subCategory.map((subCategory) => 
-              <Link to={`/narayanganj/${category.categoryName}/${subCategory.sub_category_name}`}>{subCategory.sub_category_name}</Link>
+              <Link to={`/narayanganj/${category.category_name}/${subCategory.sub_category_name}`}>{subCategory.sub_category_name}</Link>
               )}
              </div>
               

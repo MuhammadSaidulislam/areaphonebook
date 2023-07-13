@@ -80,7 +80,7 @@ const Signup = () => {
        console.log("register", data);
        if(!data.error){
         localStorage.setItem("areaphonebook", JSON.stringify(data));
-        return navigate("/userDashboard");
+        return navigate("/profile");
        }
        
     });
@@ -115,7 +115,7 @@ const Signup = () => {
     loginUser(userMobile, userPassword).then((data) => {
       if (!data.error) {
         localStorage.setItem("areaphonebook", JSON.stringify(data));
-        return navigate("/userDashboard");
+        return navigate("/profile");
       } else {
         setValidLogin(true);
       }

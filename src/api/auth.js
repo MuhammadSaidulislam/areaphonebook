@@ -43,20 +43,13 @@ export const mobileOtp = async (mobile, otp) => {
     });
 };
 // category add
-export const categoryAdd = (data) => {
-  return fetch(`${API}/createData`, {
-      method: "POST",
-      headers: {
-          Accept: "application/json",
-      },
-      body: data,
-  })
-      .then((res) => {
-          return res.json();
-      })
-      .catch((err) => {
-          return err;
-      });
+export const categoryAdd = async (body={}) => {
+  try {
+      const response = await axios.post(`${API}/category`, body);
+      return response.data;
+    } catch (error) {
+      return error.response.data;
+    }
 };
 // category list
 export const categoryList = async () => {
@@ -69,11 +62,11 @@ export const categoryList = async () => {
   }
 };
 // sub category add
-export const subCategoryAdd = async (categoryName, subCategoryName,tagsValue) => {
+export const subCategoryAdd = async (category_name, subcategory_name,tagsValue) => {
   try {
     const response = await axios.post(`${API}/subcategory`, {
-      categoryName: categoryName,
-      subCategoryName: subCategoryName,
+      category_name: category_name,
+      subcategory_name: subcategory_name,
       tags:tagsValue
     });
     return response.data;
@@ -82,10 +75,10 @@ export const subCategoryAdd = async (categoryName, subCategoryName,tagsValue) =>
   }
 };
 // sub category list
-export const subCategoryList = async (categoryName) => {
+export const subCategoryList = async (category_name) => {
   try {
     const response = await axios.post(`${API}/subcategorylist`, {
-      categoryName: categoryName,
+      category_name: category_name,
     });
     return response.data;
   } catch (error) {
@@ -102,19 +95,19 @@ export const allSubCategoryList = async () => {
   }
 };
 // shop create
-export const shopCreate = async (shop) => {
+export const shopCreate = async (body={}) => {
   try {
-    const response = await axios.post(`${API}/create`, { shop });
+    const response = await axios.post(`${API}/create`, body);
     return response.data;
   } catch (error) {
     return error.response.data;
   }
 };
 // sub category shop list
-export const subCategoryShopList = async (subCategoryName) => {
+export const subCategoryShopList = async (subcategory_name) => {
   try {
     const response = await axios.post(`${API}/AllShopList`, {
-      subCategoryName: subCategoryName,
+      subcategory_name: subcategory_name,
     });
     return response.data;
   } catch (error) {
@@ -146,10 +139,10 @@ export const userInfo = async (userMobile) => {
   }
 };
 // pending shop create
-export const pendingShopList = async (shop) => {
-  console.log(shop);
+export const pendingShopList = async (body={}) => {
+
   try {
-    const response = await axios.post(`${API}/pendingShop`, { shop });
+    const response = await axios.post(`${API}/pendingShop`, body );
     return response.data;
   } catch (error) {
     return error.response.data;
@@ -251,6 +244,17 @@ export const shopDelete = async (shopId) => {
     return error.response.data;
   }
 };
+// shop and post update
+export const shopUpdate = async (body={},shopId) => {
+
+  try {
+    const response = await axios.put(`${API}/update/${shopId}`, body );
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
 export const logout = async () => {
   localStorage.removeItem("areaphonebook");
 };

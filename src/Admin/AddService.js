@@ -82,13 +82,14 @@ const AddService = () => {
   }, [noData]);
 
   const confirmShop = (info) => {
-    pendingDel(info.shop_id).then((data) => {
-      setNodata(true);
-    });
+    // pendingDel(info.shop_id).then((data) => {
+    //   setNodata(true);
+    // });
     shopCreate(info).then((data) => {
-      if (data.message) {
-        console.log("save");
-      }
+      console.log('save',data);
+      // if (data.message) {
+      //   console.log("save");
+      // }
     });
   };
 
@@ -182,7 +183,6 @@ const AddService = () => {
                           type="file"
                           name="image"
                           className="form-control mt-3"
-                          {...register("image")}
                           required
                         />
 
@@ -203,11 +203,11 @@ const AddService = () => {
                         <option defaultValue>Select category</option>
                         {category.map((item, i) => (
                           <option
-                            onClick={() => selectCat(item.categoryName)}
+                            onClick={() => selectCat(item.category_name)}
                             key={`category` + i}
-                            value={item.categoryName}
+                            value={item.category_name}
                           >
-                            {item.categoryName}
+                            {item.category_name}
                           </option>
                         ))}
                       </select>

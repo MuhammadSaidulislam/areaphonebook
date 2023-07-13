@@ -14,16 +14,16 @@
                 <div className="align-self-center">
                   <img
                     className="manu-img"
-                    //   src={data.categoryName}
-                    //   alt={data.categoryName}
+                    //   src={data.category_name}
+                    //   alt={data.category_name}
                     src="image"
                     alt="image"
                   />
                 </div>
                 <div className="media-body">
                   <h3 className="manu-item">
-                    <Link to={`/${data.categoryName}`}>
-                      {data.categoryName}
+                    <Link to={`/${data.category_name}`}>
+                      {data.category_name}
                     </Link>
                   </h3>
 
@@ -43,14 +43,14 @@
                       className="col-6 topic tp4"
                       onClick={() =>
                         toggleCollapse(
-                          `a${data.categoryName}`,
-                          data.categoryName
+                          `a${data.category_name}`,
+                          data.category_name
                         )
                       }
                       aria-expanded={
-                        openCollapseId === `a${data.categoryName}`
+                        openCollapseId === `a${data.category_name}`
                       }
-                      aria-controls={`a${data.categoryName}`}
+                      aria-controls={`a${data.category_name}`}
                     >
                       {" "}
                       <a data-toggle="collapse">
@@ -67,9 +67,9 @@
       </div>
 
       <div
-        id="a${data.categoryName}"
+        id="a${data.category_name}"
         className={`collapse ${
-          openCollapseId === `a${data.categoryName}` ? "show" : ""
+          openCollapseId === `a${data.category_name}` ? "show" : ""
         }`}
       >
         <Container>
