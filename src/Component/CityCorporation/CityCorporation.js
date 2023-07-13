@@ -1,55 +1,35 @@
-import React, { useState } from "react";
-import Layout from "./../Layout/Layout";
+import React, { useState,useRef } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import "./CityCorporation.css";
 import { Link } from "react-router-dom";
-import { payment } from "../../api/auth";
-import html2pdf from "html2pdf.js";
-import DuplicateVoter from "./DuplicateVoter";
+import axios from 'axios';
+import Dropzone from 'react-dropzone';
 
 const CityCorporation = () => {
-  const [selectedOption, setSelectedOption] = useState("");
-  const [mobileNumber, setMobileNumber] = useState("");
-  const [userName, setUserName] = useState("");
-  const [fatherName, setFatherName] = useState("");
-  const [motherName, setMotherName] = useState("");
-  const [division, setDivision] = useState("");
-  const [district, setDistrict] = useState("");
-  const [upozila, setUpozila] = useState("");
-  const [union, setUnion] = useState("");
-  const [wardNo, setWardNo] = useState("");
-  const [holdingNo, setHoldingNo] = useState("");
-  const [address, setAddress] = useState("");
-  const [nidOne, setNidOne] = useState("");
-  const [nidTwo, setNidTwo] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
 
-  const [pdfDownload, setPdfDownload] = useState(false);
-  const handleOptionChange = (event) => {
-    setSelectedOption(event.target.value);
+  const handleFileDrop = (acceptedFiles) => {
+    setSelectedFile(acceptedFiles[0]);
   };
 
-  const paymentApi = () => {
-    payment().then((data) => {
-      console.log("payment", data);
-    });
-  };
-  const formSubmit = () => {
-    setPdfDownload(true);
-  };
-  const handleDownload = () => {
-    const element = document.getElementById("contentToDownload");
+  const handleFileUpload = async () => {
+    if (!selectedFile) {
+      alert('Please select a file.');
+      return;
+    }
 
-    html2pdf()
-      .set({
-        margin: 0.5,
-        filename: "downloaded.pdf",
-        image: { type: "jpeg", quality: 1 },
-        html2canvas: { scale: 10 },
-        jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
-      })
-      .from(element)
-      .save();
+    const formData = new FormData();
+    formData.append('category_name', "selectedFile");
+    formData.append('image', selectedFile);
+    try {
+      await axios.post(`http://localhost:8888/category`, formData);
+      alert('File uploaded successfully.');
+    } catch (error) {
+      console.error('Error uploading file:', error);
+      alert('Failed to upload file.');
+    }
   };
+
   return (
     <>
     

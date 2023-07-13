@@ -7,7 +7,12 @@ import cover from "../assets/image/banner/cover.jpg";
 import { useParams } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
-const Banner = ({ wardSelect, onValueChange }) => {
+const Banner = ({
+  wardSelect,
+  onValueChange,
+  profileFunction,
+  postFunction,
+}) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -15,9 +20,18 @@ const Banner = ({ wardSelect, onValueChange }) => {
   const savedUserProfile = localStorage.getItem("areaphonebook");
   const userProfile = JSON.parse(savedUserProfile);
   const [selectedWard, setSelectedWard] = useState("");
-
   const { category } = useParams();
   const { sub } = useParams();
+
+  const profileUrl = window.location.pathname;
+
+  console.log(window.location.pathname);
+
+  // profile button
+  const [profileShow, setProfileShow] = useState(false);
+  const [editShow, setEditShow] = useState(false);
+  const [postBox, setPostBox] = useState(false);
+  const [createProfile, setCreateProfile] = useState(false);
 
   // const [categoryTitle,setCategoryTitle]=useState("")
   // const [suCategoryTitle,setSubCategoryTitle]=useState("")
@@ -28,11 +42,8 @@ const Banner = ({ wardSelect, onValueChange }) => {
   // console.log('suCategoryTitle',suCategoryTitle);
 
   useEffect(() => {
-    // setCategoryTitle(category);
-    // setSubCategoryTitle(suCategoryTitle)
     if (userProfile) {
       userInfo(userProfile.mobile).then((data) => {
-        console.log("data", data);
         if (data.message) {
           setUserLogin(true);
         } else {
@@ -48,6 +59,7 @@ const Banner = ({ wardSelect, onValueChange }) => {
     onValueChange(event.target.value);
     setSelectedWard(event.target.value);
   };
+
 
   return (
     <>
@@ -91,23 +103,36 @@ const Banner = ({ wardSelect, onValueChange }) => {
 
                 {category && category.length ? (
                   <>
-                    <Link to={`/narayanganj/${category}`}>
-                      {categoryTitle && categoryTitle.length ? (
-                        <>{category} </>
-                      ) : (
-                        <></>
-                      )}
-                    </Link>
-                    <Link to={`/narayanganj/${category}/${sub}`}>
-                      {suCategoryTitle && suCategoryTitle.length ? (
-                        <>
-                          <FontAwesomeIcon icon={faArrowRightLong} />
-                          {sub}
-                        </>
-                      ) : (
-                        <></>
-                      )}
-                    </Link>
+                    <>
+                      <Link to={`/narayanganj/${category}`}>
+                        {categoryTitle && categoryTitle.length ? (
+                          <>{category} </>
+                        ) : (
+                          <></>
+                        )}
+                      </Link>
+                      <Link to={`/narayanganj/${category}/${sub}`}>
+                        {suCategoryTitle && suCategoryTitle.length ? (
+                          <>
+                            <FontAwesomeIcon icon={faArrowRightLong} />
+                            {sub}
+                          </>
+                        ) : (
+                          <></>
+                        )}
+                      </Link>
+                    </>
+                  </>
+                ) : profileUrl === "/profile" ? (
+                  <>
+                    <div className="profileHeading">
+                      <button className="btn" onClick={() => profileFunction()}>
+                        আপনার প্রোফাইল দেখুন
+                      </button>
+                      <button className="btn" onClick={() => postFunction()}>
+                        আপনার পোস্ট দেখুন
+                      </button>
+                    </div>
                   </>
                 ) : (
                   <>
@@ -121,6 +146,7 @@ const Banner = ({ wardSelect, onValueChange }) => {
                   </>
                 )}
               </div>
+
               <Modal show={show} onHide={handleClose} animation={false}>
                 <Modal.Header closeButton>
                   <Modal.Title>কীভাবে ওয়েবসাইটটি ব্যবহার করবেন</Modal.Title>
@@ -144,21 +170,24 @@ const Banner = ({ wardSelect, onValueChange }) => {
           </Col>
           <Col md={12}>
             <div id="signupBtn">
-              <div className="hero-btn">
-                {userLogin ? (
-                  <>
-                    <Link className="btn btn-warning" to="/userDashboard">
-                      <i className="fas fa-user-plus"></i> আপনার তথ্য
-                    </Link>
-                  </>
-                ) : (
-                  <>
-                    <Link className="btn btn-warning" to="/signup">
-                      <i className="fas fa-user-plus"></i> আপনার তথ্য যোগ করুন
-                    </Link>
-                  </>
-                )}
-              </div>
+            {profileUrl === "/profile" ? <></>:  <>
+            <div className="hero-btn">
+            {userLogin ? (
+              <>
+                <Link className="btn btn-warning" to="/profile">
+                  <i className="fas fa-user-plus"></i> আপনার তথ্য
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link className="btn btn-warning" to="/signup">
+                  <i className="fas fa-user-plus"></i> আপনার তথ্য যোগ করুন
+                </Link>
+              </>
+            )}
+          </div>
+            </>}
+             
             </div>
           </Col>
         </Row>

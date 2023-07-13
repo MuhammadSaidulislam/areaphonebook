@@ -21,3 +21,9 @@
 .trailVideo{
   padding: 5px 12px;
 }
+.profileHeading button{
+  background-color: transparent;
+  border: none;
+  color: #e84c3d;
+  font-weight: 700;
+}

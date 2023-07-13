@@ -1,32 +1,24 @@
 import React, { useEffect, useState } from "react";
 import "./Categhory.css";
-import { Card, Col, Container, Row, Button, Collapse } from "react-bootstrap";
+import {  Col, Container, Row} from "react-bootstrap";
 import data from "../jsonData/Categhory.json";
 import { Link, useNavigate } from "react-router-dom";
 import SideBar from "../Sidebar/Sidebar";
 import Banner from "../Banner/Banner";
-import {
-  allSubCategoryList,
-  cardList,
-  categoryList,
-  subCategoryList,
-} from "../api/auth";
-import Footer from "../Footer/Footer";
+import { cardList} from "../api/auth";
+import { API } from "../config";
 import Loader from "../Component/Loader/Loader";
 
 export const Categhory = () => {
-  const [category, setCategory] = useState([]);
-  const [subCategory, setSubCategory] = useState([]);
+
   const navigate = useNavigate();
 
-  // const [categories, setCategories] = useState({
-  //   categhory: []
-  // });
+
 
   const [isLoading, setIsLoading] = useState(false);
 
   const [categories, setCategories] = useState([]);
-  console.log("cardArray", categories);
+
   useEffect(() => {
     setIsLoading(true);
 
@@ -55,18 +47,19 @@ export const Categhory = () => {
                       <div className="cleartfix">
                         <div className="media align-items-stretch d-flex">
                           <div className="align-self-center">
-                            <img
+                         
+                          <img
                               className="manu-img"
-                              src={data.categoryImage}
-                              alt="image"
+                              src={`${API}/category.categoryImage`}
+                              alt={category.categoryImage}
                             />
                           </div>
                           <div className="media-body">
                             <h3 className="manu-item">
                               <Link
-                                to={`/narayanganj/${category.categoryName}`}
+                                to={`/narayanganj/${category.category_name}`}
                               >
-                                {category.categoryName}
+                                {category.category_name}
                               </Link>
                             </h3>
                             <Row>
@@ -87,7 +80,7 @@ export const Categhory = () => {
                               <span
                                 className="col-6 topic tp4"
                                 data-bs-toggle="collapse"
-                                data-bs-target={`#${category.categoryName}`}
+                                data-bs-target={`#${category.category_name}`}
                               >
                                 <a className="extra">
                                   আরো দেখুন{" "}
@@ -102,7 +95,7 @@ export const Categhory = () => {
                   </div>
                 </div>
 
-                <div id={category.categoryName} className="collapse">
+                <div id={category.category_name} className="collapse">
                   <Container>
                     <Row>
                       {category.subCategory &&
@@ -151,8 +144,8 @@ export const Categhory = () => {
                             </div>
                             <div className="media-body">
                               <h3 className="manu-item">
-                                <Link to={`/narayanganj/${data.categoryName}`}>
-                                  {data.categoryName}
+                                <Link to={`/narayanganj/${data.category_name}`}>
+                                  {data.category_name}
                                 </Link>
                               </h3>
                               <Row>
@@ -173,7 +166,7 @@ export const Categhory = () => {
                                 <span
                                   className="col-6 topic tp4"
                                   data-bs-toggle="collapse"
-                                  data-bs-target={`#${data.categoryName}`}
+                                  data-bs-target={`#${data.category_name}`}
                                 >
                                   {" "}
                                   <a
@@ -193,7 +186,7 @@ export const Categhory = () => {
                     </div>
                   </div>
 
-                  <div id={data.categoryName} className="collapse">
+                  <div id={data.category_name} className="collapse">
                     <Container>
                       <Row>
                         {data.subCategory &&
