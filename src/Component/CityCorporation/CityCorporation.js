@@ -1,4 +1,4 @@
-import React, { useState,useRef } from "react";
+import React, { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import "./CityCorporation.css";
 import { Link } from "react-router-dom";

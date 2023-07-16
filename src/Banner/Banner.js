@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { Col, Container, Modal, Row, Dropdown } from "react-bootstrap";
+import { Col, Container, Modal, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./Banner.css";
 import { userInfo } from "../api/auth";
 import cover from "../assets/image/banner/cover.jpg";
 import { useParams } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons"; import Select from 'react-select';
+
+
+const options = [
+  { value: 'chocolate', label: 'Chocolate' },
+  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'vanilla', label: 'Vanilla' },
+];
 const Banner = ({
   wardSelect,
   onValueChange,
+  filterTags,
   profileFunction,
   postFunction,
 }) => {
@@ -22,24 +30,19 @@ const Banner = ({
   const [selectedWard, setSelectedWard] = useState("");
   const { category } = useParams();
   const { sub } = useParams();
-
   const profileUrl = window.location.pathname;
-
-  console.log(window.location.pathname);
-
+  const [selectedOption, setSelectedOption] = useState(null);
   // profile button
-  const [profileShow, setProfileShow] = useState(false);
-  const [editShow, setEditShow] = useState(false);
-  const [postBox, setPostBox] = useState(false);
-  const [createProfile, setCreateProfile] = useState(false);
-
-  // const [categoryTitle,setCategoryTitle]=useState("")
-  // const [suCategoryTitle,setSubCategoryTitle]=useState("")
 
   const categoryTitle = category;
   const suCategoryTitle = sub;
-  // console.log('categoryTitle',categoryTitle);
-  // console.log('suCategoryTitle',suCategoryTitle);
+
+
+  const convertedArray = filterTags.map((item) => {
+    return { value: item, label: item };
+  });
+
+  console.log('convertedArray', convertedArray);
 
   useEffect(() => {
     if (userProfile) {
@@ -55,10 +58,6 @@ const Banner = ({
     }
   }, []);
 
-  const handleWardChange = (event) => {
-    onValueChange(event.target.value);
-    setSelectedWard(event.target.value);
-  };
 
 
   return (
@@ -81,25 +80,6 @@ const Banner = ({
           <Col md={12}>
             <div className="hero-text">
               <div className="bannerHeading">
-                {/*
-              
-               {wardSelect === true ? <>
-                <p><FontAwesomeIcon icon={faArrowRightLong} />Select ward No: </p>
-                <select className="dropdownSelect" value={selectedWard} onChange={handleWardChange}>
-                <option value="all">All Wards</option>
-                <option value="1">Ward 1</option>
-                <option value="2">Ward 2</option>
-                <option value="3">Ward 3</option>
-                <option value="4">Ward 4</option>
-                <option value="5">Ward 5</option>
-                <option value="6">Ward 6</option>
-                <option value="7">Ward 7</option>
-                <option value="8">Ward 8</option>
-                <option value="9">Ward 9</option>
-                <option value="10">Ward 10</option>
-              </select>
-                </>:<></>}
-              */}
 
                 {category && category.length ? (
                   <>
@@ -121,6 +101,14 @@ const Banner = ({
                           <></>
                         )}
                       </Link>
+
+                      <div className="app">
+                        <Select
+                          defaultValue={selectedOption}
+                          onChange={setSelectedOption}
+                          options={convertedArray}
+                        />
+                      </div>
                     </>
                   </>
                 ) : profileUrl === "/profile" ? (
@@ -170,24 +158,24 @@ const Banner = ({
           </Col>
           <Col md={12}>
             <div id="signupBtn">
-            {profileUrl === "/profile" ? <></>:  <>
-            <div className="hero-btn">
-            {userLogin ? (
-              <>
-                <Link className="btn btn-warning" to="/profile">
-                  <i className="fas fa-user-plus"></i> আপনার তথ্য
-                </Link>
-              </>
-            ) : (
-              <>
-                <Link className="btn btn-warning" to="/signup">
-                  <i className="fas fa-user-plus"></i> আপনার তথ্য যোগ করুন
-                </Link>
-              </>
-            )}
-          </div>
-            </>}
-             
+              {profileUrl === "/profile" ? <></> : <>
+                <div className="hero-btn">
+                  {userLogin ? (
+                    <>
+                      <Link className="btn btn-warning" to="/profile">
+                        <i className="fas fa-user-plus"></i> আপনার তথ্য
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      <Link className="btn btn-warning" to="/signup">
+                        <i className="fas fa-user-plus"></i> আপনার তথ্য যোগ করুন
+                      </Link>
+                    </>
+                  )}
+                </div>
+              </>}
+
             </div>
           </Col>
         </Row>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Sidebar.css";
 import { Link } from "react-router-dom";
 
@@ -6,7 +6,7 @@ const Sidebar = (props) => {
 
   return (
     <>
-      <div className={`sidebar ${props.isCollapsed ? "" : "collapsed"}`}>
+      <div className={`sidebar ${props.isCollapsed ? "collapsed" : ""}`}>
         <aside className="sidebar-content" id="sidebar-wrapper">
           <div className="sidebar-brand text-center">
            <p>Areaphonebook</p>

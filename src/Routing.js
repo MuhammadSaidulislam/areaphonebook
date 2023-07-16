@@ -11,8 +11,13 @@ import ShopDetails from "./Component/ShopDetails/ShopDetails";
 import Report from "./Component/Report/Report";
 import Profile from "./Component/Profile/Profile";
 import Login from './Component/Admin/Login';
-import Dashboard from "./Component/Admin/Dashboard";
 import CreateCategory from "./Component/Admin/CreateCategory/CreateCategory";
+import CreateSubCategory from "./Component/Admin/CreateSubCategory/CreateSubCategory";
+import PendingList from "./Component/Admin/PendingList/PendingList";
+import AllShop from "./Component/Admin/AllShop/AllShop";
+import ReportList from "./Component/Admin/ReportList/ReportList";
+import Filter from "./Component/Admin/Filter/Filter";
+
 
 const Routing = () => {
   return (
@@ -33,8 +38,12 @@ const Routing = () => {
 
           {/* admin */}
           <Route path="/admin" element={<Login />}></Route>
-          <Route path="/dashboard" element={<Dashboard />}></Route>
           <Route path="/categoryAdd" element={<CreateCategory />}></Route>
+          <Route path="/subCategoryAdd" element={<CreateSubCategory />}></Route>
+          <Route path="/pendingList" element={<PendingList />}></Route>
+          <Route path="/allList" element={<AllShop />}></Route>
+          <Route path="/reportList" element={<ReportList />}></Route>
+          <Route path="/filter" element={<Filter />}></Route>
         </Routes>
       </BrowserRouter>
     </>

@@ -1,19 +1,27 @@
 import React, { useEffect } from "react";
-import { subCategoryShopList } from "../api/auth";
+import { filterList, subCategoryShopList } from "../api/auth";
 import { useParams } from "react-router";
 import Sidebar from "../Sidebar/Sidebar";
 import Banner from "../Banner/Banner";
 import { Col, Container, Row } from "react-bootstrap";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { API } from "../config";
 const ShopList = () => {
-  const { sub } = useParams();
-  const [shopList, setShopList] = useState([]);
+
   const [wardSelect, setWardSelect] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
+  const [filterTags, setFilterTags] = useState([]);
   const [valueFromChild, setValueFromChild] = useState("all");
+  const { category } = useParams();
+  const { sub } = useParams();
+  const categoryTitle = category;
+  const suCategoryTitle = sub;
+  
+
 
   const handleValueFromChild = (value) => {
+    console.log('value',value);
     setValueFromChild(value);
   };
 
@@ -29,6 +37,11 @@ const ShopList = () => {
         setFilteredData(filtered);
       }
     });
+    // filter list
+    filterList(categoryTitle,suCategoryTitle).then((data)=>{
+    //  console.log('filter',data.tags);
+      setFilterTags(data.tags)
+    })
     
   }, [sub,valueFromChild]);
  
@@ -36,7 +49,7 @@ const ShopList = () => {
   return (
     <>
       <Sidebar />
-      <Banner wardSelect={wardSelect} onValueChange={handleValueFromChild} />
+      <Banner wardSelect={wardSelect} filterTags={filterTags} onValueChange={handleValueFromChild} />
       <Container>
         <Row>
           {filteredData.length === 0 ? (
@@ -44,13 +57,13 @@ const ShopList = () => {
               <h1 className="text-center">No data</h1>
             </>
           ) : (
-            filteredData.map((value) => (
-              <Col md={4} key={value.id}>
+            filteredData.map((value,i) => (
+              <Col md={4} key={`shop`+i}>
                 <div className="card mb-3">
                   <div className="row g-0">
-                    <div className="col-md-4">
+                    <div className="col-md-4 d-flex">
                       <img
-                        src={value.photo}
+                        src={`${API}/${value.shop_image}`}
                         className="img-fluid rounded-start"
                         alt="..."
                       />

@@ -5,10 +5,11 @@ import Sidebar from '../Sidebar';
 import { Col,Row, Container } from 'react-bootstrap';
 import { categoryAdd } from '../../../api/auth';
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
+
+
 const CreateCategory = () => {
     const form = useRef(null);
-    const { register, handleSubmit, setValue } = useForm();
+    const {  handleSubmit } = useForm();
     const [isCollapsed, setIsCollapsed] = useState(false);
     const handleSidebarToggle = () => {
         setIsCollapsed(!isCollapsed);
@@ -33,7 +34,7 @@ const CreateCategory = () => {
             <button className="sideBtn" onClick={handleSidebarToggle}>
                 <FontAwesomeIcon icon={faBars} />
             </button>
-            <section className={`main-body ${isCollapsed ? 'bodyCollapsed' : ''}`}>
+            <section className={`main-body ${isCollapsed ? '' : 'bodyCollapsed'}`}>
                 <Container>
                     <Row className='d-flex justify-content-center'>
                         <Col md={12}>

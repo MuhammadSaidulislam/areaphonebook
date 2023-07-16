@@ -13,6 +13,7 @@ import {
   userPost,
 } from "../../api/auth";
 import { v4 as uuidv4 } from "uuid";
+import { API } from "../../config";
 const Profile = () => {
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
@@ -41,7 +42,6 @@ const Profile = () => {
   const form = useRef(null);
   const {
     handleSubmit,
-    formState: { errors },
   } = useForm();
   const selectCat = (category) => {
     setShopCategory(category);
@@ -121,9 +121,10 @@ const Profile = () => {
     for (const [key, value] of shopData.entries()) {
       jsonObject[key] = value;
     }
-    console.log("shopData", shopData);
 
-    pendingShopList(jsonObject).then((data) => {
+
+
+    pendingShopList(shopData).then((data) => {
       console.log("shop", data);
       // if (data.message) {
       //   return navigate("/");
@@ -139,11 +140,11 @@ const Profile = () => {
     postData.append("shop_id", uuid);
     postData.append("post_id", uuid);
     postData.append("mobile", userProfile.mobile);
-    const jsonObject = {};
-    for (const [key, value] of postData.entries()) {
-      jsonObject[key] = value;
-    }
-    pendingShopList(jsonObject).then((data) => {
+    // const jsonObject = {};
+    // for (const [key, value] of postData.entries()) {
+    //   jsonObject[key] = value;
+    // }
+    pendingShopList(postData).then((data) => {
       console.log("post", data);
       setShow(false);
       // if (data.message) {
@@ -183,8 +184,8 @@ const Profile = () => {
                   <Col md={6}>
                     <label>Shop image</label> <br />
                     <input
-                      onChange={handleFileDrop}
                       type="file"
+                      name="shop_image"
                       placeholder="Enter your image"
                     />
                   </Col>
@@ -261,7 +262,7 @@ const Profile = () => {
                     <select
                       className="form-select"
                       aria-label="Default select example"
-                      name="ward"
+                      name="tags"
                     >
                       <option defaultValue>Open this select menu</option>
                       <option value="1">1</option>
@@ -324,9 +325,9 @@ const Profile = () => {
                     <Col md={6}>
                       <div className="card mb-3">
                         <div className="row g-0">
-                          <div className="col-md-4">
+                          <div className="col-md-4 d-flex">
                             <img
-                              src="{value.photo}"
+                              src={`${API}/${data.shop_image}`}
                               className="img-fluid rounded-start"
                               alt="..."
                             />
@@ -541,8 +542,8 @@ const Profile = () => {
                 <Col md={6}>
                   <label>Shop image</label> <br />
                   <input
-                    onChange={handleFileDrop}
                     type="file"
+                    name="shop_image"
                     placeholder="Enter your image"
                   />
                 </Col>
@@ -619,7 +620,7 @@ const Profile = () => {
                   <select
                     className="form-select"
                     aria-label="Default select example"
-                    name="ward"
+                    name="tags"
                   >
                     <option defaultValue>Open this select menu</option>
                     <option value="1">1</option>

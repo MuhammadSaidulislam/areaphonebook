@@ -62,13 +62,9 @@ export const categoryList = async () => {
   }
 };
 // sub category add
-export const subCategoryAdd = async (category_name, subcategory_name,tagsValue) => {
+export const subCategoryAdd = async (body={}) => {
   try {
-    const response = await axios.post(`${API}/subcategory`, {
-      category_name: category_name,
-      subcategory_name: subcategory_name,
-      tags:tagsValue
-    });
+    const response = await axios.post(`${API}/subcategory`, body);
     return response.data;
   } catch (error) {
     return error.response.data;
@@ -140,9 +136,8 @@ export const userInfo = async (userMobile) => {
 };
 // pending shop create
 export const pendingShopList = async (body={}) => {
-
   try {
-    const response = await axios.post(`${API}/pendingShop`, body );
+    const response = await axios.post(`${API}/pendingShop`, body);
     return response.data;
   } catch (error) {
     return error.response.data;
@@ -290,6 +285,29 @@ export const payment=async ()=>{
   }
 }
 
+// filter tags add
+export const filterFormAdd = async (body={}) => {
+  try {
+    const response = await axios.post(`${API}/filterAdd`,body);
+    return response.data;
+    // console.log(response.data);
+  } catch (error) {
+    return error.response.data;
+  }
+};
+// filter list
+export const filterList= async (categoryTitle,suCategoryTitle) => {
+  try {
+    const response = await axios.post(`${API}/filterList`,{
+      category_name: categoryTitle,
+      sub_category_name: suCategoryTitle
+    });
+    return response.data;
+    // console.log(response.data);
+  } catch (error) {
+    return error.response.data;
+  }
+};
 
 // https://api.sms.net.bd/sendsms?api_key={QRa72z0YlJt58U7gxw7WgAXNdyYw0PpeCTrsnT0l}&msg={saidul}&to=8801632663430
 

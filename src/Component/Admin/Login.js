@@ -13,7 +13,7 @@ const Login = () => {
       loginAdmin(name,password).then((data)=>{
         console.log('admin',data);
         if(data.message){
-          return navigate("/dashboard")
+          return navigate("/categoryAdd")
         }
       })
     }
