@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Signup.css";
 import { Modal } from "react-bootstrap";
 import { loginUser, mobileOtp, numberCheck, registerUser } from "../api/auth";

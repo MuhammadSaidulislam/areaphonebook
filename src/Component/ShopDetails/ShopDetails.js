@@ -5,6 +5,8 @@ import { shopDetails } from "../../api/auth";
 import { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import "./ShopDetails.css";
+import { API } from "../../config";
+
 const ShopDetails = () => {
   const { id } = useParams();
   const [shopDetail, setShopDetail] = useState({});
@@ -21,7 +23,7 @@ const ShopDetails = () => {
             <div className="shopDetail">
             <h1>Shop details</h1>
               <div className="shopImage">
-                <img src="" alt="shop" />
+                <img src={`${API}/${shopDetail.shop_image}`} alt="shop" />
               </div>
               <h4>
                 <span>Mobile: </span> {shopDetail.mobile}

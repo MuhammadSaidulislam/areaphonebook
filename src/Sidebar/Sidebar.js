@@ -41,7 +41,7 @@ const Sidebar = () => {
             <FontAwesomeIcon icon={faBars} />
           </Link>
           <Link
-            to="/"
+            to="/narayanganj"
             style={{ color: "#fff", fontSize: "18px", marginRight: "10px" }}
           >
             Area Phonebook
@@ -85,12 +85,12 @@ const Sidebar = () => {
         <div id="accordion"> 
           <Accordion>
           {categories.map((category,i) =>
-            <Accordion.Item eventKey={i}>
+            <Accordion.Item eventKey={i} key={`category`+i}>
               <Accordion.Header>{category.category_name}</Accordion.Header>
               <Accordion.Body>
              <div className="subCategorySidebar">
-             {category.subCategory && category.subCategory.map((subCategory) => 
-              <Link to={`/narayanganj/${category.category_name}/${subCategory.sub_category_name}`}>{subCategory.sub_category_name}</Link>
+             {category.subCategory && category.subCategory.map((subCategory,j) => 
+              <Link key={`subcategory`+j} to={`/narayanganj/${category.category_name}/${subCategory.sub_category_name}`}>{subCategory.sub_category_name}</Link>
               )}
              </div>
               
