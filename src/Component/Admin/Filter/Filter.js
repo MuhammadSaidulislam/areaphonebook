@@ -2,16 +2,18 @@ import React, { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "../Sidebar";
-import { Col, Row, Container } from "react-bootstrap";
-import { categoryAdd, categoryList, filterFormAdd, subCategoryAdd } from "../../../api/auth";
+import { Col, Row, Container,Table } from "react-bootstrap";
+import { allFilter, categoryAdd, categoryList, filterFormAdd, subCategoryAdd } from "../../../api/auth";
 import { useForm } from "react-hook-form";
 import { subCategoryList } from './../../../api/auth';
 
 const Filter = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [shopCategory, setShopCategory] = useState("");
+  const [msg, setMsg] = useState(0);
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
+  const [filterList, setFilterList] = useState([]);
   const form = useRef(null);
   const { handleSubmit } = useForm();
 
@@ -25,7 +27,11 @@ const Filter = () => {
     categoryList().then((data) => {
       setCategory(data.data);
     });
-  }, [])
+    allFilter().then((data)=>{
+      console.log(data.data);
+      setFilterList(data.data)
+    })
+  }, [msg])
 
   const selectCat = (category) => {
     setShopCategory(category);
@@ -44,6 +50,7 @@ const Filter = () => {
 
     filterFormAdd(jsonObject).then((data) => {
       console.log('filter', data);
+      setMsg((prevMsg) => prevMsg + 1);
     })
   }
   return (
@@ -104,13 +111,37 @@ const Filter = () => {
                     <input className="form-control" name="tags" placeholder="filter name" />
                   </Col>
                   <Col md={12}>
-                    <button type="submit" className="btn btn-info">Save</button>
+                    <button type="submit" className="btn btn-info mt-2">Save</button>
                   </Col>
                 </form>
               </Row>
             </Col>
           </Row>
         </Container>
+        <Container>
+        <Row className="d-flex justify-content-center mt-3">
+          <Col md={7}>
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Category image</th>
+                  <th>Category name</th>
+                  <th>Tags</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filterList && filterList.map((data, i) => <tr key={`categoryTable` + i}>
+                  <td>{i + 1}</td>
+                  <td>{data.category_name}</td>
+                  <td>{data.sub_category_name}</td>
+                  <td>{data.tags}</td>
+                </tr>)}
+              </tbody>
+            </Table>
+          </Col>
+        </Row>
+      </Container>
       </section>
     </>
   )

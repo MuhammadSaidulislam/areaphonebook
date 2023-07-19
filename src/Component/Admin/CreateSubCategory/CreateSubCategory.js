@@ -1,28 +1,38 @@
-import React, { useState, useRef,useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "../Sidebar";
-import { Col, Row, Container } from "react-bootstrap";
-import { categoryAdd, categoryList, subCategoryAdd } from "../../../api/auth";
+import { Col, Row, Container,Table } from "react-bootstrap";
+import { allSubCategoryList, categoryAdd, categoryList, subCategoryAdd } from "../../../api/auth";
 import { useForm } from "react-hook-form";
+import { API } from "../../../config";
 
 const CreateSubCategory = () => {
   const form = useRef(null);
   const { register, handleSubmit, setValue } = useForm();
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const handleSidebarToggle = () => {
-    setIsCollapsed(!isCollapsed);
-  };
+  const [isCollapsed, setIsCollapsed] = useState(false); 
   const [successName, setSuccessName] = useState(false);
   const [selectCategory, setSelectCategory] = useState("");
   const [subCategoryValue, setSubCategoryValue] = useState("");
   const [SubCategoryMsg, setSubCategoryMsg] = useState(false);
   const [category, setCategory] = useState([]);
+  const [subCategory, setSubCategory] = useState([]);
+  const [msg, setMsg] = useState(0);
+
+  const handleSidebarToggle = () => {
+    setIsCollapsed(!isCollapsed);
+  };
+
+  // const [category, setCategory] = useState([]);
   useEffect(() => {
     categoryList().then((data) => {
-     setCategory(data.data);
+      setCategory(data.data);
     });
-  }, []);
+    allSubCategoryList().then((data) => {
+      console.log('sub', data.data);
+      setSubCategory(data.data)
+    })
+  }, [msg]);
   const selectCat = (category) => {
     setSelectCategory(category);
   };
@@ -49,6 +59,7 @@ const CreateSubCategory = () => {
     const userRegister = new FormData(form.current);
     subCategoryAdd(userRegister).then((data) => {
       console.log('sub');
+      setMsg((prevMsg) => prevMsg + 1);
     })
     // categoryAdd(userRegister).then((data) => {
     //   console.log("data", data);
@@ -122,8 +133,33 @@ const CreateSubCategory = () => {
                 ) : (
                   <></>
                 )}
-               
+
               </form>
+            </Col>
+          </Row>
+        </Container>
+        <Container>
+          <Row className="d-flex justify-content-center mt-3">
+            <Col md={7}>
+              <Table striped bordered hover>
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Category image</th>
+                    <th>Category name</th>
+                    <th>Sub-category name</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {subCategory && subCategory.map((data, i) => <tr key={`categoryTable` + i}>
+                    <td>{i + 1}</td>
+                    <td><img src={`${API}/${data.sub_category_image}`} width={50} /></td>
+                    <td>{data.category_name}</td>
+                    <td>{data.sub_category_name}</td>
+                  </tr>)}
+
+                </tbody>
+              </Table>
             </Col>
           </Row>
         </Container>

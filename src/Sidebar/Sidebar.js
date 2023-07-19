@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import "./Sidebar.css";
 import { cardList, logout } from "../api/auth";
 import { Container, Dropdown, Accordion } from "react-bootstrap";
+import logo from "../assets/image/logo/logo.png"
 const Sidebar = () => {
   const navigate = useNavigate();
   const [sidebar, setSidebar] = useState(false);
@@ -44,7 +45,7 @@ const Sidebar = () => {
             to="/narayanganj"
             style={{ color: "#fff", fontSize: "18px", marginRight: "10px" }}
           >
-            Area Phonebook
+           <img src={logo} width={33} /> Area Phonebook
           </Link>
           <Dropdown className="navDropdown">
             <Dropdown.Toggle id="dropdown-basic">

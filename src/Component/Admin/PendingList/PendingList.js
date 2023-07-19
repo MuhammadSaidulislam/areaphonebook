@@ -2,27 +2,30 @@ import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "../Sidebar";
-import { Col, Row, Container } from "react-bootstrap";
+import { Col, Row, Container, Table } from "react-bootstrap";
 import { pendingDel, pendingList, shopCreate, shopDelete } from "../../../api/auth";
 import { API } from "../../../config";
 const PendingList = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [msg, setMsg] = useState(0);
   const [pending, setPending] = useState([]);
   const handleSidebarToggle = () => {
     setIsCollapsed(!isCollapsed);
   };
   useEffect(() => {
+    console.log('saa');
     pendingList().then((data) => {
+      console.log('data',data.data);
       setPending(data.data);
     });
-  }, []);
+  }, [msg]);
 
   const confirmShop = (info) => {
     shopCreate(info).then((data) => {
       if (data.message) {
-        console.log("save");
         pendingDel(info.shop_id).then((data) => {
-          //   setNodata(true);
+          setMsg((prevMsg) => prevMsg + 1);
+             console.log("save");
         });
       }
     });
@@ -36,52 +39,44 @@ const PendingList = () => {
         <FontAwesomeIcon icon={faBars} />
       </button>
       <section className={`main-body ${isCollapsed ? "" : "bodyCollapsed"}`}>
-        <Container>
-          <Row>
-            {pending.length === 0 ? (
-              <p>No data</p>
-            ) : (
-              pending.map((data, i) => (
-                <Col md={6} key={`card` + i}>
-                  <div className="card mb-3">
-                    <div className="row g-0">
-                      <div className="col-md-4">
-                        <img
-                          src={`${API}/${data.shop_image}`}
-                          className="img-fluid rounded-start"
-                          alt="..."
-                        />
-                      </div>
-                      <div className="col-md-8">
-                        <div className="card-body subcategory">
-                          <h1>{data.shop_name}</h1>
-                          <p className="card-text">
-                            মোবাইল: {data.ward}
-                          </p>
-                          <p className="card-text">
-                            মালিক: {data.shop_owner}
-                          </p>
-                          <p className="card-text">
-                            স্থান: {data.address}
-                          </p>
-                          <p className="card-text">
-                            বিস্তারিত: {data.service}
-                          </p>
-                          <button
-                            className="btn btn-info"
-                            onClick={() => confirmShop(data)}
-                          >
-                            Confirm
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </Col>
-              ))
-            )}
-          </Row>
-        </Container>
+      <Container>
+      <Row className="d-flex justify-content-center mt-3">
+      <Col md={12}>
+      <h1>Pending list</h1>
+      </Col>
+        <Col md={10}>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Shop image</th>
+                <th>Shop name</th>
+                <th>Shop owner</th>
+                <th>Mobile</th>
+                <th>Category</th>
+                <th>sub-category</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {pending && pending.map((data, i) => <tr key={`categoryTable` + i}>
+                <td>{i + 1}</td>
+                <td><img src={`${API}/${data.shop_image}`} width={55} /></td>
+                <td>{data.shop_name}</td>
+                <td>{data.shop_owner}</td>
+                <td>{data.mobile}</td>
+                <td>{data.category}</td>
+                <td>{data.sub_category}</td>
+                <td>
+               {/*  <Link className="btn btn-danger" to={`${data.category}/${data.sub_category}/${data.shop_id}`}>View</Link> */}
+                <button className="btn btn-danger" onClick={() => confirmShop(data)}>Confirm</button>
+                </td>
+              </tr>)}
+            </tbody>
+          </Table>
+        </Col>
+      </Row>
+    </Container>
       </section>
     </>
   )

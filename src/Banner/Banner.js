@@ -9,17 +9,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons"; import Select from 'react-select';
 
 
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
-];
+
 const Banner = ({
   wardSelect,
-  onValueChange,
+  selectedOption,
   filterTags,
   profileFunction,
   postFunction,
+  setSelectedOption 
 }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -31,19 +28,24 @@ const Banner = ({
   const { category } = useParams();
   const { sub } = useParams();
   const profileUrl = window.location.pathname;
-  const [selectedOption, setSelectedOption] = useState(null);
+
   // profile button
 
   const categoryTitle = category;
   const suCategoryTitle = sub;
 
+  const FilterValue=(value)=>{
+    setSelectedOption(value)
+  }
 
-  const convertedArray = filterTags.map((item) => {
-    return { value: item, label: item };
-  });
+  const convertedArray = filterTags && filterTags.length > 0
+  ? [
+    { value: 'all', label: 'All' },
+    ...filterTags.map((item) => ({ value: item, label: item })),
+  ]
+  : [];
 
-  console.log('convertedArray', convertedArray);
-
+  
   useEffect(() => {
     if (userProfile) {
       userInfo(userProfile.mobile).then((data) => {
@@ -94,21 +96,23 @@ const Banner = ({
                       <Link to={`/narayanganj/${category}/${sub}`}>
                         {suCategoryTitle && suCategoryTitle.length ? (
                           <>
-                            <FontAwesomeIcon icon={faArrowRightLong} />
+                          <FontAwesomeIcon className="arrowHeading" icon={faArrowRightLong} />
                             {sub}
                           </>
                         ) : (
                           <></>
                         )}
                       </Link>
-
-                      <div className="app">
-                        <Select
+{sub && sub.length >0 ? <>
+  <div className="d-flex align-items-center">
+  <FontAwesomeIcon className="arrowHeading" icon={faArrowRightLong} /> <Select
                           defaultValue={selectedOption}
-                          onChange={setSelectedOption}
+                          onChange={(selectedOption)=>FilterValue(selectedOption.value)}
                           options={convertedArray}
                         />
                       </div>
+  </>:<></>}
+                      
                     </>
                   </>
                 ) : profileUrl === "/profile" ? (

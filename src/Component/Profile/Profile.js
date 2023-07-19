@@ -4,8 +4,10 @@ import Banner from "../../Banner/Banner";
 import "./Profile.css";
 import { Container, Row, Col, Modal } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
 import {
   categoryList,
+  filterList,
   pendingShopList,
   shopUpdate,
   subCategoryList,
@@ -15,6 +17,7 @@ import {
 import { v4 as uuidv4 } from "uuid";
 import { API } from "../../config";
 const Profile = () => {
+  const navigate = useNavigate();
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -29,6 +32,7 @@ const Profile = () => {
   const [shopName, setShopName] = useState("");
   const [shopCategory, setShopCategory] = useState("");
   const [shopSubCategory, setShopSubCategory] = useState("");
+  const [shopTagsCategory, setShopTagsCategory] = useState([]);
   const [shopOwner, setShopOwner] = useState("");
   const [shopAddress, setShopAddress] = useState("");
   const [shopService, setShopService] = useState("");
@@ -47,6 +51,13 @@ const Profile = () => {
     setShopCategory(category);
     subCategoryList(category).then((data) => {
       setSubCategory(data);
+    });
+  };
+
+  // filter tags
+  const setShopTagCategory = (subCategory) => {
+    filterList(shopCategory,subCategory).then((data) => {
+      setShopTagsCategory(data.tags)
     });
   };
 
@@ -122,13 +133,14 @@ const Profile = () => {
       jsonObject[key] = value;
     }
 
+    console.log('create',shopData);
 
 
     pendingShopList(shopData).then((data) => {
       console.log("shop", data);
-      // if (data.message) {
-      //   return navigate("/");
-      // }
+      if (data.message) {
+        return navigate("/narayanganj");
+      }
     });
   };
 
@@ -144,11 +156,12 @@ const Profile = () => {
     // for (const [key, value] of postData.entries()) {
     //   jsonObject[key] = value;
     // }
+    console.log('postData',postData);
     pendingShopList(postData).then((data) => {
       console.log("post", data);
       setShow(false);
       // if (data.message) {
-      //   return navigate("/");
+      //   return navigate("/narayanganj");
       // }
     });
   };
@@ -187,6 +200,7 @@ const Profile = () => {
                       type="file"
                       name="shop_image"
                       placeholder="Enter your image"
+                      required
                     />
                   </Col>
                   <Col md={6}>
@@ -214,6 +228,7 @@ const Profile = () => {
                       className="form-select"
                       aria-label="Default select example"
                       name="sub_category"
+                      onChange={(e)=>setShopTagCategory(e.target.value)}
                     >
                       <option defaultValue>Open this select menu</option>
                       {subCategory &&
@@ -225,6 +240,27 @@ const Profile = () => {
                             {item.sub_category_name}
                           </option>
                         ))}
+                    </select>
+                  </Col>
+                  <Col md={6}>
+                    <label>Filter tags</label>
+                    <select
+                      className="form-select"
+                      aria-label="Default select example"
+                      name="tags"
+                    >
+                      <option defaultValue>Open this select menu</option>
+                    
+                    {shopTagsCategory &&
+                        shopTagsCategory.map((item, i) => 
+                          <option
+                            key={`shopTagsCategory` + i}
+                            value={item}
+                          >
+                            {item}
+                          </option>
+                        )}
+                    
                     </select>
                   </Col>
                   <Col md={6}>
@@ -257,25 +293,7 @@ const Profile = () => {
                       required
                     />
                   </Col>
-                  <Col md={6}>
-                    <label>Ward no</label>
-                    <select
-                      className="form-select"
-                      aria-label="Default select example"
-                      name="tags"
-                    >
-                      <option defaultValue>Open this select menu</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                      <option value="7">7</option>
-                      <option value="8">8</option>
-                      <option value="9">9</option>
-                    </select>
-                  </Col>
+                  
                   <Col md={6}>
                     <label>Address</label>
                     <input
@@ -538,128 +556,133 @@ const Profile = () => {
         <Modal.Body>
           <Container>
             <form ref={form} onSubmit={handleSubmit(onSubmitPost)}>
-              <Row className="d-flex justify-content-center">
-                <Col md={6}>
-                  <label>Shop image</label> <br />
-                  <input
-                    type="file"
-                    name="shop_image"
-                    placeholder="Enter your image"
-                  />
-                </Col>
-                <Col md={6}>
-                  <label>Category select</label>
-                  <select
-                    className="form-select"
-                    aria-label="Default select example"
-                    name="category"
-                    onChange={(event) => selectCat(event.target.value)}
+            <Row className="d-flex justify-content-center">
+            <Col md={6}>
+              <label>Shop image</label> <br />
+              <input
+                type="file"
+                name="shop_image"
+                placeholder="Enter your image"
+                required
+              />
+            </Col>
+            <Col md={6}>
+              <label>Category select</label>
+              <select
+                className="form-select"
+                aria-label="Default select example"
+                name="category"
+                onChange={(event) => selectCat(event.target.value)}
+              >
+                <option defaultValue>Open this select menu</option>
+                {category.map((item, i) => (
+                  <option
+                    key={`category_name` + i}
+                    value={item.category_name}
                   >
-                    <option defaultValue>Open this select menu</option>
-                    {category.map((item, i) => (
-                      <option
-                        key={`category_name` + i}
-                        value={item.category_name}
-                      >
-                        {item.category_name}
-                      </option>
-                    ))}
-                  </select>
-                </Col>
-                <Col md={6}>
-                  <label>Sub-category select</label>
-                  <select
-                    className="form-select"
-                    aria-label="Default select example"
-                    name="sub_category"
-                  >
-                    <option defaultValue>Open this select menu</option>
-                    {subCategory &&
-                      subCategory.map((item, i) => (
-                        <option
-                          key={`subcategory` + i}
-                          value={item.sub_category_name}
-                        >
-                          {item.sub_category_name}
-                        </option>
-                      ))}
-                  </select>
-                </Col>
-                <Col md={6}>
-                  <label>Shop owner</label>
-                  <input
-                    type="text"
-                    name="shop_owner"
-                    className="form-control"
-                    placeholder="Shop owner"
-                    required
-                  />
-                </Col>
-                <Col md={6}>
-                  <label>Shop name</label>
-                  <input
-                    type="text"
-                    name="shop_name"
-                    className="form-control"
-                    placeholder="Shop name"
-                    required
-                  />
-                </Col>
-                <Col md={6}>
-                  <label>E-mail address</label>
-                  <input
-                    type="text"
-                    name="email"
-                    className="form-control"
-                    placeholder="E-mail"
-                    required
-                  />
-                </Col>
-                <Col md={6}>
-                  <label>Ward no</label>
-                  <select
-                    className="form-select"
-                    aria-label="Default select example"
-                    name="tags"
-                  >
-                    <option defaultValue>Open this select menu</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                  </select>
-                </Col>
-                <Col md={6}>
-                  <label>Address</label>
-                  <input
-                    type="text"
-                    name="address"
-                    className="form-control"
-                    placeholder="Address"
-                    required
-                  />
-                </Col>
-                <Col md={6}>
-                  <label>Service</label>
-                  <input
-                    type="text"
-                    name="service"
-                    className="form-control"
-                    placeholder="Service"
-                    required
-                  />
-                </Col>
-                <Col md={12} className="text-center mt-3">
-                  <button type="submit" className="btn btn-info">
-                    Save
-                  </button>
-                </Col>
-              </Row>
+                    {item.category_name}
+                  </option>
+                ))}
+              </select>
+            </Col>
+            <Col md={6}>
+              <label>Sub-category select</label>
+              <select
+                className="form-select"
+                aria-label="Default select example"
+                name="sub_category"
+                onChange={(e)=>setShopTagCategory(e.target.value)}
+              >
+                <option defaultValue>Open this select menu</option>
+                {subCategory &&
+                  subCategory.map((item, i) => (
+                    <option
+                      key={`subcategory` + i}
+                      value={item.sub_category_name}
+                    >
+                      {item.sub_category_name}
+                    </option>
+                  ))}
+              </select>
+            </Col>
+            <Col md={6}>
+              <label>Filter tags</label>
+              <select
+                className="form-select"
+                aria-label="Default select example"
+                name="tags"
+              >
+                <option defaultValue>Open this select menu</option>
+              
+              {shopTagsCategory &&
+                  shopTagsCategory.map((item, i) => 
+                    <option
+                      key={`shopTagsCategory` + i}
+                      value={item}
+                    >
+                      {item}
+                    </option>
+                  )}
+              
+              </select>
+            </Col>
+            <Col md={6}>
+              <label>Shop owner</label>
+              <input
+                type="text"
+                name="shop_owner"
+                className="form-control"
+                placeholder="Shop owner"
+                required
+              />
+            </Col>
+            <Col md={6}>
+              <label>Shop name</label>
+              <input
+                type="text"
+                name="shop_name"
+                className="form-control"
+                placeholder="Shop name"
+                required
+              />
+            </Col>
+            <Col md={6}>
+              <label>E-mail address</label>
+              <input
+                type="text"
+                name="email"
+                className="form-control"
+                placeholder="E-mail"
+                required
+              />
+            </Col>
+            
+            <Col md={6}>
+              <label>Address</label>
+              <input
+                type="text"
+                name="address"
+                className="form-control"
+                placeholder="Address"
+                required
+              />
+            </Col>
+            <Col md={6}>
+              <label>Service</label>
+              <input
+                type="text"
+                name="service"
+                className="form-control"
+                placeholder="Service"
+                required
+              />
+            </Col>
+            <Col md={12} className="text-center mt-3">
+              <button type="submit" className="btn btn-info">
+                Save
+              </button>
+            </Col>
+          </Row>
             </form>
           </Container>
         </Modal.Body>
