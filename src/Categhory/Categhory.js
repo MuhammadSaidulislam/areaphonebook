@@ -19,6 +19,7 @@ export const Categhory = () => {
     setIsLoading(true);
     cardList().then((data) => {
       //  / console.log('card',data);
+      
       setCategories(data);
     });
   }, []);
@@ -29,6 +30,7 @@ export const Categhory = () => {
       <Container>
         <Row>
           <Banner />
+        
           {categories.map((category, i) => (
             <Col md={6} lg={4} key={`category` + i}>
               <div className="card categorySubcategory">

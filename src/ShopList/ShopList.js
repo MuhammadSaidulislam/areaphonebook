@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect ,useRef } from "react";
 import { filterList, subCategoryShopList } from "../api/auth";
 import { useParams } from "react-router";
 import Sidebar from "../Sidebar/Sidebar";
@@ -12,7 +12,8 @@ const ShopList = () => {
   const [wardSelect, setWardSelect] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
   const [filterTags, setFilterTags] = useState([]);
-  const [valueFromChild, setValueFromChild] = useState("all");
+  const [selectedOption, setSelectedOption] = useState("all");
+
   const { category } = useParams();
   const { sub } = useParams();
   const categoryTitle = category;
@@ -20,21 +21,22 @@ const ShopList = () => {
   
 
 
-  const handleValueFromChild = (value) => {
-    console.log('value',value);
-    setValueFromChild(value);
-  };
+ 
 
 
   useEffect(() => {
     subCategoryShopList(sub).then((data) => {
       setWardSelect(true);
      // setFilteredData(data);
-      if (valueFromChild === "all") {
+     console.log('selectedOption',selectedOption);
+ 
+      if (selectedOption === "all") {
         setFilteredData(data);
+        console.log('filtered',data);
       } else {
-        const filtered = data.filter((item) => item.ward === valueFromChild);
+        const filtered = data.filter((item) => item.tags === selectedOption);
         setFilteredData(filtered);
+        console.log('filtered',filtered);
       }
     });
     // filter list
@@ -43,13 +45,12 @@ const ShopList = () => {
       setFilterTags(data.tags)
     })
     
-  }, [sub,valueFromChild]);
+  }, [sub,selectedOption]);
  
-
   return (
     <>
       <Sidebar />
-      <Banner wardSelect={wardSelect} filterTags={filterTags} onValueChange={handleValueFromChild} />
+      <Banner wardSelect={wardSelect} filterTags={filterTags}  selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
       <Container>
         <Row>
           {filteredData.length === 0 ? (

@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 }
 .bannerHeading p,.bannerHeading a {
   margin-bottom: 0px;
@@ -15,8 +16,10 @@
   border: none !important;
   /* font-size: 23px !important; */
 }
-.bannerHeading p svg {
+.arrowHeading {
   margin: 0px 12px;
+  color: #e84c3d;
+  font-size: 21px;
 }
 .trailVideo{
   padding: 5px 12px;
@@ -26,4 +29,9 @@
   border: none;
   color: #e84c3d;
   font-weight: 700;
+}
+@media (max-width: 778px) {
+  /* .arrowHeading {
+    display: none;
+  } */
 }

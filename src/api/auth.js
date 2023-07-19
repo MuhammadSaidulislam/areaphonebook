@@ -51,6 +51,16 @@ export const categoryAdd = async (body={}) => {
       return error.response.data;
     }
 };
+// category delete
+export const deleteCategory = async (category_name) => {
+  try {
+    const response = await axios.delete(`${API}/categoryDelete/${category_name}`);
+    return response.data;
+    // console.log(response.data);
+  } catch (error) {
+    return error.response.data;
+  }
+};
 // category list
 export const categoryList = async () => {
   try {
@@ -90,6 +100,7 @@ export const allSubCategoryList = async () => {
     return error.response.data;
   }
 };
+
 // shop create
 export const shopCreate = async (body={}) => {
   try {
@@ -304,6 +315,16 @@ export const filterList= async (categoryTitle,suCategoryTitle) => {
     });
     return response.data;
     // console.log(response.data);
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
+// sub category list
+export const allFilter = async () => {
+  try {
+    const response = await axios.get(`${API}/allFilter`);
+    return response.data;
   } catch (error) {
     return error.response.data;
   }
