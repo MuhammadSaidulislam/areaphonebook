@@ -549,7 +549,7 @@ const Profile = () => {
       </section>
 
       {/* create post modal */}
-      <Modal show={show} size="lg" onHide={handleClose} animation={false}>
+      <Modal show={show} size="lg" onHide={handleClose} animation={false} centered>
         <Modal.Header closeButton>
           <Modal.Title>Add your post</Modal.Title>
         </Modal.Header>

@@ -139,7 +139,7 @@ const Banner = ({
                 )}
               </div>
 
-              <Modal show={show} onHide={handleClose} animation={false}>
+              <Modal show={show} onHide={handleClose} animation={false} centered>
                 <Modal.Header closeButton>
                   <Modal.Title>কীভাবে ওয়েবসাইটটি ব্যবহার করবেন</Modal.Title>
                 </Modal.Header>

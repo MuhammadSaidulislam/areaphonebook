@@ -2,20 +2,24 @@ import React, { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "../Sidebar";
-import { Col, Row, Container,Table } from "react-bootstrap";
-import { allFilter, categoryAdd, categoryList, filterFormAdd, subCategoryAdd } from "../../../api/auth";
+import { Col, Row, Container, Table, Modal } from "react-bootstrap";
+import { allFilter, categoryAdd, categoryList, deleteTags, filterFormAdd, subCategoryAdd } from "../../../api/auth";
 import { useForm } from "react-hook-form";
-import { subCategoryList } from './../../../api/auth';
-
+import { subCategoryList, filterList } from './../../../api/auth';
+import { v4 as uuidv4 } from "uuid";
 const Filter = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [shopCategory, setShopCategory] = useState("");
   const [msg, setMsg] = useState(0);
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
-  const [filterList, setFilterList] = useState([]);
+  const [filterLists, setFilterList] = useState([]);
+  const [filterTags, setFilterTags] = useState([]);
   const form = useRef(null);
   const { handleSubmit } = useForm();
+  const [show, setShow] = useState(false);
+  const uuid = uuidv4();
+  const handleClose = () => setShow(false);
 
 
   const handleSidebarToggle = () => {
@@ -27,8 +31,7 @@ const Filter = () => {
     categoryList().then((data) => {
       setCategory(data.data);
     });
-    allFilter().then((data)=>{
-      console.log(data.data);
+    allFilter().then((data) => {
       setFilterList(data.data)
     })
   }, [msg])
@@ -42,17 +45,30 @@ const Filter = () => {
 
   let onSubmit = () => {
     const userRegister = new FormData(form.current);
-    console.log('userRegister', userRegister);
     const jsonObject = {};
     for (const [key, value] of userRegister.entries()) {
       jsonObject[key] = value;
     }
-
     filterFormAdd(jsonObject).then((data) => {
-      console.log('filter', data);
       setMsg((prevMsg) => prevMsg + 1);
     })
   }
+
+  // filterList
+  const handleShow = (category_name, sub_category_name) => {
+    setShow(true);
+    filterList(category_name, sub_category_name).then((data) => {
+      setFilterTags(data);
+    })
+  }
+  // delete tags
+  const deleteTag = (filter_id, tag) => {
+    deleteTags(filter_id, tag).then((data) => {
+      setShow(false);
+      setMsg((prevMsg) => prevMsg + 1);
+    })
+  }
+
   return (
     <>
       <Sidebar isCollapsed={isCollapsed} />
@@ -68,6 +84,7 @@ const Filter = () => {
                   <h1>Filter option</h1>
                 </Col>
                 <form ref={form} onSubmit={handleSubmit(onSubmit)}>
+                <input type="text" value={uuid} name="filter_id" hidden />
                   <Col md={12}>
                     <label>Category select</label>
                     <select
@@ -119,29 +136,69 @@ const Filter = () => {
           </Row>
         </Container>
         <Container>
-        <Row className="d-flex justify-content-center mt-3">
-          <Col md={7}>
+          <Row className="d-flex justify-content-center mt-3">
+            <Col md={7}>
+              <Table striped bordered hover>
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Category image</th>
+                    <th>Category name</th>
+                    <th>Tags</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filterLists && filterLists.map((data, i) => <tr key={`categoryTable` + i}>
+                    <td>{i + 1}</td>
+                    <td>{data.category_name}</td>
+                    <td>{data.sub_category_name}</td>
+                    <td>{data.tags}</td>
+                    <td><button className="btn btn-info" onClick={() => handleShow(data.category_name, data.sub_category_name)}>Delete</button></td>
+                  </tr>)}
+                </tbody>
+              </Table>
+            </Col>
+          </Row>
+        </Container>
+        {/* modal */}
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Modal heading</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
             <Table striped bordered hover>
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Category image</th>
-                  <th>Category name</th>
-                  <th>Tags</th>
+                  <th>tag name</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                {filterList && filterList.map((data, i) => <tr key={`categoryTable` + i}>
-                  <td>{i + 1}</td>
-                  <td>{data.category_name}</td>
-                  <td>{data.sub_category_name}</td>
-                  <td>{data.tags}</td>
-                </tr>)}
+
+                {filterTags && filterTags.map((data, i) => <>
+                  {data.tags && data.tags.map((value, i) =>
+                    <tr key={`categoryTable` + i}>
+                      <td>{data.filter_id}</td>
+                      <td>{value}</td>
+                      <td><button className="btn btn-info" onClick={() => deleteTag(data.filter_id, value)}>Delete</button></td>
+                    </tr>
+                  )}
+                </>)}
+
               </tbody>
             </Table>
-          </Col>
-        </Row>
-      </Container>
+          </Modal.Body>
+          <Modal.Footer>
+            <button variant="secondary" onClick={handleClose}>
+              Close
+            </button>
+            <button variant="primary" onClick={handleClose}>
+              Save Changes
+            </button>
+          </Modal.Footer>
+        </Modal>
       </section>
     </>
   )

@@ -14,6 +14,8 @@
   text-align: left;
   background-color: #f0f0f0 !important;
   border: 1px solid #f83e2d;
+  min-height: 82px;
+border-radius: 5px;
 }
 /* .subcategoryBox:hover{
 

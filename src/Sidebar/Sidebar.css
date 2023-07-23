@@ -6,7 +6,7 @@
   align-items: center;
   position: fixed;
   width: 100%;
-  z-index: 9999999;
+  z-index: 999;
 }
 
 .menu-bars {
@@ -159,6 +159,7 @@
   color: #1b1b1b;
   text-align: left;
   border: none;
+  padding: 0px !important;
 }
 /* span {
     margin-left: 16px;

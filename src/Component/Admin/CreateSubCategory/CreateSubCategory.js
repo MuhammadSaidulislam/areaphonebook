@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "../Sidebar";
 import { Col, Row, Container,Table } from "react-bootstrap";
-import { allSubCategoryList, categoryAdd, categoryList, subCategoryAdd } from "../../../api/auth";
+import { allSubCategoryList, categoryAdd, categoryList, deleteSubCategory, subCategoryAdd } from "../../../api/auth";
 import { useForm } from "react-hook-form";
 import { API } from "../../../config";
 
@@ -29,7 +29,6 @@ const CreateSubCategory = () => {
       setCategory(data.data);
     });
     allSubCategoryList().then((data) => {
-      console.log('sub', data.data);
       setSubCategory(data.data)
     })
   }, [msg]);
@@ -40,35 +39,26 @@ const CreateSubCategory = () => {
     let subCategory = e.target.value;
     setSubCategoryValue(subCategory);
   };
-  const subCategoryApi = () => {
-    if (selectCategory.length > 0 && subCategoryValue.length > 0) {
-      subCategoryAdd(selectCategory, subCategoryValue).then(
-        (data) => {
-          if (data.message) {
-            setSubCategoryMsg(true);
-            setSubCategoryValue("");
-          }
-        }
-      );
-    } else {
-      setSubCategoryMsg(false);
-    }
-  };
+ 
   // form submit
   let onSubmit = () => {
     const userRegister = new FormData(form.current);
     subCategoryAdd(userRegister).then((data) => {
       console.log('sub');
       setMsg((prevMsg) => prevMsg + 1);
-    })
-    // categoryAdd(userRegister).then((data) => {
-    //   console.log("data", data);
-    //   if (data.message === "Success") {
-    //   } else {
-    //     setSuccessName(true);
-    //   }
-    // });
+      setValue("category_name", "", { shouldValidate: false });
+      setValue("sub_category_image", "", { shouldValidate: false });
+      setValue("sub_category_name", "", { shouldValidate: false });
+      setSuccessName(false)
+    });
   };
+  // delete sub category
+  // delete category
+  const CategoryDelete = (subcategory_name) => {
+    deleteSubCategory(subcategory_name).then((data) => {
+      setMsg((prevMsg) => prevMsg + 1);
+    })
+  }
   return (
     <>
       <Sidebar isCollapsed={isCollapsed} />
@@ -88,6 +78,7 @@ const CreateSubCategory = () => {
                   className="form-select"
                   aria-label="Default select example"
                   name="category_name"
+                  required
                 >
                   <option defaultValue>Select category</option>
                   {category.map((item, i) => (
@@ -106,6 +97,8 @@ const CreateSubCategory = () => {
                   name="sub_category_name"
                   placeholder="sub-category add"
                   className="form-control"
+                  {...register("sub_category_name")}
+                  required
                 />
                 {SubCategoryMsg ? (
                   <p>Sub category select successfully</p>
@@ -119,6 +112,7 @@ const CreateSubCategory = () => {
                   name="sub_category_image"
                   className="form-control"
                   required
+                  {...register("sub_category_image")}
                 />
                 <button className="btn btn-info mt-2" type="submit">
                   Save
@@ -148,6 +142,7 @@ const CreateSubCategory = () => {
                     <th>Category image</th>
                     <th>Category name</th>
                     <th>Sub-category name</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -156,6 +151,7 @@ const CreateSubCategory = () => {
                     <td><img src={`${API}/${data.sub_category_image}`} width={50} /></td>
                     <td>{data.category_name}</td>
                     <td>{data.sub_category_name}</td>
+                    <td><button className='btn btn-danger' onClick={() => CategoryDelete(data.sub_category_name)}>Delete</button></td>
                   </tr>)}
 
                 </tbody>
