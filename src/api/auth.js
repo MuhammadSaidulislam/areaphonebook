@@ -61,6 +61,26 @@ export const deleteCategory = async (category_name) => {
     return error.response.data;
   }
 };
+// category delete
+export const deleteSubCategory = async (subcategory_name) => {
+  try {
+    const response = await axios.delete(`${API}/subcategoryDelete/${subcategory_name}`);
+    return response.data;
+    // console.log(response.data);
+  } catch (error) {
+    return error.response.data;
+  }
+};
+// category delete
+export const deleteTags = async (filter_id,tag_name) => {
+  console.log(filter_id,tag_name);
+  try {
+    const response = await axios.delete(`${API}/filterTagDelete/${filter_id}/${tag_name}`);
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
 // category list
 export const categoryList = async () => {
   try {
@@ -324,6 +344,26 @@ export const filterList= async (categoryTitle,suCategoryTitle) => {
 export const allFilter = async () => {
   try {
     const response = await axios.get(`${API}/allFilter`);
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
+// single category
+export const categorySingle = async (id) => {
+  try {
+    const response = await axios.get(`${API}/singleCategory/${id}`);
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+// category update
+export const categoryUpdate = async (body={},id) => {
+
+  try {
+    const response = await axios.put(`${API}/categoryUpdate/${id}`, body );
     return response.data;
   } catch (error) {
     return error.response.data;
