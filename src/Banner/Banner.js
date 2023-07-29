@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Col, Container, Modal, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./Banner.css";
-import { postNewsTags, userInfo } from "../api/auth";
+import { userInfo } from "../api/auth";
 import cover from "../assets/image/banner/cover.jpg";
 import { useParams } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,15 +11,12 @@ import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons"; import Sel
 
 
 const Banner = ({
-  wardSelect,
   selectedOption,
   filterTags,
   profileFunction,
   postFunction,
   setSelectedOption,
-  selectedTagsOption,
-  setSelectedTagsOption,
-  tagsState
+  selectedTagsOption
 }) => {
 
 
@@ -28,12 +25,9 @@ const Banner = ({
   const [userLogin, setUserLogin] = useState(false);
   const savedUserProfile = localStorage.getItem("areaphonebook");
   const userProfile = JSON.parse(savedUserProfile);
-  const [selectedWard, setSelectedWard] = useState("");
   const { category } = useParams();
   const { sub } = useParams();
-  const { id } = useParams();
   const profileUrl = window.location.pathname;
-  const [tagsList, setTagsList] = useState([]);
 
   // profile button
   const categoryTitle = category;
@@ -43,9 +37,7 @@ const Banner = ({
     setSelectedOption(value);
   }
 
-  const FilterTagsValue = (value) => {
-    setSelectedTagsOption(value);
-  }
+
 
 
   const convertedArray = filterTags && filterTags.length > 0
@@ -55,13 +47,7 @@ const Banner = ({
     ]
     : [];
   // tags
-  const tagsArray = tagsList.map(item => item.tags);
-  const convertedTagsArray = tagsArray && tagsArray.length > 0
-    ? [
-      { value: 'all', label: 'All' },
-      ...tagsArray.map((item) => ({ value: item, label: item })),
-    ]
-    : [];
+
 
 
   useEffect(() => {
@@ -76,9 +62,7 @@ const Banner = ({
     } else {
       setUserLogin(false);
     }
-    postNewsTags(id).then((data) => {
-      setTagsList(data);
-    });
+
 
   }, []);
 
@@ -100,7 +84,7 @@ const Banner = ({
           <Col md={12}>
             <div className="hero-text">
               <div className="bannerHeading">
-               
+
                 {category && category.length ? (
                   <>
                     <>
@@ -111,7 +95,7 @@ const Banner = ({
                           <></>
                         )}
                       </Link>
-                      
+
                       <Link to={`/narayanganj/${category}/${sub}`}>
                         {suCategoryTitle && suCategoryTitle.length ? (
                           <>
@@ -131,9 +115,6 @@ const Banner = ({
                           />
                         </div>
                       </> : <></>}
-
-
-
                     </>
                   </>
                 ) : profileUrl === "/profile" ? (
@@ -149,17 +130,8 @@ const Banner = ({
                   </>
                 ) : (
                   <>
-                    <Link to="/newsFeed" className="active trailVideo">নিউজ ফীড</Link>
-                    <p>{id && id ? <><FontAwesomeIcon className="arrowHeading" icon={faArrowRightLong} />{id}</> : <></>}</p>
-                    {tagsState && tagsState ? <>
-                      <div className="d-flex align-items-center">
-                        <FontAwesomeIcon className="arrowHeading" icon={faArrowRightLong} /> <Select
-                          defaultValue={selectedTagsOption}
-                          onChange={(selectedTagsOption) => FilterTagsValue(selectedTagsOption.value)}
-                          options={convertedTagsArray}
-                        />
-                      </div>
-                    </> : <></>}
+                    <Link to="/narayanganj/newsFeed" className="active trailVideo">নিউজ ফীড</Link>
+
                   </>
                 )}
               </div>

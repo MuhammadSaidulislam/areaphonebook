@@ -56,23 +56,23 @@ const Sidebar = () => {
           </Link>
 
 
-          <div class="d-flex justify-content-end align-items-center logo-div">
-            <div class="nav-item dropdown">
+          <div className="d-flex justify-content-end align-items-center logo-div">
+            <div className="nav-item dropdown">
               <a onClick={navClick} href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 <FontAwesomeIcon icon={faEllipsisVertical} />
               </a>
-              <div class={showNav ? `dropdown-menu show navPosition` : `navDrop`} aria-labelledby="navbarDropdownMenuLink" x-placement="bottom-start">
+              <div className={showNav ? `dropdown-menu show navPosition` : `navDrop`} aria-labelledby="navbarDropdownMenuLink" x-placement="bottom-start">
 
 
-                <Link class="dropdown-item" to="/report"><FontAwesomeIcon icon={faEye} /> Report</Link>
-                <Link class="dropdown-item" to="/"><FontAwesomeIcon icon={faLocationArrow} /> Change city</Link>
+                <Link className="dropdown-item" to="/report"><FontAwesomeIcon icon={faEye} /> Report</Link>
+                <Link className="dropdown-item" to="/"><FontAwesomeIcon icon={faLocationArrow} /> Change city</Link>
                 {userProfile ? (
                   <>
-                    <button class="dropdown-item" onClick={logoutBtn}><FontAwesomeIcon icon={faArrowRightToBracket} /> Logout</button>
+                    <button className="dropdown-item" onClick={logoutBtn}><FontAwesomeIcon icon={faArrowRightToBracket} /> Logout</button>
                   </>
                 ) : (
                   <>
-                    <Link class="dropdown-item" to="/signup"><FontAwesomeIcon icon={faArrowRightToBracket} /> Login</Link>
+                    <Link className="dropdown-item" to="/signup"><FontAwesomeIcon icon={faArrowRightToBracket} /> Login</Link>
                   </>
                 )}
               </div>

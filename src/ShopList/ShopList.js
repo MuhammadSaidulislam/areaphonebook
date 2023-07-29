@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { filterList, subCategoryShopList } from "../api/auth";
 import { useParams } from "react-router";
 import Sidebar from "../Sidebar/Sidebar";
@@ -7,6 +7,11 @@ import { Col, Container, Row } from "react-bootstrap";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { API } from "../config";
+import "./ShopList.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPhone, faStar } from "@fortawesome/free-solid-svg-icons";
+import ShopCard from "../Component/ShopCard/ShopCard";
+import Loader from "../Component/Loader/Loader";
 const ShopList = () => {
 
   const [wardSelect, setWardSelect] = useState(false);
@@ -21,11 +26,10 @@ const ShopList = () => {
 
   useEffect(() => {
     subCategoryShopList(sub).then((data) => {
+      console.log('shop', data);
       setWardSelect(true);
-
       if (selectedOption === "all") {
         setFilteredData(data);
-        console.log('filtered', data);
       } else {
         const filtered = data.filter((item) => item.tags === selectedOption);
         setFilteredData(filtered);
@@ -46,6 +50,7 @@ const ShopList = () => {
       <Banner wardSelect={wardSelect} filterTags={filterTags} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
       <Container>
         <Row>
+        {filteredData && filteredData.length > 0  ? <>
           {filteredData.length === 0 ? (
             <>
               <h1 className="text-center">No data</h1>
@@ -53,31 +58,12 @@ const ShopList = () => {
           ) : (
             filteredData.map((value, i) => (
               <Col md={4} key={`shop` + i}>
-                <div className="card mb-3">
-                  <div className="row g-0">
-                    <div className="col-md-4 d-flex">
-                      <img
-                        src={`${API}/${value.shop_image}`}
-                        className="img-fluid rounded-start"
-                        alt="..."
-                      />
-                    </div>
-                    <div className="col-md-8">
-                      <div className="card-body subcategory">
-                        <Link to={`${value.shop_id}`} className="card-title">
-                          {value.title}
-                        </Link>
-                        <p className="card-text">মোবাইল: {value.number}</p>
-                        <p className="card-text">মালিক: {value.title}</p>
-                        <p className="card-text">স্থান: {value.address}</p>
-                        <p className="card-text">বিস্তারিত: {value.service}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <ShopCard value={value} />
               </Col>
             ))
           )}
+          </>:<><Loader/></>}
+          
         </Row>
       </Container>
     </>
