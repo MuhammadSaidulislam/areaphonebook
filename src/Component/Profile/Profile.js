@@ -16,6 +16,7 @@ import {
 } from "../../api/auth";
 import { v4 as uuidv4 } from "uuid";
 import { API } from "../../config";
+import CreateProfile from "./CreateProfile";
 const Profile = () => {
   const navigate = useNavigate();
   const [category, setCategory] = useState([]);
@@ -189,6 +190,7 @@ const Profile = () => {
       <Banner profileFunction={profileFunction} postFunction={postFunction} />
       <section className="profile">
         {/* create profile add */}
+        <CreateProfile />
         {createProfile ? (
           <>
             <Container>

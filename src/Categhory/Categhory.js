@@ -44,7 +44,6 @@ export const Categhory = () => {
                       <div className="cleartfix">
                         <div className="media align-items-stretch d-flex">
                           <div className="align-self-center">
-
                             <img
                               className="manu-img"
                               src={`${API}/${category.categoryImage}`}
