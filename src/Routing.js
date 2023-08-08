@@ -5,7 +5,6 @@ import Signup from "./Signup/Signup";
 import { SubCateghory } from "./SubCateghory/SubCateghory";
 import Shop from "./Shop/Shop";
 import ShopList from "./ShopList/ShopList";
-import AddService from "./Admin/AddService";
 import CityCorporation from "./Component/CityCorporation/CityCorporation";
 import ShopDetails from "./Component/ShopDetails/ShopDetails";
 import Report from "./Component/Report/Report";

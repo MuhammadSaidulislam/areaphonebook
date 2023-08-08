@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Categhory.css";
 import { Col, Container, Row } from "react-bootstrap";
-import data from "../jsonData/Categhory.json";
 import { Link, useNavigate } from "react-router-dom";
 import SideBar from "../Sidebar/Sidebar";
 import Banner from "../Banner/Banner";

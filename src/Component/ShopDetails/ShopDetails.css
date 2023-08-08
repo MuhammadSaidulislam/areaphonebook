@@ -15,6 +15,15 @@
 .shopDetail h4 span{
     color: #e84c3d;
 }
+.shopImage{
+    text-align: center;
+}
 .shopImage img{
-    width: 100%;
+    width: 500px;
+    height: 333px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
 }

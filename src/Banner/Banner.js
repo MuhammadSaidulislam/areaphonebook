@@ -16,11 +16,9 @@ const Banner = ({
   filterTags,
   profileFunction,
   postFunction,
-  setSelectedOption 
+  setSelectedOption
 }) => {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+
   const [userLogin, setUserLogin] = useState(false);
   const savedUserProfile = localStorage.getItem("areaphonebook");
   const userProfile = JSON.parse(savedUserProfile);
@@ -30,22 +28,20 @@ const Banner = ({
   const profileUrl = window.location.pathname;
 
   // profile button
-
   const categoryTitle = category;
   const suCategoryTitle = sub;
 
-  const FilterValue=(value)=>{
+  const FilterValue = (value) => {
     setSelectedOption(value)
   }
 
   const convertedArray = filterTags && filterTags.length > 0
-  ? [
-    { value: 'all', label: 'All' },
-    ...filterTags.map((item) => ({ value: item, label: item })),
-  ]
-  : [];
+    ? [
+      { value: 'all', label: 'All' },
+      ...filterTags.map((item) => ({ value: item, label: item })),
+    ]
+    : [];
 
-  
   useEffect(() => {
     if (userProfile) {
       userInfo(userProfile.mobile).then((data) => {
@@ -70,11 +66,7 @@ const Banner = ({
             <a href="about-us.html">
               <div className="row">
                 <div className="col-12">
-                  <img
-                    src={cover}
-                    alt="Help Card"
-                    style={{ width: "100%", marginTop: "15px" }}
-                  />
+                  <img src={cover} alt="Help Card" style={{ width: "100%", marginTop: "15px" }} />
                 </div>
               </div>
             </a>
@@ -82,7 +74,6 @@ const Banner = ({
           <Col md={12}>
             <div className="hero-text">
               <div className="bannerHeading">
-
                 {category && category.length ? (
                   <>
                     <>
@@ -96,30 +87,30 @@ const Banner = ({
                       <Link to={`/narayanganj/${category}/${sub}`}>
                         {suCategoryTitle && suCategoryTitle.length ? (
                           <>
-                          <FontAwesomeIcon className="arrowHeading" icon={faArrowRightLong} />
+                            <FontAwesomeIcon className="arrowHeading" icon={faArrowRightLong} />
                             {sub}
                           </>
                         ) : (
                           <></>
                         )}
                       </Link>
-{sub && sub.length >0 ? <>
-  <div className="d-flex align-items-center">
-  <FontAwesomeIcon className="arrowHeading" icon={faArrowRightLong} /> <Select
-                          defaultValue={selectedOption}
-                          onChange={(selectedOption)=>FilterValue(selectedOption.value)}
-                          options={convertedArray}
-                        />
-                      </div>
-  </>:<></>}
-                      
+                      {sub && sub.length > 0 ? <>
+                        <div className="d-flex align-items-center">
+                          <FontAwesomeIcon className="arrowHeading" icon={faArrowRightLong} /> <Select
+                            defaultValue={selectedOption}
+                            onChange={(selectedOption) => FilterValue(selectedOption.value)}
+                            options={convertedArray}
+                          />
+                        </div>
+                      </> : <></>}
+
                     </>
                   </>
                 ) : profileUrl === "/profile" ? (
                   <>
                     <div className="profileHeading">
                       <button className="btn" onClick={() => profileFunction()}>
-                        আপনার প্রোফাইল দেখুন
+                        আপনার সার্ভিস দেখুন
                       </button>
                       <button className="btn" onClick={() => postFunction()}>
                         আপনার পোস্ট দেখুন
@@ -128,38 +119,13 @@ const Banner = ({
                   </>
                 ) : (
                   <>
-                    <button
-                      onClick={handleShow}
-                      className="active trailVideo"
-                      data-toggle="modal"
-                    >
-                      ব্যবহারের ভিডিও
-                    </button>
+                    <button className="active trailVideo">নিউজ ফীড</button>
                   </>
                 )}
               </div>
-
-              <Modal show={show} onHide={handleClose} animation={false} centered>
-                <Modal.Header closeButton>
-                  <Modal.Title>কীভাবে ওয়েবসাইটটি ব্যবহার করবেন</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  <div className="embed-responsive embed-responsive-1by1">
-                    <iframe
-                      src="https://www.facebook.com/plugins/video.php?height=476&amp;href=https%3A%2F%2Fwww.facebook.com%2FAreaPhonebook%2Fvideos%2F4241454192633439%2F&amp;show_text=false&amp;width=476&amp;t=0"
-                      style={{ border: "none", overflow: "hidden" }}
-                      scrolling="no"
-                      allowfullscreen="true"
-                      allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                      width="476"
-                      height="476"
-                      frameborder="0"
-                    ></iframe>
-                  </div>
-                </Modal.Body>
-              </Modal>
             </div>
           </Col>
+          {/* category link */}
           <Col md={12}>
             <div id="signupBtn">
               {profileUrl === "/profile" ? <></> : <>
@@ -179,7 +145,6 @@ const Banner = ({
                   )}
                 </div>
               </>}
-
             </div>
           </Col>
         </Row>
