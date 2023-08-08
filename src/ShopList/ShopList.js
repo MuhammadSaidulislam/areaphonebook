@@ -41,10 +41,9 @@ const ShopList = () => {
     });
     // filter list
     filterList(categoryTitle,suCategoryTitle).then((data)=>{
-    //  console.log('filter',data.tags);
-      setFilterTags(data.tags)
+      // console.log('filter',data[0].tags);
+      setFilterTags(data[0].tags)
     })
-    
   }, [sub,selectedOption]);
  
   return (
@@ -72,10 +71,10 @@ const ShopList = () => {
                     <div className="col-md-8">
                       <div className="card-body subcategory">
                         <Link to={`${value.shop_id}`} className="card-title">
-                          {value.shop_name}
+                          {value.title}
                         </Link>
-                        <p className="card-text">মোবাইল: {value.ward}</p>
-                        <p className="card-text">মালিক: {value.shop_owner}</p>
+                        <p className="card-text">মোবাইল: {value.number}</p>
+                        <p className="card-text">মালিক: {value.title}</p>
                         <p className="card-text">স্থান: {value.address}</p>
                         <p className="card-text">বিস্তারিত: {value.service}</p>
                       </div>

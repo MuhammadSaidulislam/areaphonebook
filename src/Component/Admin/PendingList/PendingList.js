@@ -50,8 +50,7 @@ const PendingList = () => {
               <tr>
                 <th>No</th>
                 <th>Shop image</th>
-                <th>Shop name</th>
-                <th>Shop owner</th>
+                <th>Title</th>
                 <th>Mobile</th>
                 <th>Category</th>
                 <th>sub-category</th>
@@ -62,8 +61,7 @@ const PendingList = () => {
               {pending && pending.map((data, i) => <tr key={`categoryTable` + i}>
                 <td>{i + 1}</td>
                 <td><img src={`${API}/${data.shop_image}`} width={55} /></td>
-                <td>{data.shop_name}</td>
-                <td>{data.shop_owner}</td>
+                <td>{data.title}</td>
                 <td>{data.mobile}</td>
                 <td>{data.category}</td>
                 <td>{data.sub_category}</td>

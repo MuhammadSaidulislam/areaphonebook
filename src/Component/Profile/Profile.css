@@ -1,0 +1,23 @@
+.timeStatus .form-select {
+    width: 112px !important;
+    padding: .375rem 1.85rem .375rem .75rem !important;
+}
+
+.dayText {
+    font-size: 16px;
+    margin-bottom: 0px;
+}
+
+@media (max-width: 778px) {
+    .timeStatus .col-4{
+        padding: 1px;
+    }
+    .timeStatus .form-select {
+        padding: 0.2rem 1.885rem 0.2rem .275rem !important;
+        font-size: 14px;
+    }
+    .dayText {
+        font-size: 14px;
+        margin-bottom: 0px;
+    }
+}

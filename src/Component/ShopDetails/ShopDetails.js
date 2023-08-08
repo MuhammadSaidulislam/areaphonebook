@@ -29,22 +29,13 @@ const ShopDetails = () => {
                 <span>Mobile: </span> {shopDetail.mobile}
               </h4>
               <h4>
-                <span>Shop owner: </span> {shopDetail.shop_owner}
-              </h4>
-              <h4>
-                <span>Shop name:</span> {shopDetail.shop_name}
+                <span>Title: </span> {shopDetail.title}
               </h4>
               <h4>
                 <span>Category: </span> {shopDetail.category}
               </h4>
               <h4>
                 <span>Sub-category: </span> {shopDetail.sub_category}
-              </h4>
-              <h4>
-                <span>Email: </span> {shopDetail.email}
-              </h4>
-              <h4>
-                <span>Ward: </span> {shopDetail.ward}
               </h4>
               <h4>
                 <span>Address: </span> {shopDetail.address}
