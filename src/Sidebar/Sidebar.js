@@ -8,7 +8,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import "./Sidebar.css";
 import { cardList, logout } from "../api/auth";
-import { Container, Dropdown, Accordion } from "react-bootstrap";
+import { Container, Dropdown, Accordion, Navbar } from "react-bootstrap";
 import logo from "../assets/image/logo/logo.png"
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="navbar">
+      <Navbar className="navbar"  sticky="top">
         <Container>
           <Link to="#" className="menu-bars" onClick={showSidebar}>
             <FontAwesomeIcon icon={faBars} />
@@ -80,7 +80,7 @@ const Sidebar = () => {
             </Dropdown.Menu>
           </Dropdown>
         </Container>
-      </div>
+      </Navbar>
       <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
         <ul className="nav-menu-items">
         <div id="accordion"> 
