@@ -119,6 +119,7 @@ const CreateProfile = (props) => {
       //  shopData.append("shop_image", selectedFile);
         shopData.append("shop_id", uuid);
         shopData.append("post_id", "");
+        shopData.append("related_shop", "");
         shopData.append("mobile", userProfile.mobile);
         pendingShopList(shopData).then((data) => {
             if (data.message) {

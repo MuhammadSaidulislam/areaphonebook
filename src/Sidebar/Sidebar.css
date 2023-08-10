@@ -4,13 +4,13 @@
   display: flex;
   justify-content: start;
   align-items: center;
-  position: relative;
+  position: sticky;
   width: 100%;
   z-index: 999;
 }
 
 .menu-bars {
-  margin-left: 25px;
+  margin-left: 0px;
   font-size: 22px;
   background: none;
   color: #fff;
@@ -95,6 +95,7 @@
   justify-content: end;
 }
 .navbar .navDropdown .dropdown-toggle {
+  padding: 0px !important;
   background-color: transparent !important;
   border: none !important;
 }

@@ -42,7 +42,9 @@ const ShopList = () => {
     // filter list
     filterList(categoryTitle,suCategoryTitle).then((data)=>{
       // console.log('filter',data[0].tags);
-      setFilterTags(data[0].tags)
+      if(data.length){
+        setFilterTags(data[0].tags)
+      }
     })
   }, [sub,selectedOption]);
  

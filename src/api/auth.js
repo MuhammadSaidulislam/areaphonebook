@@ -381,3 +381,13 @@ export const cardList = async () => {
     return error.response.data;
   }
 };
+
+// related shop
+export const relatedShop = async (id) => {
+  try {
+    const response = await axios.get(`${API}/related_shop/${id}`);
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};

@@ -18,7 +18,7 @@ const CreatePost = (props) => {
     const navigate = useNavigate();
     const [shopCategory, setShopCategory] = useState("");
     const [shopTagsCategory, setShopTagsCategory] = useState([]);
-    const [selectedFile, setSelectedFile] = useState(null);
+    const [shopName, setShopName] = useState(null);
     const [subCategory, setSubCategory] = useState([]);
     const [category, setCategory] = useState([]);
     const [key, setKey] = useState("home");
@@ -44,15 +44,15 @@ const CreatePost = (props) => {
             setCategory(data.data);
         });
         // user profile
-        // userInfo(userProfile.mobile).then((data) => {
-        //   if (data.message) {
-        //     console.log("no shop");
-        //     setCreateProfile(true);
-        //   } else {
-        //     setCreateProfile(false);
-        //     setUserShop(data[0]);
-        //   }
-        // });
+        userInfo(userProfile.mobile).then((data) => {
+            console.log('shop', data);
+
+            if (data.message) {
+                console.log("no shop");
+            } else {
+                setShopName(data)
+            }
+        });
 
 
     }, []);
@@ -175,6 +175,22 @@ const CreatePost = (props) => {
                                                         shopTagsCategory.map((item, i) => (
                                                             <option key={`shopTagsCategory` + i} value={item}>
                                                                 {item}
+                                                            </option>
+                                                        ))}
+                                                </select>
+                                            </Col>
+                                            <Col md={12} className="mt-2">
+                                                <label>Shop name</label>
+                                                <select
+                                                    className="form-select"
+                                                    aria-label="Default select example"
+                                                    name="related_shop"
+                                                >
+                                                    <option defaultValue>Select your filter</option>
+                                                    {shopName &&
+                                                        shopName.map((item, i) => (
+                                                            <option key={`shopTagsCategory` + i} value={item.shop_id}>
+                                                                {item.title}
                                                             </option>
                                                         ))}
                                                 </select>

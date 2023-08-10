@@ -88,7 +88,7 @@ const Profile = () => {
         setShopAddress(data[0].address);
         setShopService(data[0].service);
         setShopEmail(data[0].email);
-        console.log('data[0].shop_time',data.shop_time);
+        console.log('data[0].shop_time', data.shop_time);
         setDayTime(data[0].shop_time);
 
         //  setPostBox(true);
@@ -205,7 +205,7 @@ const Profile = () => {
         {profileShow ? (
           <>
             <Container>
-            <Row className="d-flex justify-content-center">
+              <Row className="d-flex justify-content-center">
                 <Col md={6} className="text-center mb-4">
                   <button className="btn btn-info" onClick={handleShowModal}>
                     আপনার সার্ভিস যুক্ত করুন
@@ -234,28 +234,30 @@ const Profile = () => {
                           <p className="card-text">
                             বিস্তারিত: {data.service}
                           </p>
-                          <Table striped bordered hover responsive>
-                            <thead>
-                              <tr>
-                                <th>Day</th>
-                                <th>Start time</th>
-                                <th>End time</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {data.shop_time && data.shop_time.map((data) => <>
-                                <tr>
-                                  <td>{data.day}</td>
-                                  <td>{data.start_time}</td>
-                                  <td>{data.end_time}</td>
-                                </tr>
-                              </>)}
-
-                            </tbody>
-                          </Table>
                         </div>
                       </div>
                     </div>
+                    {data.shop_time && data.shop_time.length ? <><div className="row g-0">
+                    <Table striped bordered hover responsive>
+                      <thead>
+                        <tr>
+                          <th>Day</th>
+                          <th>Start time</th>
+                          <th>End time</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {data.shop_time && data.shop_time.map((data) => <>
+                          <tr>
+                            <td>{data.day}</td>
+                            <td>{data.start_time}</td>
+                            <td>{data.end_time}</td>
+                          </tr>
+                        </>)}
+                      </tbody>
+                    </Table>
+                  </div></>:<></>}
+                    
                   </div>
                 </Col>)}
               </Row>
