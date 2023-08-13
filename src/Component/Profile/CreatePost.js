@@ -45,8 +45,6 @@ const CreatePost = (props) => {
         });
         // user profile
         userInfo(userProfile.mobile).then((data) => {
-            console.log('shop', data);
-
             if (data.message) {
                 console.log("no shop");
             } else {

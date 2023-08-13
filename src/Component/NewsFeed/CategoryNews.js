@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
-import "./Categhory.css";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import SideBar from "../Sidebar/Sidebar";
-import Banner from "../Banner/Banner";
-import { cardList } from "../api/auth";
-import { API } from "../config";
-import Loader from "../Component/Loader/Loader";
+import { API } from "../../config";
+import Banner from "../../Banner/Banner";
+import Sidebar from "../../Sidebar/Sidebar";
+import { cardList } from "../../api/auth";
 
-export const Categhory = () => {
 
-  const navigate = useNavigate();
+const CategoryNews = () => {
+    const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [categories, setCategories] = useState([]);
 
@@ -20,10 +18,9 @@ export const Categhory = () => {
       setCategories(data);
     });
   }, []);
-
   return (
     <>
-      <SideBar />
+    <Sidebar />
       <Container>
         <Row>
           <Banner />
@@ -49,7 +46,7 @@ export const Categhory = () => {
                           <div className="media-body">
                             <h3 className="manu-item">
                               <Link
-                                to={`/narayanganj/${category.category_name}`}
+                                to={`/newsFeed/${category.category_name}`}
                               >
                                 {category.category_name}
                               </Link>
@@ -86,11 +83,37 @@ export const Categhory = () => {
                     </div>
                   </div>
                 </div>
+
+                <div id={category.category_name} className="collapse">
+                  <Container>
+                    <Row>
+                      {category.subCategory &&
+                        category.subCategory.map((subData, k) => (
+                          <>
+                            <Col xs={6} key={`subValue` + k}>
+                              <span className="topic">
+                                {" "}
+                                <Link
+                                  to={`/narayanganj/${subData.category_name}/${subData.sub_category_name}`}
+                                  key={subData.sub_id}
+                                  className="lol"
+                                >
+                                  {subData.sub_category_name}
+                                </Link>
+                              </span>
+                            </Col>
+                          </>
+                        ))}
+                    </Row>
+                  </Container>
+                </div>
               </div>
             </Col>
           ))}
         </Row>
       </Container>
     </>
-  );
-};
+  )
+}
+
+export default CategoryNews
