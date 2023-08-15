@@ -1,4 +1,4 @@
-import React, { useEffect ,useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { filterList, subCategoryShopList } from "../api/auth";
 import { useParams } from "react-router";
 import Sidebar from "../Sidebar/Sidebar";
@@ -18,40 +18,32 @@ const ShopList = () => {
   const { sub } = useParams();
   const categoryTitle = category;
   const suCategoryTitle = sub;
-  
-
-
- 
-
 
   useEffect(() => {
     subCategoryShopList(sub).then((data) => {
       setWardSelect(true);
-     // setFilteredData(data);
-     console.log('selectedOption',selectedOption);
- 
+
       if (selectedOption === "all") {
         setFilteredData(data);
-        console.log('filtered',data);
+        console.log('filtered', data);
       } else {
         const filtered = data.filter((item) => item.tags === selectedOption);
         setFilteredData(filtered);
-        console.log('filtered',filtered);
       }
     });
     // filter list
-    filterList(categoryTitle,suCategoryTitle).then((data)=>{
+    filterList(categoryTitle, suCategoryTitle).then((data) => {
       // console.log('filter',data[0].tags);
-      if(data.length){
+      if (data.length) {
         setFilterTags(data[0].tags)
       }
     })
-  }, [sub,selectedOption]);
- 
+  }, [sub, selectedOption]);
+
   return (
     <>
       <Sidebar />
-      <Banner wardSelect={wardSelect} filterTags={filterTags}  selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
+      <Banner wardSelect={wardSelect} filterTags={filterTags} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
       <Container>
         <Row>
           {filteredData.length === 0 ? (
@@ -59,8 +51,8 @@ const ShopList = () => {
               <h1 className="text-center">No data</h1>
             </>
           ) : (
-            filteredData.map((value,i) => (
-              <Col md={4} key={`shop`+i}>
+            filteredData.map((value, i) => (
+              <Col md={4} key={`shop` + i}>
                 <div className="card mb-3">
                   <div className="row g-0">
                     <div className="col-md-4 d-flex">

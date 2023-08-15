@@ -474,25 +474,6 @@ h1 {
 
 /* iPhone */
 
-@media only screen and (max-width: 767px) {
-  .nav-menu {
-    width: 220px;
-  }
-  /* nav section */
-  .blog-header-logo {
-    font-size: 18px;
-  }
-
-  .logo-div {
-    top: 10px;
-  }
-
-  sup {
-    top: -9px;
-    font-size: 8px;
-  }
-}
-
 /* 
   .onetime{
       height : 300px;
@@ -569,4 +550,43 @@ h1 {
   -moz-transform: rotate(-135deg) !important;
   -ms-transform: rotate(-135deg) !important;
   -o-transform: rotate(-135deg) !important;
+}
+.navDrop{
+  display: none;
+}
+.navPosition {
+  position: absolute;
+  top: 10px;
+  left: 0px;
+  transform: translate3d(-62px, 25px, 0px);
+  -webkit-transform: translate3d(-62px, 25px, 0px);
+  -moz-transform: translate3d(-62px, 25px, 0px);
+  -ms-transform: translate3d(-62px, 25px, 0px);
+  -o-transform: translate3d(-62px, 25px, 0px);
+}
+
+@media only screen and (max-width: 767px) {
+  .nav-menu {
+    width: 220px;
+  }
+  /* nav section */
+  .blog-header-logo {
+    font-size: 18px;
+  }
+
+  .logo-div {
+    top: 10px;
+  }
+
+  sup {
+    top: -9px;
+    font-size: 8px;
+  }
+  .navPosition {
+    transform: translate3d(-162px, 25px, 0px);
+    -webkit-transform: translate3d(-162px, 25px, 0px);
+    -moz-transform: translate3d(-162px, 25px, 0px);
+    -ms-transform: translate3d(-162px, 25px, 0px);
+    -o-transform: translate3d(-162px, 25px, 0px);
+}
 }

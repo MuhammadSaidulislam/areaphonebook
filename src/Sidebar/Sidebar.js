@@ -2,13 +2,17 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faArrowsLeftRightToLine,
   faBars,
   faEllipsisVertical,
+  faEye,
+  faLocationArrow,
+  faArrowRightToBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import "./Sidebar.css";
 import { cardList, logout } from "../api/auth";
-import { Container, Dropdown, Accordion, Navbar } from "react-bootstrap";
+import { Container, Dropdown, Accordion, Navbar, DropdownButton } from "react-bootstrap";
 import logo from "../assets/image/logo/logo.png"
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -32,11 +36,14 @@ const Sidebar = () => {
     return navigate(`/narayanganj`);
   };
 
-  
+  const [showNav, setShowNav] = useState(false);
+  const navClick = () => {
+    setShowNav(!showNav)
+  };
 
   return (
     <>
-      <Navbar className="navbar"  sticky="top">
+      <Navbar className="navbar" sticky="top">
         <Container>
           <Link to="#" className="menu-bars" onClick={showSidebar}>
             <FontAwesomeIcon icon={faBars} />
@@ -45,61 +52,54 @@ const Sidebar = () => {
             to="/narayanganj"
             style={{ color: "#fff", fontSize: "18px", marginRight: "10px" }}
           >
-           <img src={logo} width={33} /> Area Phonebook
+            <img src={logo} width={33} /> Area Phonebook
           </Link>
-          <Dropdown className="navDropdown">
-            <Dropdown.Toggle id="dropdown-basic">
-              <FontAwesomeIcon icon={faEllipsisVertical} />
-            </Dropdown.Toggle>
 
-            <Dropdown.Menu className="navbarDropdown">
-              {/*
-             <Dropdown href="#/action-2">Search</Dropdown>
-              <Dropdown href="#/action-3">Language</Dropdown>
-              <Dropdown href="#/action-1">Dark/Light</Dropdown>
-            */}
-              <Dropdown>
-                <Link to="/report">Report</Link>
-              </Dropdown>
-              <Dropdown>
-                <Link to="/">Change city</Link>
-              </Dropdown>
-              {userProfile ? (
-                <>
-                  <Dropdown>
-                    <button onClick={logoutBtn}>Logout</button>
-                  </Dropdown>
-                </>
-              ) : (
-                <>
-                  <Dropdown>
-                    <Link to="/signup">Login</Link>
-                  </Dropdown>
-                </>
-              )}
-            </Dropdown.Menu>
-          </Dropdown>
+
+          <div class="d-flex justify-content-end align-items-center logo-div">
+            <div class="nav-item dropdown">
+              <a onClick={navClick} href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <FontAwesomeIcon icon={faEllipsisVertical} />
+              </a>
+              <div class={showNav ? `dropdown-menu show navPosition` : `navDrop`} aria-labelledby="navbarDropdownMenuLink" x-placement="bottom-start">
+
+
+                <Link class="dropdown-item" to="/report"><FontAwesomeIcon icon={faEye} /> Report</Link>
+                <Link class="dropdown-item" to="/"><FontAwesomeIcon icon={faLocationArrow} /> Change city</Link>
+                {userProfile ? (
+                  <>
+                    <button class="dropdown-item" onClick={logoutBtn}><FontAwesomeIcon icon={faArrowRightToBracket} /> Logout</button>
+                  </>
+                ) : (
+                  <>
+                    <Link class="dropdown-item" to="/signup"><FontAwesomeIcon icon={faArrowRightToBracket} /> Login</Link>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+
         </Container>
       </Navbar>
       <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
         <ul className="nav-menu-items">
-        <div id="accordion"> 
-          <Accordion>
-          {categories.map((category,i) =>
-            <Accordion.Item eventKey={i} key={`category`+i}>
-              <Accordion.Header>{category.category_name}</Accordion.Header>
-              <Accordion.Body>
-             <div className="subCategorySidebar">
-             {category.subCategory && category.subCategory.map((subCategory,j) => 
-              <Link key={`subcategory`+j} to={`/narayanganj/${category.category_name}/${subCategory.sub_category_name}`}>{subCategory.sub_category_name}</Link>
+          <div id="accordion">
+            <Accordion>
+              {categories.map((category, i) =>
+                <Accordion.Item eventKey={i} key={`category` + i}>
+                  <Accordion.Header>{category.category_name}</Accordion.Header>
+                  <Accordion.Body>
+                    <div className="subCategorySidebar">
+                      {category.subCategory && category.subCategory.map((subCategory, j) =>
+                        <Link key={`subcategory` + j} to={`/narayanganj/${category.category_name}/${subCategory.sub_category_name}`}>{subCategory.sub_category_name}</Link>
+                      )}
+                    </div>
+
+
+                  </Accordion.Body>
+                </Accordion.Item>
               )}
-             </div>
-              
-            
-              </Accordion.Body>
-            </Accordion.Item>
-            )}
-          </Accordion>
+            </Accordion>
           </div>
         </ul>
       </nav>

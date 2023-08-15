@@ -370,6 +370,26 @@ export const categoryUpdate = async (body={},id) => {
   }
 };
 
+// news post
+export const postNews = async (id) => {
+  try {
+    const response = await axios.get(`${API}/newsFeed/${id}`);
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+// news post tags
+export const postNewsTags = async (id) => {
+  try {
+    const response = await axios.get(`${API}/postTags/${id}`);
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
+
 // https://api.sms.net.bd/sendsms?api_key={QRa72z0YlJt58U7gxw7WgAXNdyYw0PpeCTrsnT0l}&msg={saidul}&to=8801632663430
 
 export const cardList = async () => {

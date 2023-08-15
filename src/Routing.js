@@ -16,6 +16,8 @@ import PendingList from "./Component/Admin/PendingList/PendingList";
 import AllShop from "./Component/Admin/AllShop/AllShop";
 import ReportList from "./Component/Admin/ReportList/ReportList";
 import Filter from "./Component/Admin/Filter/Filter";
+import CategoryNews from './Component/NewsFeed/CategoryNews';
+import NewsList from './Component/NewsFeed/NewsList';
 
 
 const Routing = () => {
@@ -26,15 +28,18 @@ const Routing = () => {
           <Route path="/" element={<CityCorporation />}></Route>
           <Route path="/narayanganj" element={<Categhory />}></Route>
           <Route path="/narayanganj/:category" element={<SubCateghory />}></Route>
-          
+
           <Route path="/signup" element={<Signup />}></Route>
           {/* <Route path="/userDashboard" element={<Shop />}></Route> */}
           <Route path="/narayanganj/:category/:sub" element={<ShopList />}></Route>
           <Route path="/narayanganj/:category/:sub/:id" element={<ShopDetails />}></Route>
-         
+
           <Route path="/report" element={<Report />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
-
+          {/* news feed */}
+          <Route path="/newsFeed" element={<CategoryNews />}></Route>
+          <Route path="/newsFeed/:id" element={<NewsList />}></Route>
+          <Route path="/newsFeed/:category/:id" element={<ShopDetails />}></Route>
           {/* admin */}
           <Route path="/admin" element={<Login />}></Route>
           <Route path="/categoryAdd" element={<CreateCategory />}></Route>
