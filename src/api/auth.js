@@ -371,9 +371,9 @@ export const categoryUpdate = async (body={},id) => {
 };
 
 // news post
-export const postNews = async (id) => {
+export const postNews = async () => {
   try {
-    const response = await axios.get(`${API}/newsFeed/${id}`);
+    const response = await axios.get(`${API}/newsFeed`);
     return response.data;
   } catch (error) {
     return error.response.data;
@@ -388,7 +388,41 @@ export const postNewsTags = async (id) => {
     return error.response.data;
   }
 };
+// category post
+export const categoriesPost = async (category) => {
+  console.log('category name',category);
+  try {
+    const response = await axios.get(`${API}/categoryPost/${category}`);
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
 
+// filter list
+export const addReview= async (user_name,review,rating,shop_id) => {
+  try {
+    const response = await axios.post(`${API}/reviewAdd`,{
+      user_name: user_name,
+      review: review,
+      rating: rating,
+      shop_id: shop_id
+    });
+    return response.data;
+    // console.log(response.data);
+  } catch (error) {
+    return error.response.data;
+  }
+};
+// review list
+export const getReview = async (id) => {
+  try {
+    const response = await axios.get(`${API}/getReview/${id}`);
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
 
 // https://api.sms.net.bd/sendsms?api_key={QRa72z0YlJt58U7gxw7WgAXNdyYw0PpeCTrsnT0l}&msg={saidul}&to=8801632663430
 

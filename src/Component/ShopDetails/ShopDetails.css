@@ -1,24 +1,29 @@
-.shopDetail{
+.shopDetail {
     background-color: #f4f4f4;
     padding: 30px;
 }
-.shopDetail h1{
-    text-align: center;
+
+.shopDetail h1 {
+    text-align: left;
     color: #e84c3d;
     font-weight: 500;
     font-size: 30px;
 }
-.shopDetail h4{
+
+.shopDetail h4 {
     font-size: 21px;
     color: black;
 }
-.shopDetail h4 span{
+
+.shopDetail h4 span {
     color: #e84c3d;
 }
-.shopImage{
+
+.shopImage {
     text-align: center;
 }
-.shopImage img{
+
+.shopImage img {
     width: 500px;
     height: 333px;
     border-radius: 10px;
@@ -26,4 +31,111 @@
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
+}
+
+.shopDetails {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border: 1px solid #e84c3d;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+.shopService b{
+    color: #e84c3d;
+    font-size: 16px;
+}
+
+.shopTitle {
+    font-size: 15px;
+    color: #e84c3d;
+}
+
+.shopDes {
+    display: flex;
+    align-items: center;
+}
+
+.shopDes p {
+    margin-bottom: 0px;
+    font-size: 14px;
+}
+
+.shopDetailsSocial {
+    display: flex;
+    color: #e84c3d;
+    font-size: 14px;
+}
+
+.shopDetailsSocial .rating {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: #e84c3d;
+    margin: 0px 2px;
+}
+
+.shopService {
+    margin-top: 15px;
+}
+
+.shopService h2 {
+    color: #181818;
+    font-size: 16px;
+    padding: 10px 10px;
+    border: 1px solid #e84c3d;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.reviewBox {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    border: 1px solid red;
+    margin-bottom: 8px;
+    padding: 5px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.reviewImg img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.reviewHeading {
+    text-align: center;
+    color: #e84c3d;
+    font-weight: 500;
+    font-size: 30px;
+}
+
+.reviewContent h1 {
+    color: #e84c3d;
+    font-weight: 700;
+    font-size: 22px;
+    text-align: left;
+}
+
+@media (max-width: 778px) {
+    .shopImage img {
+        width: 100%;
+        height: auto;
+    }
+    .shopDetails{
+        padding: 5px 10px;
+    }
 }

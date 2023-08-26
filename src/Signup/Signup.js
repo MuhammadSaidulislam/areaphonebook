@@ -126,6 +126,7 @@ const Signup = () => {
     <Layout>
       <section className="loginBox">
         <div className="app">
+        
           <form>
             <h1>Welcome</h1>
             <div className="inputs">

@@ -1,0 +1,51 @@
+.shopCard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 128px;
+    border: 1px solid #e84c3d;
+    padding: 5px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.shopCardImg img {
+    width: 60px !important;
+    height: 60px !important;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+}
+.shopCardContent{
+    padding: 1px 9px;
+    display: flex;
+    flex-direction: column;
+}
+.shopCardContent p{
+    font-size: 14px;
+    margin-bottom: 0px;
+}
+.shopCardContent a {
+    color: #e84c3d;
+    font-weight: 700;
+    font-size: 17px;
+}
+.shopCardSocial{
+    display: flex;
+}
+.shopCardSocial svg{
+    color: #e84c3d;
+    font-size: 15px;
+    margin: 0px 5px;
+}
+.shopCardSocial .rating{
+display: flex;
+flex-direction: column;
+justify-content: center;
+text-align: center;
+}
